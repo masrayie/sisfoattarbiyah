@@ -1,5 +1,8 @@
 .DS_Store
 
+application/config/*
+!application/config/autoload.php
+
 application/cache/*
 !application/cache/index.html
 
@@ -9,8 +12,6 @@ application/logs/*
 !application/*/.htaccess
 
 composer.lock
-
-application/config/*
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
