@@ -100,11 +100,11 @@ class Guru extends CI_Controller {
            $result = $model->readDataWhere('nip', $nip, 't_guru');
             if($result){
               foreach ($result as $row) {
-                  $nipguru = $row->nip;
-                  $namaGuru = $row->nama_guru;
-                  $kode_guru = $row->kode_guru;
-                  $alamat = $row->alamat;
-                  $email = $row->email;
+                  $nipguru      = $row->nip;
+                  $namaGuru     = $row->nama_guru;
+                  $kode_guru    = $row->kode_guru;
+                  $alamat       = $row->alamat;
+                  $email        = $row->email;
                   $passwordguru = $row->password;
               }
               $objGuru = new M_Guru($nipguru, $namaGuru, $alamat, $kode_guru, $email, $passwordguru);
