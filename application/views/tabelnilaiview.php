@@ -40,6 +40,7 @@
                           </div>
                       </div>
                   </div>
+                  <form method="POST" action="google.com">
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -94,10 +95,12 @@
 						</td>
 						<td align="center">
 						  <input type="text" class="form-control col-md-7" name="nilai_uas" placeholder="UAS" size="3">
+              <input type="submit" hidden>
 						</td>
                       </tr>
                     </tbody>
                   </table>
+                  </form>
                 </div>
               </div>
             </div>
