@@ -19,19 +19,19 @@
                   <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Pegawai</label>
-                      <input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
+                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Guru</label>
-                      <input type="text" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Kode Guru</label>
-                      <input type="text" class="form-control" name="kode_guru" placeholder="Kode Guru">
+                      <input type="text" pattern="[a-zA-Z]{3}"class="form-control" name="kode_guru" placeholder="Kode Guru">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Alamat">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Email</label>

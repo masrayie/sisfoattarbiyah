@@ -19,11 +19,11 @@
                   <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/inputdatasiswa' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Siswa</label>
-                      <input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa">
+                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nis" placeholder="Nomor Induk Siswa [10 Karakter]">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Siswa</label>
-                      <input type="text" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Tanggal Lahir</label>
@@ -31,16 +31,16 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" class="form-control" name="alamat" placeholder="Password">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Nama Orang Tua</label>
-                      <input type="text" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
                       <select class="form-control form-control-sm" name="jenjang">
-                      <option value="0" disabled selected="selected">Pilih Jenjang Pendidikan</option>
+                      <option value="0"selected="selected">Pilih Jenjang Pendidikan</option>
                       <option value="1">Taman Kanak-Kanak</option>
                       <option value="2">Madrasah Ibtida'iyah</option>
                       <option value="3">Madrasah Tsanawiyah</option>

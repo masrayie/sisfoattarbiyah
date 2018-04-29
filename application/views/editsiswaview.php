@@ -19,23 +19,23 @@
                   <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/editdatasiswa' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Siswa</label>
-                      <input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa" value="<?php echo $objSiswa->getNis(); ?>">
+                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nis" placeholder="Nomor Induk Siswa [10 Karakter]">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Siswa</label>
-                      <input type="text" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa" value="<?php echo $objSiswa->getNamaSiswa(); ?>">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Tanggal Lahir</label>
-                      <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir" value="<?php echo $objSiswa->getTglLahir(); ?>">
+                      <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" class="form-control" name="alamat" placeholder="Password" value="<?php echo $objSiswa->getAlamat(); ?>">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Nama Orang Tua</label>
-                      <input type="text" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua" value="<?php echo $objSiswa->getNamaOrangTua(); ?>">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
