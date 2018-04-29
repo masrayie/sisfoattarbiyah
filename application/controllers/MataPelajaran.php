@@ -18,21 +18,74 @@ class MataPelajaran extends CI_Controller {
    * map to /index.php/welcome/<method_name>
    * @see https://codeigniter.com/user_guide/general/urls.html
    */
+
+  function __construct(){
+    parent::__construct();
+    $this->load->model('M_MataPelajaran', '', TRUE);
+    $this->load->model('ModelDB', '' , TRUE);
+  }
+
   public function index()
   {
-    
+
   }
-  
+
   public function viewInputMapel(){
-      $this->load->view('HeaderFooter/Header');
-      $this->load->view('inputmapelview');
-      $this->load->view('HeaderFooter/Footer');
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $this->load->view('HeaderFooter/Header');
+         $this->load->view('inputmapelview');
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
   }
 
   public function viewTabelMapel(){
-      $this->load->view('HeaderFooter/Header');
-      $this->load->view('tabelmapelview');
-      $this->load->view('HeaderFooter/Footer');
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $data['mapelArr'] = $this->readDataMapelAll();
+         $this->load->view('HeaderFooter/Header');
+         $this->load->view('tabelmapelview');
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
+  }
+
+  public function inputDataMapel(){
+      $kode_mapel     = $this->input->post('kode_mapel');
+      $nama_mapel     = $this->input->post('nama_mapel');
+      $objMapel = new M_MataPelajaran($kode_mapel, $nama_mapel);
+      $model = new ModelDB();
+      $res = $model->insertMapel($objMapel);
+      echo $res;
+      redirect(base_url('index.php/MataPelajaran/viewInputMapel/'), 'refresh');
+  }
+
+  public function readDataMapelAll(){
+      $model = new ModelDB();
+      $result = $model->readDataAll('t_mapel');
+
+      foreach ($result as $row) {
+        # code...
+          $mapelArr[] = new M_MataPelajaran($row->kode_mapel, $row->nama_mapel);
+      }
+      return $mapelArr;
   }
 
 }

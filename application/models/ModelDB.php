@@ -28,6 +28,15 @@ class ModelDB extends CI_Model{
 		return $this-> db -> affected_rows();
 	}
 
+	function insertMapel($object){
+		$data = array(
+			'kode_mapel' 			=> $object->getKodeMapel(),
+			'nama_mapel' 	=> $object->getNamaMapel()
+		);
+		$this-> db -> insert('t_mapel', $data);
+		return $this-> db -> affected_rows();
+	}
+
 	function insertData($object, $table){
 		$this -> db -> insert($table, $data);
 	}
@@ -75,7 +84,7 @@ class ModelDB extends CI_Model{
 
 	function freeQuery($query){
 		$sql = $query;
-      	$this-> db -> query($sql);  
+      	$this-> db -> query($sql);
 	}
 }
 

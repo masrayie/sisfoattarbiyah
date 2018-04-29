@@ -3,7 +3,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-			
+
 			<div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -45,6 +45,10 @@
                               <td><?php echo $as->getKodeGuru(); ?></td>
                               <td><?php echo $as->getEmail(); ?></td>
                               <td>
+                                <a href="" class="btn btn-warning mr-2">UBAH</a>
+                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2">HAPUS</a>
+                              </td>
+                              <td>
                                       <!-- <?php
                                         if($as->status==0){
                                             echo "<label class='label label-danger' style='font-size: 10px;'>BELUM KEMBALI </label>";
@@ -60,8 +64,8 @@
                 </div>
               </div>
             </div>
-			
-			
+
+
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -75,4 +79,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    

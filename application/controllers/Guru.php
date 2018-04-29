@@ -39,7 +39,7 @@ class Guru extends CI_Controller {
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header');
          $this->load->view('inputguruview');
-         $this->load->view('HeaderFooter/Footer');        
+         $this->load->view('HeaderFooter/Footer');
        }
        else
        {
@@ -58,7 +58,7 @@ class Guru extends CI_Controller {
          $data['guruArr'] = $this->readDataGuruAll();
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('tabelguruview', $data);
-         $this->load->view('HeaderFooter/Footer', $data);      
+         $this->load->view('HeaderFooter/Footer', $data);
        }
        else
        {
@@ -88,7 +88,7 @@ class Guru extends CI_Controller {
       }
       return $guruArr;
   }
-  
+
   public function viewEditGuru($nip){
         if($this->session->userdata('logged_in'))
          {
@@ -111,16 +111,24 @@ class Guru extends CI_Controller {
               $data['objGuru'] = $objGuru;
            $this->load->view('HeaderFooter/Header', $data);
            $this->load->view('editguruview', $data);
-           $this->load->view('HeaderFooter/Footer');        
+           $this->load->view('HeaderFooter/Footer');
          }
          else
          {
            //If no session, redirect to login page
            redirect(base_url(), 'refresh');
          }
+       }
   }
 
   public function editDataGuru($nip){
 
   }
+
+  public function deleteDataGuru(){
+    $id = $this->uri->segment(3);
+    $this->ModelDB->deleteData('nip', $id, 't_guru');
+    redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+  }
+
 }

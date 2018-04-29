@@ -27,7 +27,7 @@ class Siswa extends CI_Controller {
 
   public function index()
   {
-    
+
   }
 
   public function viewInputSiswa(){
@@ -39,7 +39,7 @@ class Siswa extends CI_Controller {
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header');
          $this->load->view('inputsiswaview');
-         $this->load->view('HeaderFooter/Footer');        
+         $this->load->view('HeaderFooter/Footer');
        }
        else
        {
@@ -58,7 +58,7 @@ class Siswa extends CI_Controller {
          $data['siswaArr'] = $this->readDataSiswaAll();
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('tabelsiswaview', $data);
-         $this->load->view('HeaderFooter/Footer', $data);      
+         $this->load->view('HeaderFooter/Footer', $data);
        }
        else
        {
@@ -78,6 +78,7 @@ class Siswa extends CI_Controller {
       $model = new ModelDB();
       $res = $model->insertSiswa($objSiswa);
       echo $res;
+      redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   }
 
   public function readDataSiswaAll(){
@@ -91,5 +92,12 @@ class Siswa extends CI_Controller {
       return $siswaArr;
   }
 
-  
+  public function deleteDataSiswa()
+   {
+     $id = $this->uri->segment(3);
+     $this->ModelDB->deleteData('nis', $id, 't_siswa');
+     redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+   }
+
+
 }
