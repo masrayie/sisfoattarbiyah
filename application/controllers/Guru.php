@@ -129,9 +129,17 @@ class Guru extends CI_Controller {
     $alamat     = $this->input->post('alamat');
     $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
-    $password   = md5($this->input->post('nip'));
-    $objGuru    = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
-    $this->ModelDB->editData('nip', $nip, 't_guru', $objGuru);
+    $password   = md5($this->input->post('password'));
+
+    $data = array('nama_guru' => $nama_guru,
+                  'alamat'    => $alamat,
+                  'kode_guru' => $kode_guru,
+                  'email'     => $email,
+                  'password'  => $password
+                );
+
+    $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+
     redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
   }
 

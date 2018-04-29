@@ -15,7 +15,7 @@
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/MataPelajaran/inputdatamapel' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/MataPelajaran/editdatamapel' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Kode Mata Pelajaran</label>
                       <input type="text" class="form-control" name="kode_mapel" placeholder="Kode Mata Pelajaran" value="<?php echo $objMapel->getKodeMapel(); ?>">

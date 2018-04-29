@@ -117,6 +117,18 @@ class MataPelajaran extends CI_Controller {
        }
   }
 
+  public function editDataMapel(){
+    $kode_mapel     = $this->input->post('kode_mapel');
+    $nama_mapel     = $this->input->post('nama_mapel');
+
+    $data = array('nama_mapel'    => $nama_mapel
+                );
+
+    $this->ModelDB->editData('kode_mapel', $kode_mapel, 't_mapel', $data);
+
+    redirect(base_url('index.php/MataPelajaran/viewTabelMapel/'), 'refresh');
+  }
+
   public function deleteDataMapel()
    {
      $id = $this->uri->segment(3);

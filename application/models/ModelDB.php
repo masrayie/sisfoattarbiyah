@@ -2,19 +2,6 @@
 
 class ModelDB extends CI_Model{
 
-	function insertSiswa($object){
-		$data = array(
-			'nis' 			=> $object->getNis(),
-			'nama_siswa' 	=> $object->getNamaSiswa(),
-			'tgl_lahir'		=> $object->getTglLahir(),
-			'alamat' 		=> $object->getAlamat(),
-			'nama_orangtua'	=> $object->getNamaOrangTua(),
-			'jenjang' 		=> $object->getJenjang()
-		);
-		$this-> db -> insert('t_siswa', $data);
-		return $this-> db -> affected_rows();
-	}
-
 	function insertGuru($object){
 		$data = array(
 			'nip' 			=> $object->getNip(),
@@ -37,7 +24,7 @@ class ModelDB extends CI_Model{
 		return $this-> db -> affected_rows();
 	}
 
-	function insertData($object, $table){
+	function insertData($data, $table){
 		$this -> db -> insert($table, $data);
 	}
 

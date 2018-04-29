@@ -74,10 +74,16 @@ class Siswa extends CI_Controller {
       $alamat         = $this->input->post('alamat');
       $nama_orangtua  = $this->input->post('nama_orangtua');
       $jenjang        = $this->input->post('jenjang');
-      $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
-      $model = new ModelDB();
-      $res = $model->insertSiswa($objSiswa);
-      echo $res;
+
+      $data = array('nis'           => $nis,
+                    'nama_siswa'    => $nama_siswa,
+                    'tgl_lahir'     => $tgl_lahir,
+                    'alamat'        => $alamat,
+                    'nama_orangtua' => $nama_orangtua,
+                    'jenjang'       => $jenjang
+                  );
+
+      $this->ModelDB->insertData($data, 't_siswa');
       redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   }
 
@@ -113,9 +119,10 @@ class Siswa extends CI_Controller {
               }
               $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
               $data['objSiswa'] = $objSiswa;
-           $this->load->view('HeaderFooter/Header', $data);
-           $this->load->view('editsiswaview', $data);
-           $this->load->view('HeaderFooter/Footer');
+
+              $this->load->view('HeaderFooter/Header', $data);
+              $this->load->view('editsiswaview', $data);
+              $this->load->view('HeaderFooter/Footer');
          }
          else
          {
@@ -123,6 +130,26 @@ class Siswa extends CI_Controller {
            redirect(base_url(), 'refresh');
          }
        }
+  }
+
+  public function editDataSiswa(){
+    $nis            = $this->input->post('nis');
+    $nama_siswa     = $this->input->post('nama_siswa');
+    $tgl_lahir      = $this->input->post('tgl_lahir');
+    $alamat         = $this->input->post('alamat');
+    $nama_orangtua  = $this->input->post('nama_orangtua');
+    $jenjang        = $this->input->post('jenjang');
+
+    $data = array('nama_siswa'    => $nama_siswa,
+                  'tgl_lahir'     => $tgl_lahir,
+                  'alamat'        => $alamat,
+                  'nama_orangtua' => $nama_orangtua,
+                  'jenjang'       => $jenjang
+                );
+
+    $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+
+    redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
   }
 
   public function deleteDataSiswa()

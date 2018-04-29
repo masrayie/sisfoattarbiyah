@@ -16,7 +16,7 @@
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/inputdatasiswa' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/editdatasiswa' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Siswa</label>
                       <input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa" value="<?php echo $objSiswa->getNis(); ?>">
