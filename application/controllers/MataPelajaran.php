@@ -70,10 +70,14 @@ class MataPelajaran extends CI_Controller {
   public function inputDataMapel(){
       $kode_mapel     = $this->input->post('kode_mapel');
       $nama_mapel     = $this->input->post('nama_mapel');
-      $objMapel = new M_MataPelajaran($kode_mapel, $nama_mapel);
-      $model = new ModelDB();
-      $res = $model->insertMapel($objMapel);
-      echo $res;
+
+      $data = array(
+  			'kode_mapel' 	=> $kode_mapel,
+  			'nama_mapel' 	=> $nama_mapel
+  		);
+
+      $this->ModelDB->insertData($data, 't_mapel');
+
       redirect(base_url('index.php/MataPelajaran/viewInputMapel/'), 'refresh');
   }
 

@@ -74,9 +74,18 @@ class Guru extends CI_Controller {
     $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
     $password   = md5($this->input->post('password'));
-    $objGuru    = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
-    $model      = new ModelDB();
-    $res        = $model->insertGuru($objGuru);
+
+    $data = array(
+			'nip' 			=> $nip,
+			'nama_guru' => $nama_guru,
+			'kode_guru'	=> $alamat,
+			'alamat' 		=> $kode_guru,
+			'email'			=> $email,
+			'password' 	=> $password
+		);
+
+    $this->ModelDB->insertData($data, 't_guru');
+
     redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
   }
 
@@ -127,13 +136,13 @@ class Guru extends CI_Controller {
     $nip        = $this->input->post('nip');
     $nama_guru  = $this->input->post('nama_guru');
     $alamat     = $this->input->post('alamat');
-    $kode_guru  = $this->input->post('kode_guru');
+    // $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
     $password   = md5($this->input->post('password'));
 
     $data = array('nama_guru' => $nama_guru,
                   'alamat'    => $alamat,
-                  'kode_guru' => $kode_guru,
+                  // 'kode_guru' => $kode_guru,
                   'email'     => $email,
                   'password'  => $password
                 );
