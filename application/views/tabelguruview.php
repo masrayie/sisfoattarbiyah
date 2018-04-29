@@ -45,7 +45,7 @@
                               <td><?php echo $as->getKodeGuru(); ?></td>
                               <td><?php echo $as->getEmail(); ?></td>
                               <td>
-                                <a href="" class="btn btn-warning mr-2">UBAH</a>
+                                <a href="<?php echo base_url('index.php/guru/viewEditGuru/'.$as->getNip()); ?>" class="btn btn-warning mr-2">UBAH</a>
                                 <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2">HAPUS</a>
                               </td>
                               <td>

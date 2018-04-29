@@ -2,8 +2,8 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
-          
+
+
           <div class="row">
             <div class="col-md-10 grid-margin stretch-card">
               <div class="card">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Tanggal Lahir</label>
-                      <input type="text" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir">
+                      <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
                       <select class="form-control form-control-sm" name="jenjang">
-                      <option value="0">Pilih Jenjang Pendidikan</option>
+                      <option value="0" disabled selected="selected">Pilih Jenjang Pendidikan</option>
                       <option value="1">Taman Kanak-Kanak</option>
                       <option value="2">Madrasah Ibtida'iyah</option>
                       <option value="3">Madrasah Tsanawiyah</option>
@@ -75,4 +75,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    

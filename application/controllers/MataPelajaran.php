@@ -88,6 +88,35 @@ class MataPelajaran extends CI_Controller {
       return $mapelArr;
   }
 
+  public function viewEditMapel(){
+    $nip = $this->uri->segment(3);
+        if($this->session->userdata('logged_in'))
+         {
+           $session_data = $this->session->userdata('logged_in');
+           $data['nip'] = $session_data['nip'];
+           $data['nama_guru'] = $session_data['nama_guru'];
+           $data['kode_guru'] = $session_data['kode_guru'];
+           $model = new ModelDB();
+           $result = $model->readDataWhere('kode_mapel', $nip, 't_mapel');
+            if($result){
+              foreach ($result as $row) {
+                  $kode_mapel = $row->kode_mapel;
+                  $nama_mapel = $row->nama_mapel;
+              }
+              $objMapel = new M_MataPelajaran($kode_mapel, $nama_mapel);
+              $data['objMapel'] = $objMapel;
+           $this->load->view('HeaderFooter/Header', $data);
+           $this->load->view('editmapelview', $data);
+           $this->load->view('HeaderFooter/Footer');
+         }
+         else
+         {
+           //If no session, redirect to login page
+           redirect(base_url(), 'refresh');
+         }
+       }
+  }
+
   public function deleteDataMapel()
    {
      $id = $this->uri->segment(3);

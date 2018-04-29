@@ -10,39 +10,44 @@
                 <div class="card-body">
                   <div class="row">
                       <div class="col-md-10 grid-margin stretch-card">
-                        <h3 class="card-title">Form Input Data Guru</h3>
+                        <h3 class="card-title">Form Edit Siswa</h3>
                       </div>
-                      <div class="col-lg-2 grid-margin stretch-card" style="text-align: right;">
+                      <div class="col-md-2 grid-margin stretch-card" style="text-align: right;">
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/inputdatasiswa' ?>">
                     <div class="form-group">
-                      <label for="exampleInputName1">Nomor Induk Pegawai</label>
-                      <input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
+                      <label for="exampleInputName1">Nomor Induk Siswa</label>
+                      <input type="text" class="form-control" name="nis" placeholder="Nomor Induk Siswa" value="<?php echo $objSiswa->getNis(); ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">Nama Lengkap Guru</label>
-                      <input type="text" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
+                      <label for="exampleInputEmail3">Nama Lengkap Siswa</label>
+                      <input type="text" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa" value="<?php echo $objSiswa->getNamaSiswa(); ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Kode Guru</label>
-                      <input type="text" class="form-control" name="kode_guru" placeholder="Kode Guru">
+                      <label for="exampleInputPassword4">Tanggal Lahir</label>
+                      <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir" value="<?php echo $objSiswa->getTglLahir(); ?>">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                      <input type="text" class="form-control" name="alamat" placeholder="Password" value="<?php echo $objSiswa->getAlamat(); ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Email</label>
-                      <input type="email" class="form-control" name="email" placeholder="Email">
+                      <label for="exampleInputPassword4">Nama Orang Tua</label>
+                      <input type="text" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua" value="<?php echo $objSiswa->getNamaOrangTua(); ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Password</label>
-                      <input type="password" class="form-control" name="password" placeholder="Password">
+                      <label for="exampleInputPassword4">Jenjang Pendidikan</label>
+                      <select class="form-control form-control-sm" name="jenjang" >
+                      <option value="0" disabled >Pilih Jenjang Pendidikan</option>
+                      <option value="1">Taman Kanak-Kanak</option>
+                      <option value="2">Madrasah Ibtida'iyah</option>
+                      <option value="3">Madrasah Tsanawiyah</option>
+                    </select>
                     </div>
                     <div class="form-group">
-                      <label>Foto Diri</label>
+                      <label>Foto Siswa</label>
                       <input type="file" name="img[]" class="file-upload-default">
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Unggah Foto">
@@ -51,9 +56,7 @@
                         </span>
                       </div>
                     </div>
-                    <div class="panel-footer">
-                      <button type="submit" class="btn btn-success mr-2">Submit</button>
-                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Submit</button>
                     <!-- <button class="btn btn-light">Cancel</button> -->
                   </form>
                 </div>

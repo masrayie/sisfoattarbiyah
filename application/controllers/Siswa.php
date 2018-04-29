@@ -92,6 +92,39 @@ class Siswa extends CI_Controller {
       return $siswaArr;
   }
 
+  public function viewEditSiswa(){
+    $nip = $this->uri->segment(3);
+        if($this->session->userdata('logged_in'))
+         {
+           $session_data = $this->session->userdata('logged_in');
+           $data['nip'] = $session_data['nip'];
+           $data['nama_guru'] = $session_data['nama_guru'];
+           $data['kode_guru'] = $session_data['kode_guru'];
+           $model = new ModelDB();
+           $result = $model->readDataWhere('nis', $nip, 't_siswa');
+            if($result){
+              foreach ($result as $row) {
+                  $nis = $row->nis;
+                  $nama_siswa = $row->nama_siswa;
+                  $tgl_lahir = $row->tgl_lahir;
+                  $alamat = $row->alamat;
+                  $nama_orangtua = $row->nama_orangtua;
+                  $jenjang = $row->jenjang;
+              }
+              $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
+              $data['objSiswa'] = $objSiswa;
+           $this->load->view('HeaderFooter/Header', $data);
+           $this->load->view('editsiswaview', $data);
+           $this->load->view('HeaderFooter/Footer');
+         }
+         else
+         {
+           //If no session, redirect to login page
+           redirect(base_url(), 'refresh');
+         }
+       }
+  }
+
   public function deleteDataSiswa()
    {
      $id = $this->uri->segment(3);

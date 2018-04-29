@@ -35,7 +35,7 @@
                             <td><?php echo $as->getKodeMapel(); ?></td>
                             <td><?php echo $as->getNamaMapel(); ?></td>
                             <td>
-                              <a href="" class="btn btn-warning mr-2">UBAH</a>
+                              <a href="<?php echo base_url('index.php/MataPelajaran/viewEditMapel/'.$as->getKodeMapel()); ?>" class="btn btn-warning mr-2">UBAH</a>
                               <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger mr-2">HAPUS</a>
                             </td>
                             <td>

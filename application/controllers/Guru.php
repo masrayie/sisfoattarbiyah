@@ -73,10 +73,11 @@ class Guru extends CI_Controller {
     $alamat     = $this->input->post('alamat');
     $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
-    $password   = md5($this->input->post('nip'));
+    $password   = md5($this->input->post('password'));
     $objGuru    = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
     $model      = new ModelDB();
     $res        = $model->insertGuru($objGuru);
+    redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
   }
 
   public function readDataGuruAll(){
@@ -89,7 +90,8 @@ class Guru extends CI_Controller {
       return $guruArr;
   }
 
-  public function viewEditGuru($nip){
+  public function viewEditGuru(){
+    $nip = $this->uri->segment(3);
         if($this->session->userdata('logged_in'))
          {
            $session_data = $this->session->userdata('logged_in');
@@ -105,7 +107,7 @@ class Guru extends CI_Controller {
                   $kode_guru = $row->kode_guru;
                   $alamat = $row->alamat;
                   $email = $row->email;
-                  $passwordguru = $row->password;
+                  $passwordguru = md5($row->password);
               }
               $objGuru = new M_Guru($nipguru, $namaGuru, $alamat, $kode_guru, $email, $passwordguru);
               $data['objGuru'] = $objGuru;
@@ -121,8 +123,16 @@ class Guru extends CI_Controller {
        }
   }
 
-  public function editDataGuru($nip){
-
+  public function editDataGuru(){
+    $nip        = $this->input->post('nip');
+    $nama_guru  = $this->input->post('nama_guru');
+    $alamat     = $this->input->post('alamat');
+    $kode_guru  = $this->input->post('kode_guru');
+    $email      = $this->input->post('email');
+    $password   = md5($this->input->post('nip'));
+    $objGuru    = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
+    $this->ModelDB->editData('nip', $nip, 't_guru', $objGuru);
+    redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
   }
 
   public function deleteDataGuru(){
