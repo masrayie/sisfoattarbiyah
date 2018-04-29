@@ -36,7 +36,7 @@
                             <td><?php echo $as->getNamaMapel(); ?></td>
                             <td>
                               <a href="" class="btn btn-warning mr-2">UBAH</a>
-                              <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger mr-2">HAPUS</a>
+                              <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger mr-2">HAPUS</a>
                             </td>
                             <td>
                         <!-- <?php

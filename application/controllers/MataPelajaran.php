@@ -56,9 +56,9 @@ class MataPelajaran extends CI_Controller {
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
          $data['mapelArr'] = $this->readDataMapelAll();
-         $this->load->view('HeaderFooter/Header');
-         $this->load->view('tabelmapelview');
-         $this->load->view('HeaderFooter/Footer');
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('tabelmapelview', $data);
+         $this->load->view('HeaderFooter/Footer', $data);
        }
        else
        {
@@ -88,4 +88,10 @@ class MataPelajaran extends CI_Controller {
       return $mapelArr;
   }
 
+  public function deleteDataMapel()
+   {
+     $id = $this->uri->segment(3);
+     $this->ModelDB->deleteData('kode_mapel', $id, 't_mapel');
+     redirect(base_url('index.php/MataPelajaran/viewTabelMapel/'), 'refresh');
+   }
 }
