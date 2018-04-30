@@ -75,18 +75,30 @@ class Guru extends CI_Controller {
     $email      = $this->input->post('email');
     $password   = md5($this->input->post('password'));
 
-    $data = array(
-			'nip' 			=> $nip,
-			'nama_guru' => $nama_guru,
-			'kode_guru'	=> $alamat,
-			'alamat' 		=> $kode_guru,
-			'email'			=> $email,
-			'password' 	=> $password
-		);
+    $config = array('file_name'     => $nip,
+                    'upload_path'   => './photoguru/',
+                    'allowed_types' => 'jpg',
+                    'max_size'      => '100',
+                    'max_width'     => '1024',
+                    'max_height'    => '768'
+                  );
 
-    $this->ModelDB->insertData($data, 't_guru');
+    $data = array('nip' 			=> $nip,
+            			'nama_guru' => $nama_guru,
+            			'kode_guru'	=> $alamat,
+            			'alamat' 		=> $kode_guru,
+            			'email'			=> $email,
+            			'password' 	=> $password
+            		);
 
-    redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
+    $this->load->library('upload', $config);
+
+    if (!$this->upload->do_upload('filefoto')) {
+
+    } else {
+      $this->ModelDB->insertData($data, 't_guru');
+      redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
+    }
   }
 
   public function readDataGuruAll(){
@@ -139,20 +151,35 @@ class Guru extends CI_Controller {
     $email      = $this->input->post('email');
     $password   = md5($this->input->post('password'));
 
+    $config = array('file_name'     => $nip,
+                    'upload_path'   => './photoguru/',
+                    'allowed_types' => 'jpg',
+                    'max_size'      => '100',
+                    'max_width'     => '1024',
+                    'max_height'    => '768'
+                  );
+
     $data = array('nama_guru' => $nama_guru,
                   'alamat'    => $alamat,
                   'email'     => $email,
                   'password'  => $password
                 );
 
-    $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+    unlink('photoguru/'.$nip.".jpg");
+    $this->load->library('upload', $config);
 
-    redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+    if (!$this->upload->do_upload('filefoto')) {
+
+    } else {
+      $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+      redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+    }
   }
 
   public function deleteDataGuru(){
-    $id = $this->uri->segment(3);
-    $this->ModelDB->deleteData('nip', $id, 't_guru');
+    $nip = $this->uri->segment(3);
+    unlink('photosiswa/'.$nis.".jpg");
+    $this->ModelDB->deleteData('nip', $nip, 't_guru');
     redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
   }
 
