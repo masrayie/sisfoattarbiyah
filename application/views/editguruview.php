@@ -16,30 +16,32 @@
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/editdataguru' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/editdataguru/'.$objGuru->getNip(); ?>">
                     <div class="form-group">
-                      <label for="exampleInputName1">Nomor Induk Pegawai</label>
-                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
+                      <label for="exampleInputName1">Nomor Induk Pegawai</label><br>
+                      <span><?php echo $objGuru->getNip(); ?></span>
+                      <!-- <input type="text" disabled class="form-control" name="nip" placeholder="Nomor Induk Pegawai" value="<?php echo $objGuru->getNip(); ?>"> -->
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Guru</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
+                      <input type="text" pattern="[a-zA-Z\s]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru" value="<?php echo $objGuru->getNamaGuru(); ?>">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Kode Guru</label>
-                      <input type="text" pattern="[a-zA-Z]{3}"class="form-control" name="kode_guru" placeholder="Kode Guru">
+                      <label for="exampleInputPassword4">Kode Guru</label><br>
+                      <span><?php echo $objGuru->getKodeGuru(); ?></span>
+                      <!-- <input type="text" disabled class="form-control" name="kode_guru" placeholder="Kode Guru" value="<?php echo $objGuru->getKodeGuru(); ?>"> -->
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Alamat">
+                      <input type="text" pattern="{1,}" class="form-control" name="alamat" placeholder="Alamat" value="<?php echo $objGuru->getAlamat(); ?>">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Email</label>
-                      <input type="email" class="form-control" name="email" placeholder="Email">
+                      <input type="email" class="form-control" name="email" placeholder="Email" value="<?php echo $objGuru->getEmail(); ?>">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Password</label>
-                      <input type="password" class="form-control" name="password" placeholder="Password">
+                      <input type="password" class="form-control" name="password" placeholder="Password" value="<?php echo $objGuru->getPassword(); ?>">
                     </div>
                     <div class="form-group">
                       <label>Foto Diri</label>

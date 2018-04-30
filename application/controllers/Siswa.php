@@ -133,7 +133,7 @@ class Siswa extends CI_Controller {
   }
 
   public function editDataSiswa(){
-    $nis            = $this->input->post('nis');
+    $nis            = $this->uri->segment(3);
     $nama_siswa     = $this->input->post('nama_siswa');
     $tgl_lahir      = $this->input->post('tgl_lahir');
     $alamat         = $this->input->post('alamat');

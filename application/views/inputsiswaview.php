@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Siswa</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa">
+                      <input type="text" pattern="[a-zA-Z\s]{1,}" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Tanggal Lahir</label>
@@ -31,11 +31,11 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Password">
+                      <input type="text" pattern="{1,}" class="form-control" name="alamat" placeholder="Password">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Nama Orang Tua</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua">
+                      <input type="text" pattern="[a-zA-Z\s]{1,}" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>

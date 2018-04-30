@@ -133,16 +133,14 @@ class Guru extends CI_Controller {
   }
 
   public function editDataGuru(){
-    $nip        = $this->input->post('nip');
+    $nip        = $this->uri->segment(3);
     $nama_guru  = $this->input->post('nama_guru');
     $alamat     = $this->input->post('alamat');
-    // $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
     $password   = md5($this->input->post('password'));
 
     $data = array('nama_guru' => $nama_guru,
                   'alamat'    => $alamat,
-                  // 'kode_guru' => $kode_guru,
                   'email'     => $email,
                   'password'  => $password
                 );

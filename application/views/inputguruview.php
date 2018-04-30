@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Guru</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
+                      <input type="text" pattern="[a-zA-Z\s]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Kode Guru</label>
@@ -31,7 +31,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Alamat">
+                      <input type="text" pattern="{1,}" class="form-control" name="alamat" placeholder="Alamat">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Email</label>
