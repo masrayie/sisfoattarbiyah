@@ -39,7 +39,7 @@ class Guru extends CI_Controller {
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header');
          $this->load->view('inputguruview');
-         $this->load->view('HeaderFooter/Footer');        
+         $this->load->view('HeaderFooter/Footer');
        }
        else
        {
@@ -58,7 +58,7 @@ class Guru extends CI_Controller {
          $data['guruArr'] = $this->readDataGuruAll();
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('tabelguruview', $data);
-         $this->load->view('HeaderFooter/Footer', $data);      
+         $this->load->view('HeaderFooter/Footer', $data);
        }
        else
        {
@@ -73,10 +73,20 @@ class Guru extends CI_Controller {
     $alamat     = $this->input->post('alamat');
     $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
-    $password   = md5($this->input->post('nip'));
-    $objGuru    = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
-    $model      = new ModelDB();
-    $res        = $model->insertGuru($objGuru);
+    $password   = md5($this->input->post('password'));
+
+    $data = array(
+			'nip' 			=> $nip,
+			'nama_guru' => $nama_guru,
+			'kode_guru'	=> $alamat,
+			'alamat' 		=> $kode_guru,
+			'email'			=> $email,
+			'password' 	=> $password
+		);
+
+    $this->ModelDB->insertData($data, 't_guru');
+
+    redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
   }
 
   public function readDataGuruAll(){
@@ -88,8 +98,9 @@ class Guru extends CI_Controller {
       }
       return $guruArr;
   }
-  
-  public function viewEditGuru($nip){
+
+  public function viewEditGuru(){
+    $nip = $this->uri->segment(3);
         if($this->session->userdata('logged_in'))
          {
            $session_data = $this->session->userdata('logged_in');
@@ -105,22 +116,44 @@ class Guru extends CI_Controller {
                   $kode_guru = $row->kode_guru;
                   $alamat = $row->alamat;
                   $email = $row->email;
-                  $passwordguru = $row->password;
+                  $passwordguru = md5($row->password);
               }
               $objGuru = new M_Guru($nipguru, $namaGuru, $alamat, $kode_guru, $email, $passwordguru);
               $data['objGuru'] = $objGuru;
            $this->load->view('HeaderFooter/Header', $data);
            $this->load->view('editguruview', $data);
-           $this->load->view('HeaderFooter/Footer');        
+           $this->load->view('HeaderFooter/Footer');
          }
          else
          {
            //If no session, redirect to login page
            redirect(base_url(), 'refresh');
          }
+       }
   }
 
-  public function editDataGuru($nip){
+  public function editDataGuru(){
+    $nip        = $this->uri->segment(3);
+    $nama_guru  = $this->input->post('nama_guru');
+    $alamat     = $this->input->post('alamat');
+    $email      = $this->input->post('email');
+    $password   = md5($this->input->post('password'));
 
+    $data = array('nama_guru' => $nama_guru,
+                  'alamat'    => $alamat,
+                  'email'     => $email,
+                  'password'  => $password
+                );
+
+    $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+
+    redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
   }
+
+  public function deleteDataGuru(){
+    $id = $this->uri->segment(3);
+    $this->ModelDB->deleteData('nip', $id, 't_guru');
+    redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+  }
+
 }

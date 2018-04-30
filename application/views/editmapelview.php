@@ -9,20 +9,21 @@
                 <div class="card-body">
                   <div class="row">
                       <div class="col-md-10 grid-margin stretch-card">
-                        <h3 class="card-title">Form Input Mata Pelajaran</h3>
+                        <h3 class="card-title">Form Edit Mata Pelajaran</h3>
                       </div>
                       <div class="col-md-2 grid-margin stretch-card" style="text-align: right;">
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/MataPelajaran/inputdatamapel' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/MataPelajaran/editdatamapel/'.$objMapel->getKodeMapel(); ?>">
                     <div class="form-group">
-                      <label for="exampleInputName1">Kode Mata Pelajaran</label>
-                      <input type="text" pattern="[a-zA-Z0-9]{8}" class="form-control" name="kode_mapel" placeholder="Kode Mata Pelajaran">
+                      <label for="exampleInputName1">Kode Mata Pelajaran</label><br>
+                      <span><?php echo $objMapel->getKodeMapel(); ?></span>
+                      <!-- <input type="text" disabled class="form-control" name="kode_mapel" placeholder="Kode Mata Pelajaran" value="<?php echo $objMapel->getKodeMapel(); ?>"> -->
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Mata Pelajaran</label>
-                      <input type="text" pattern="{1,}" class="form-control" name="nama_mapel" placeholder="Nama Mata Pelajaran">
+                      <input type="text" pattern="{1,}" class="form-control" name="nama_mapel" placeholder="Nama Mata Pelajaran" value="<?php echo $objMapel->getNamaMapel(); ?>">
                     </div>
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
                     <!-- <button class="btn btn-light">Cancel</button> -->
