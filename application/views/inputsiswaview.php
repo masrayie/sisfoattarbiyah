@@ -52,7 +52,7 @@
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Unggah Foto">
                         <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-info" type="browse">Upload</button>
+                          <button class="file-upload-browse btn btn-info" type="file">Upload</button>
                         </span>
                       </div>
                     </div>

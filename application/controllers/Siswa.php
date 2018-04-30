@@ -84,6 +84,7 @@ class Siswa extends CI_Controller {
                   );
 
       $this->ModelDB->insertData($data, 't_siswa');
+      
       redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   }
 
