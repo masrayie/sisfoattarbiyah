@@ -8,7 +8,7 @@ class M_MataPelajaran
   private $kodeMapel;
   private $namaMapel;
 
-  function __construct($kodeMapel, $namaMapel)
+  function __construct($kodeMapel=null, $namaMapel=null)
   {
     $this->kodeMapel = $kodeMapel;
     $this->namaMapel = $namaMapel;
