@@ -15,12 +15,6 @@
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="form-group" style="font-size:12px;">
-                                  <!-- <select class="form-control form-control-sm  col-lg-12" name="jenjang">
-                                      <option value="0">Pilih Jenjang Pendidikan</option>
-                                      <option value="1">Taman Kanak-Kanak</option>
-                                      <option value="2">Madrasah Ibtida'iyah</option>
-                                      <option value="3">Madrasah Tsanawiyah</option>
-                                  </select> -->
                                       <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjang" name="jenjang">
               														<option></option>
                                       </select>
@@ -28,26 +22,14 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group" style="font-size:12px;">
-                                  <!-- <select class="form-control form-control-sm  col-lg-12" name="jenjang">
-                                      <option value="0">Pilih Jenjang Pendidikan</option>
-                                      <option value="1">Taman Kanak-Kanak</option>
-                                      <option value="2">Madrasah Ibtida'iyah</option>
-                                      <option value="3">Madrasah Tsanawiyah</option>
-                                  </select> -->
-                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectmapel" name="jenjang">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectmapel" name="mapel">
                                           <option></option>
                                       </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group" style="font-size:12px;">
-                                  <!-- <select class="form-control form-control-sm  col-lg-12" name="jenjang">
-                                      <option value="0">Pilih Jenjang Pendidikan</option>
-                                      <option value="1">Taman Kanak-Kanak</option>
-                                      <option value="2">Madrasah Ibtida'iyah</option>
-                                      <option value="3">Madrasah Tsanawiyah</option>
-                                  </select> -->
-                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectkelas" name="jenjang">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectkelas" name="kelas">
                                           <option></option>
                                       </select>
                                 </div>

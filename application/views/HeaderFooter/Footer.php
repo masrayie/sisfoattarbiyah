@@ -59,6 +59,10 @@
         allowClear : true,
         data : data
       });
+
+      function selectjenjang(){
+        document.getElementById("#selectmapel").disabled=false;
+      }
   </script>
   <!-- End custom js for this page-->
 </body>
