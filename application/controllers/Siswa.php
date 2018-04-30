@@ -91,7 +91,6 @@ class Siswa extends CI_Controller {
                     'nama_orangtua' => $nama_orangtua,
                     'jenjang'       => $jenjang
                   );
-
       $this->load->library('upload', $config);
 
       if (!$this->upload->do_upload('filefoto')) {

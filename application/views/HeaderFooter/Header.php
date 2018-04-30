@@ -8,6 +8,7 @@
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo base_url("assets/node_modules/mdi/css/materialdesignicons.min.css");?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/node_modules/simple-line-icons/css/simple-line-icons.css");?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/vendor/Select2/dist/css/select2.min.css");?>"/>
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -15,6 +16,11 @@
   <link rel="stylesheet" href="<?php echo base_url("assets/css/style2.css");?>">
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo base_url("assets/images/logo_kecil.png");?>" />
+  <style type="text/css">
+      .select2-results__options{
+        font-size:12px !important;
+    }
+  </style>
 </head>
 <body>
   <div class="container-scroller">
