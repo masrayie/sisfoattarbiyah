@@ -3,7 +3,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-			
+
 			<div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -12,7 +12,7 @@
                     Data Siswa Al-Islamiyah Attarbiyah
                   </p>
                   <table class="table table-hover">
-                    <thead>
+                    <thead align="justify">
                       <tr>
                         <th> NO </th>
                         <th> NIS </th>
@@ -35,7 +35,11 @@
                                   <td><?php echo $as->getNamaSiswa(); ?></td>
                                   <td><?php echo $as->getNamaOrangTua(); ?></td>
                                   <td><?php echo $as->getAlamat(); ?></td>
-                                  <td><?php echo $as->getJenjang(); ?></td>
+                                  <td align="center"><?php echo $as->getJenjang(); ?></td>
+                                  <td>
+                                    <a href="<?php echo base_url('index.php/siswa/viewEditSiswa/'.$as->getNis()); ?>" class="btn btn-warning mr-2">UBAH</a>
+                                    <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger mr-2">HAPUS</a>
+                                  </td>
                                   <td>
                                       <!-- <?php
                                         if($as->status==0){
@@ -52,7 +56,6 @@
                 </div>
               </div>
             </div>
-			
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -66,4 +69,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    

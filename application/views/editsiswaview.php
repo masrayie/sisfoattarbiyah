@@ -10,13 +10,13 @@
                 <div class="card-body">
                   <div class="row">
                       <div class="col-md-10 grid-margin stretch-card">
-                        <h3 class="card-title">Form Input Siswa</h3>
+                        <h3 class="card-title">Form Edit Siswa</h3>
                       </div>
                       <div class="col-md-2 grid-margin stretch-card" style="text-align: right;">
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/inputdatasiswa' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/editdatasiswa' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Siswa</label>
                       <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nis" placeholder="Nomor Induk Siswa [10 Karakter]">
@@ -39,8 +39,8 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
-                      <select class="form-control form-control-sm" name="jenjang">
-                      <option value="0"selected="selected">Pilih Jenjang Pendidikan</option>
+                      <select class="form-control form-control-sm" name="jenjang" >
+                      <option value="0" disabled >Pilih Jenjang Pendidikan</option>
                       <option value="1">Taman Kanak-Kanak</option>
                       <option value="2">Madrasah Ibtida'iyah</option>
                       <option value="3">Madrasah Tsanawiyah</option>

@@ -10,44 +10,39 @@
                 <div class="card-body">
                   <div class="row">
                       <div class="col-md-10 grid-margin stretch-card">
-                        <h3 class="card-title">Form Input Siswa</h3>
+                        <h3 class="card-title">Form Edit Data Guru</h3>
                       </div>
-                      <div class="col-md-2 grid-margin stretch-card" style="text-align: right;">
+                      <div class="col-lg-2 grid-margin stretch-card" style="text-align: right;">
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/inputdatasiswa' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/editdataguru' ?>">
                     <div class="form-group">
-                      <label for="exampleInputName1">Nomor Induk Siswa</label>
-                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nis" placeholder="Nomor Induk Siswa [10 Karakter]">
+                      <label for="exampleInputName1">Nomor Induk Pegawai</label>
+                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputEmail3">Nama Lengkap Siswa</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_siswa" placeholder="Nama Lengkap Siswa">
+                      <label for="exampleInputEmail3">Nama Lengkap Guru</label>
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Tanggal Lahir</label>
-                      <input type="date" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir">
+                      <label for="exampleInputPassword4">Kode Guru</label>
+                      <input type="text" pattern="[a-zA-Z]{3}"class="form-control" name="kode_guru" placeholder="Kode Guru">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Password">
+                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="alamat" placeholder="Alamat">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Nama Orang Tua</label>
-                      <input type="text" pattern="[a-zA-Z]{1,}" class="form-control" name="nama_orangtua" placeholder="Nama Orang Tua">
+                      <label for="exampleInputPassword4">Email</label>
+                      <input type="email" class="form-control" name="email" placeholder="Email">
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword4">Jenjang Pendidikan</label>
-                      <select class="form-control form-control-sm" name="jenjang">
-                      <option value="0"selected="selected">Pilih Jenjang Pendidikan</option>
-                      <option value="1">Taman Kanak-Kanak</option>
-                      <option value="2">Madrasah Ibtida'iyah</option>
-                      <option value="3">Madrasah Tsanawiyah</option>
-                    </select>
+                      <label for="exampleInputPassword4">Password</label>
+                      <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                      <label>Foto Siswa</label>
+                      <label>Foto Diri</label>
                       <input type="file" name="img[]" class="file-upload-default">
                       <div class="input-group col-xs-12">
                         <input type="text" class="form-control file-upload-info" disabled placeholder="Unggah Foto">
@@ -56,7 +51,9 @@
                         </span>
                       </div>
                     </div>
-                    <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    <div class="panel-footer">
+                      <button type="submit" class="btn btn-success mr-2">Submit</button>
+                    </div>
                     <!-- <button class="btn btn-light">Cancel</button> -->
                   </form>
                 </div>

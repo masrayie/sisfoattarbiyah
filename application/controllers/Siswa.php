@@ -27,7 +27,7 @@ class Siswa extends CI_Controller {
 
   public function index()
   {
-    
+
   }
 
   public function viewInputSiswa(){
@@ -39,7 +39,7 @@ class Siswa extends CI_Controller {
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header');
          $this->load->view('inputsiswaview');
-         $this->load->view('HeaderFooter/Footer');        
+         $this->load->view('HeaderFooter/Footer');
        }
        else
        {
@@ -58,7 +58,7 @@ class Siswa extends CI_Controller {
          $data['siswaArr'] = $this->readDataSiswaAll();
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('tabelsiswaview', $data);
-         $this->load->view('HeaderFooter/Footer', $data);      
+         $this->load->view('HeaderFooter/Footer', $data);
        }
        else
        {
@@ -74,16 +74,23 @@ class Siswa extends CI_Controller {
       $alamat         = $this->input->post('alamat');
       $nama_orangtua  = $this->input->post('nama_orangtua');
       $jenjang        = $this->input->post('jenjang');
-      $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
-      $model = new ModelDB();
-      $res = $model->insertSiswa($objSiswa);
-      echo $res;
+
+      $data = array('nis'           => $nis,
+                    'nama_siswa'    => $nama_siswa,
+                    'tgl_lahir'     => $tgl_lahir,
+                    'alamat'        => $alamat,
+                    'nama_orangtua' => $nama_orangtua,
+                    'jenjang'       => $jenjang
+                  );
+
+      $this->ModelDB->insertData($data, 't_siswa');
+      redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   }
 
   public function readDataSiswaAll(){
       $model = new ModelDB();
       $result = $model->readDataAll('t_siswa');
-
+      
       foreach ($result as $row) {
         # code...
           $siswaArr[] = new M_Siswa($row->nis, $row->nama_siswa, $row->tgl_lahir, $row->alamat, $row->nama_orangtua, $row->jenjang);
@@ -91,5 +98,65 @@ class Siswa extends CI_Controller {
       return $siswaArr;
   }
 
-  
+  public function viewEditSiswa(){
+    $nip = $this->uri->segment(3);
+        if($this->session->userdata('logged_in'))
+         {
+           $session_data = $this->session->userdata('logged_in');
+           $data['nip'] = $session_data['nip'];
+           $data['nama_guru'] = $session_data['nama_guru'];
+           $data['kode_guru'] = $session_data['kode_guru'];
+           $model = new ModelDB();
+           $result = $model->readDataWhere('nis', $nip, 't_siswa');
+            if($result){
+              foreach ($result as $row) {
+                  $nis = $row->nis;
+                  $nama_siswa = $row->nama_siswa;
+                  $tgl_lahir = $row->tgl_lahir;
+                  $alamat = $row->alamat;
+                  $nama_orangtua = $row->nama_orangtua;
+                  $jenjang = $row->jenjang;
+              }
+              $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
+              $data['objSiswa'] = $objSiswa;
+
+              $this->load->view('HeaderFooter/Header', $data);
+              $this->load->view('editsiswaview', $data);
+              $this->load->view('HeaderFooter/Footer');
+         }
+         else
+         {
+           //If no session, redirect to login page
+           redirect(base_url(), 'refresh');
+         }
+       }
+  }
+
+  public function editDataSiswa(){
+    $nis            = $this->input->post('nis');
+    $nama_siswa     = $this->input->post('nama_siswa');
+    $tgl_lahir      = $this->input->post('tgl_lahir');
+    $alamat         = $this->input->post('alamat');
+    $nama_orangtua  = $this->input->post('nama_orangtua');
+    $jenjang        = $this->input->post('jenjang');
+
+    $data = array('nama_siswa'    => $nama_siswa,
+                  'tgl_lahir'     => $tgl_lahir,
+                  'alamat'        => $alamat,
+                  'nama_orangtua' => $nama_orangtua,
+                  'jenjang'       => $jenjang
+                );
+
+    $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+
+    redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+  }
+
+  public function deleteDataSiswa()
+   {
+     $id = $this->uri->segment(3);
+     $this->ModelDB->deleteData('nis', $id, 't_siswa');
+     redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+   }
+
 }
