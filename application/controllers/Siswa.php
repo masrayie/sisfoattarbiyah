@@ -84,14 +84,13 @@ class Siswa extends CI_Controller {
                   );
 
       $this->ModelDB->insertData($data, 't_siswa');
-      
       redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   }
 
   public function readDataSiswaAll(){
       $model = new ModelDB();
       $result = $model->readDataAll('t_siswa');
-      
+
       foreach ($result as $row) {
         # code...
           $siswaArr[] = new M_Siswa($row->nis, $row->nama_siswa, $row->tgl_lahir, $row->alamat, $row->nama_orangtua, $row->jenjang);
