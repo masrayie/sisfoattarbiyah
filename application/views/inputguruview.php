@@ -16,7 +16,7 @@
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Pegawai</label>
                       <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
@@ -43,12 +43,8 @@
                     </div>
                     <div class="form-group">
                       <label>Foto Diri</label>
-                      <input type="file" name="img[]" class="file-upload-default">
                       <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Unggah Foto">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-info" type="browse">Upload</button>
-                        </span>
+                        <input class="btn" type="file" name="filefoto" size="20" accept=".jpg" required/>
                       </div>
                     </div>
                     <div class="panel-footer">

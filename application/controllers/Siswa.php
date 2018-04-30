@@ -68,12 +68,21 @@ class Siswa extends CI_Controller {
   }
 
   public function inputDataSiswa(){
+
       $nis            = $this->input->post('nis');
       $nama_siswa     = $this->input->post('nama_siswa');
       $tgl_lahir      = $this->input->post('tgl_lahir');
       $alamat         = $this->input->post('alamat');
       $nama_orangtua  = $this->input->post('nama_orangtua');
       $jenjang        = $this->input->post('jenjang');
+
+      $config = array('file_name'     => $nis,
+                      'upload_path'   => './photosiswa/',
+                      'allowed_types' => 'jpg',
+                      'max_size'      => '100',
+                      'max_width'     => '1024',
+                      'max_height'    => '728'
+                    );
 
       $data = array('nis'           => $nis,
                     'nama_siswa'    => $nama_siswa,
@@ -82,9 +91,14 @@ class Siswa extends CI_Controller {
                     'nama_orangtua' => $nama_orangtua,
                     'jenjang'       => $jenjang
                   );
+      $this->load->library('upload', $config);
 
-      $this->ModelDB->insertData($data, 't_siswa');
-      redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
+      if (!$this->upload->do_upload('filefoto')) {
+
+  		} else {
+        $this->ModelDB->insertData($data, 't_siswa');
+        redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
+  		}
   }
 
   public function readDataSiswaAll(){
@@ -140,6 +154,14 @@ class Siswa extends CI_Controller {
     $nama_orangtua  = $this->input->post('nama_orangtua');
     $jenjang        = $this->input->post('jenjang');
 
+    $config = array('file_name'     => $nis,
+                    'upload_path'   => './photosiswa/',
+                    'allowed_types' => 'jpeg|jpg|png',
+                    'max_size'      => '2048',
+                    'max_width'     => '2000',
+                    'max_height'    => '2000'
+                  );
+
     $data = array('nama_siswa'    => $nama_siswa,
                   'tgl_lahir'     => $tgl_lahir,
                   'alamat'        => $alamat,
@@ -147,15 +169,26 @@ class Siswa extends CI_Controller {
                   'jenjang'       => $jenjang
                 );
 
-    $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
 
-    redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+    unlink('photosiswa/'.$nis.".jpg");
+    $this->load->library('upload', $config);
+
+    if (!$this->upload->do_upload('filefoto')) {
+
+    } else {
+
+      $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+      redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+    }
+
+
   }
 
   public function deleteDataSiswa()
    {
-     $id = $this->uri->segment(3);
-     $this->ModelDB->deleteData('nis', $id, 't_siswa');
+     $nis = $this->uri->segment(3);
+     unlink('photosiswa/'.$nis.".jpg");
+     $this->ModelDB->deleteData('nis', $nis, 't_siswa');
      redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
    }
 
