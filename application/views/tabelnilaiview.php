@@ -3,7 +3,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-			
+
 			<div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -11,33 +11,48 @@
                       <div class="col-md-6 grid-margin stretch-card">
                         <h3 class="card-title">Data Nilai Siswa</h3>
                       </div>
-                      <div class="col-md-6 stretch-card" align="left">
-                          <div class="form-group">
-                            <select class="form-control form-control-sm  col-lg-12" name="jenjang">
-                                <option value="0">Pilih Jenjang Pendidikan</option>
-                                <option value="1">Taman Kanak-Kanak</option>
-                                <option value="2">Madrasah Ibtida'iyah</option>
-                                <option value="3">Madrasah Tsanawiyah</option>
-                            </select>
-                          </div>
-                          &nbsp;
-                          <div class="form-group">
-                            <select class="form-control form-control-sm col-md-12" name="jenjang">
-                                <option value="0">Pilih Mata Pelajaran</option>
-                                <option value="1">Aqidah Akhlak</option>
-                                <option value="2">Fiqih</option>
-                                <option value="3">Matematika</option>
-                            </select>
-                          </div>
-                          &nbsp;
-                          <div class="form-group" align="left">
-                            <select class="form-control form-control-sm col-md-12" name="jenjang">
-                                <option value="0">Pilih Kelas</option>
-                                <option value="1">MI-A</option>
-                                <option value="2">MI-B</option>
-                                <option value="3">MI-C</option>
-                            </select>
-                          </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group" style="font-size:12px;">
+                                  <!-- <select class="form-control form-control-sm  col-lg-12" name="jenjang">
+                                      <option value="0">Pilih Jenjang Pendidikan</option>
+                                      <option value="1">Taman Kanak-Kanak</option>
+                                      <option value="2">Madrasah Ibtida'iyah</option>
+                                      <option value="3">Madrasah Tsanawiyah</option>
+                                  </select> -->
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjang" name="jenjang">
+              														<option></option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" style="font-size:12px;">
+                                  <!-- <select class="form-control form-control-sm  col-lg-12" name="jenjang">
+                                      <option value="0">Pilih Jenjang Pendidikan</option>
+                                      <option value="1">Taman Kanak-Kanak</option>
+                                      <option value="2">Madrasah Ibtida'iyah</option>
+                                      <option value="3">Madrasah Tsanawiyah</option>
+                                  </select> -->
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectmapel" name="jenjang">
+                                          <option></option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" style="font-size:12px;">
+                                  <!-- <select class="form-control form-control-sm  col-lg-12" name="jenjang">
+                                      <option value="0">Pilih Jenjang Pendidikan</option>
+                                      <option value="1">Taman Kanak-Kanak</option>
+                                      <option value="2">Madrasah Ibtida'iyah</option>
+                                      <option value="3">Madrasah Tsanawiyah</option>
+                                  </select> -->
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectkelas" name="jenjang">
+                                          <option></option>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
                       </div>
                   </div>
                   <form method="POST" action="google.com">
@@ -51,10 +66,10 @@
                           NIS
                         </th>
                         <th>
-                          Nama 
+                          Nama
                         </th>
                         <th>
-                          Kelas 
+                          Kelas
                         </th>
             						<th>
             						  Mata Pelajaran
@@ -104,7 +119,7 @@
                 </div>
               </div>
             </div>
-			
+
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -118,4 +133,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    
