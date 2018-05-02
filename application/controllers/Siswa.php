@@ -79,9 +79,9 @@ class Siswa extends CI_Controller {
       $config = array('file_name'     => $nis,
                       'upload_path'   => './photosiswa/',
                       'allowed_types' => 'jpg',
-                      'max_size'      => '100',
-                      'max_width'     => '1024',
-                      'max_height'    => '728'
+                      'max_size'      => '2000',
+                      'max_width'     => '2000',
+                      'max_height'    => '2000'
                     );
 
       $data = array('nis'           => $nis,
