@@ -89,9 +89,9 @@
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">
-              <div class="profile-image"> <img src="<?php echo base_url("assets/images/faces/face28.jpg");?>" alt="image"/> <span class="online-status online"></span> </div>
+              <div class="profile-image"> <img src="<?php echo base_url('photoguru/'.$nip.'.jpg');?>" alt="image"/> <span class="online-status online"></span> </div>
               <div class="profile-name">
-                <p class="name">Asep Saefullah</p>
+                <p class="name"><?php echo $nama_guru; ?></p>
                 <p class="designation">Wakepsek</p>
                 <div class="badge badge-teal mx-auto mt-3">Online</div>
               </div>

@@ -37,7 +37,7 @@ class Guru extends CI_Controller {
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
-         $this->load->view('HeaderFooter/Header');
+         $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('inputguruview');
          $this->load->view('HeaderFooter/Footer');
        }
@@ -68,6 +68,7 @@ class Guru extends CI_Controller {
   }
 
   public function inputDataGuru(){
+
     $nip        = $this->input->post('nip');
     $nama_guru  = $this->input->post('nama_guru');
     $alamat     = $this->input->post('alamat');
@@ -78,9 +79,9 @@ class Guru extends CI_Controller {
     $config = array('file_name'     => $nip,
                     'upload_path'   => './photoguru/',
                     'allowed_types' => 'jpg',
-                    'max_size'      => '100',
-                    'max_width'     => '1024',
-                    'max_height'    => '768'
+                    'max_size'      => '20',
+                    'max_width'     => '2000',
+                    'max_height'    => '2000'
                   );
 
     $data = array('nip' 			=> $nip,
@@ -94,11 +95,12 @@ class Guru extends CI_Controller {
     $this->load->library('upload', $config);
 
     if (!$this->upload->do_upload('filefoto')) {
-
+      $this->session->set_flashdata('upload_failed', 'coba foto lain');
     } else {
       $this->ModelDB->insertData($data, 't_guru');
-      redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
     }
+
+    redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
   }
 
   public function readDataGuruAll(){
@@ -128,7 +130,7 @@ class Guru extends CI_Controller {
                   $kode_guru = $row->kode_guru;
                   $alamat = $row->alamat;
                   $email = $row->email;
-                  $passwordguru = md5($row->password);
+                  $passwordguru = $row->password;
               }
               $objGuru = new M_Guru($nipguru, $namaGuru, $alamat, $kode_guru, $email, $passwordguru);
               $data['objGuru'] = $objGuru;
@@ -148,31 +150,49 @@ class Guru extends CI_Controller {
     $nip        = $this->uri->segment(3);
     $nama_guru  = $this->input->post('nama_guru');
     $alamat     = $this->input->post('alamat');
+    $kode_guru  = $this->input->post('kode_guru');
     $email      = $this->input->post('email');
-    $password   = md5($this->input->post('password'));
+    $password   = $this->input->post('password');
 
     $config = array('file_name'     => $nip,
                     'upload_path'   => './photoguru/',
                     'allowed_types' => 'jpg',
-                    'max_size'      => '100',
-                    'max_width'     => '1024',
-                    'max_height'    => '768'
+                    'max_size'      => '20',
+                    'max_width'     => '2000',
+                    'max_height'    => '2000'
                   );
 
-    $data = array('nama_guru' => $nama_guru,
-                  'alamat'    => $alamat,
-                  'email'     => $email,
-                  'password'  => $password
-                );
+    if ($password == '') {
+      $data = array('nama_guru' => $nama_guru,
+                    'alamat'    => $alamat,
+                    'email'     => $email,
+                  );
+    }else {
+      $data = array('nama_guru' => $nama_guru,
+                    'alamat'    => $alamat,
+                    'email'     => $email,
+                    'password'  => md5($password)
+                  );
+    }
 
-    unlink('photoguru/'.$nip.".jpg");
-    $this->load->library('upload', $config);
-
-    if (!$this->upload->do_upload('filefoto')) {
-
-    } else {
+    if ($_FILES['filefoto']['size'] == 0) {
       $this->ModelDB->editData('nip', $nip, 't_guru', $data);
       redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+    }else {
+      $this->load->library('upload', $config);
+      $this->upload->overwrite = true;
+
+      if (!$this->upload->do_upload('filefoto')){
+        $objGuru = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
+        $data['objGuru'] = $objGuru;
+
+        $this->session->set_flashdata('upload_failed', 'coba foto lain');
+
+        redirect(base_url('index.php/guru/viewEditGuru/'.$nip), 'refresh', $data);
+      } else {
+        $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+        redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+      }
     }
   }
 

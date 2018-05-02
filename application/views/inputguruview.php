@@ -43,6 +43,15 @@
                     </div>
                     <div class="form-group">
                       <label>Foto Diri</label>
+                      <?php if ($error = $this->session->flashdata('upload_failed')):?>
+                        <div class="row" >
+                          <div class="col-lg-4">
+                            <div class="alert alert-dismissible alert-danger" align="center">
+                              <?= $error ?>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endif ?>
                       <div class="input-group col-xs-12">
                         <input class="btn" type="file" name="filefoto" size="20" accept=".jpg" required/>
                       </div>

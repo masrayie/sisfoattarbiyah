@@ -37,7 +37,7 @@ class Siswa extends CI_Controller {
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
-         $this->load->view('HeaderFooter/Header');
+         $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('inputsiswaview');
          $this->load->view('HeaderFooter/Footer');
        }
@@ -94,11 +94,12 @@ class Siswa extends CI_Controller {
       $this->load->library('upload', $config);
 
       if (!$this->upload->do_upload('filefoto')) {
-
+        $this->session->set_flashdata('upload_failed', 'coba foto lain');
   		} else {
         $this->ModelDB->insertData($data, 't_siswa');
-        redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   		}
+
+      redirect(base_url('index.php/siswa/viewInputSiswa/'), 'refresh');
   }
 
   public function readDataSiswaAll(){
@@ -157,7 +158,7 @@ class Siswa extends CI_Controller {
     $config = array('file_name'     => $nis,
                     'upload_path'   => './photosiswa/',
                     'allowed_types' => 'jpeg|jpg|png',
-                    'max_size'      => '2048',
+                    'max_size'      => '20',
                     'max_width'     => '2000',
                     'max_height'    => '2000'
                   );
@@ -169,19 +170,24 @@ class Siswa extends CI_Controller {
                   'jenjang'       => $jenjang
                 );
 
-
-    unlink('photosiswa/'.$nis.".jpg");
-    $this->load->library('upload', $config);
-
-    if (!$this->upload->do_upload('filefoto')) {
-
-    } else {
-
+    if ($_FILES['filefoto']['size'] == 0) {
       $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
       redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+    }else {
+      $this->load->library('upload', $config);
+      $this->upload->overwrite = true;
+
+      if (!$this->upload->do_upload('filefoto')) {
+        $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
+        $data['objSiswa'] = $objSiswa;
+        $this->session->set_flashdata('upload_failed', 'coba foto lain');
+        
+        redirect(base_url('index.php/siswa/viewEditSiswa/'.$nis), 'refresh', $data);
+      } else {
+        $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+        redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+      }
     }
-
-
   }
 
   public function deleteDataSiswa()
