@@ -54,15 +54,18 @@
         allowClear : true,
         data : data
       });
+      // $("#selectmapel").select2("enable", false);
       $("#selectkelas").select2({
         placeholder: "Pilih Kelas",
         allowClear : true,
         data : data
       });
-
-      function selectjenjang(){
-        document.getElementById("#selectmapel").disabled=false;
-      }
+      $("#selectjenjang").on("change", function(e){
+        $("#selectmapel").removeAttr("disabled");
+      });
+      $("#selectmapel").on("change", function(e){
+        $("#selectkelas").removeAttr("disabled");
+      });
   </script>
   <!-- End custom js for this page-->
 </body>

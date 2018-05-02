@@ -22,14 +22,14 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group" style="font-size:12px;">
-                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectmapel" name="mapel">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectmapel" name="mapel" disabled>
                                           <option></option>
                                       </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group" style="font-size:12px;">
-                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectkelas" name="kelas">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectkelas" name="kelas" disabled>
                                           <option></option>
                                       </select>
                                 </div>
