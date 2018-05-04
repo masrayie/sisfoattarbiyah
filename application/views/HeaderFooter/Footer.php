@@ -44,11 +44,7 @@
       $("#selectmapel").on("change", function(e){
         $("#selectkelas").removeAttr("disabled");
       });
-      $("#selecthari").on("change", function(e){
-        $("#selectjenjang").removeAttr("disabled");
-        $("#jumlahkelas").removeAttr("disabled");
-        $("#btngojadwal").removeAttr("disabled");
-      });
+    
   </script>
   <!-- End custom js for this page-->
 </body>

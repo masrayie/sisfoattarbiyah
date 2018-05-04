@@ -23,7 +23,7 @@ class JadwalSeluruh extends CI_Controller {
 
   }
 
-  public function viewInputJadwalAll(){
+  public function viewSettingShift(){
     if($this->session->userdata('logged_in'))
        {
          $session_data = $this->session->userdata('logged_in');
@@ -31,7 +31,7 @@ class JadwalSeluruh extends CI_Controller {
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header', $data);
-         $this->load->view('inputjadwalview');
+         $this->load->view('inputshiftview');
          $this->load->view('HeaderFooter/Footer');
        }
        else

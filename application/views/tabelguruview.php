@@ -42,7 +42,7 @@
                             'kode_guru'   => $as->getKodeGuru(),
                             'email'       => $as->getEmail()
                           );
-                        $no = $no + 1;
+                          $no = $no + 1;
                         ?>
                           <tr>
                               <td><?php echo $no; ?></td>
@@ -65,8 +65,6 @@
                 </div>
               </div>
             </div>
-
-
           </div>
         </div>
         <!-- content-wrapper ends -->
