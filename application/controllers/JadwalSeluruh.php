@@ -20,18 +20,42 @@ class JadwalSeluruh extends CI_Controller {
    */
   public function index()
   {
-    
+
   }
 
   public function viewInputJadwalAll(){
-    $this->load->view('HeaderFooter/Header');
-    $this->load->view('inputjadwalview');
-    $this->load->view('HeaderFooter/Footer');
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('inputjadwalview');
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
   }
 
   public function viewTabelJadwalAll(){
-    $this->load->view('HeaderFooter/Header');
-    $this->load->view('tabeljadwalview');
-    $this->load->view('HeaderFooter/Footer');
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('tabeljadwalview');
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
   }
 }

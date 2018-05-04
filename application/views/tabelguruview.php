@@ -36,6 +36,12 @@
                       <?php
                         $no=0;
                         foreach ($guruArr as $as) {
+                          $dataku[] = array(
+                            'nip'         => $as->getNip(),
+                            'nama_guru'   => $as->getNamaGuru(),
+                            'kode_guru'   => $as->getKodeGuru(),
+                            'email'       => $as->getEmail()
+                          );
                         $no = $no + 1;
                         ?>
                           <tr>
@@ -49,16 +55,11 @@
                                 <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2">HAPUS</a>
                               </td>
                               <td>
-                                      <!-- <?php
-                                        if($as->status==0){
-                                            echo "<label class='label label-danger' style='font-size: 10px;'>BELUM KEMBALI </label>";
-                                        } elseif ($as->status==1) {
-                                            echo "<label class='label label-success'style='font-size: 10px;' >SUDAH KEMBALI </label>";
-                                        }
-                                      ?>   -->
                               </td>
                           </tr>
-                        <?php } ?>
+                        <?php
+                          }
+                        ?>
                     </tbody>
                   </table>
                 </div>
@@ -78,4 +79,8 @@
         </footer>
         <!-- partial -->
       </div>
+      <script type="text/javascript">
+          var tes
+          tes = <?php echo json_encode($dataku); ?>;
+      </script>
       <!-- main-panel ends -->

@@ -37,8 +37,8 @@ class MataPelajaran extends CI_Controller {
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
-         $this->load->view('HeaderFooter/Header');
-         $this->load->view('inputmapelview');
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('inputmapelview', $data);
          $this->load->view('HeaderFooter/Footer');
        }
        else

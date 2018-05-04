@@ -79,7 +79,7 @@ class Guru extends CI_Controller {
     $config = array('file_name'     => $nip,
                     'upload_path'   => './photoguru/',
                     'allowed_types' => 'jpg',
-                    'max_size'      => '20',
+                    'max_size'      => '2000',
                     'max_width'     => '2000',
                     'max_height'    => '2000'
                   );
@@ -157,7 +157,7 @@ class Guru extends CI_Controller {
     $config = array('file_name'     => $nip,
                     'upload_path'   => './photoguru/',
                     'allowed_types' => 'jpg',
-                    'max_size'      => '20',
+                    'max_size'      => '200',
                     'max_width'     => '2000',
                     'max_height'    => '2000'
                   );

@@ -21,50 +21,33 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script>
   <script src="<?php echo base_url("assets/js/maps.js");?>"></script>
   <script type="text/javascript">
-      var data = [
-          {
-              id: 0,
-              text: 'enhancement'
-          },
-          {
-              id: 1,
-              text: 'bug'
-          },
-          {
-              id: 2,
-              text: 'duplicate'
-          },
-          {
-              id: 3,
-              text: 'invalid'
-          },
-          {
-              id: 4,
-              text: 'wontfix'
-          }
-      ];
 
       $("#selectjenjang").select2({
         placeholder: "Pilih Jenjang Pendidikan",
         allowClear : true,
-        data : data
       });
       $("#selectmapel").select2({
         placeholder: "Pilih Mata Pelajaran",
         allowClear : true,
-        data : data
       });
-      // $("#selectmapel").select2("enable", false);
       $("#selectkelas").select2({
         placeholder: "Pilih Kelas",
         allowClear : true,
-        data : data
+      });
+      $("#selecthari").select2({
+        placeholder: "Pilih Hari",
+        allowClear : true,
       });
       $("#selectjenjang").on("change", function(e){
         $("#selectmapel").removeAttr("disabled");
       });
       $("#selectmapel").on("change", function(e){
         $("#selectkelas").removeAttr("disabled");
+      });
+      $("#selecthari").on("change", function(e){
+        $("#selectjenjang").removeAttr("disabled");
+        $("#jumlahkelas").removeAttr("disabled");
+        $("#btngojadwal").removeAttr("disabled");
       });
   </script>
   <!-- End custom js for this page-->
