@@ -12,7 +12,7 @@
                             <h3 class="card-title"> Input Jadwal Pelajaran</h3>
                           </div>
                           <div class="col-md-2 stretch-card">
-                              <a class="btn  btn-outline-danger" href="<?php echo base_url('index.php/JadwalSeluruh/viewSettingShift'); ?>" style=" padding:15px 13px;"> <i class="mdi mdi-settings"></i><h7 class="card-title">Set Shift</h7></a>
+                              <a  href="<?php echo base_url('index.php/JadwalSeluruh/viewSettingShift'); ?>" style=" padding:15px 13px;" class="btn btn-danger mr-2"> <i class="mdi mdi-settings"></i><h7 class="card-title">Set Shift</h7></a>
                           </div>
                       </div>
                         <div class="row" style="margin-bottom:-10px; margin-top:10px;">
@@ -73,11 +73,13 @@
                             </div>
                           </form>
                         </div>
-                  <form class="form-control" style="border:0px;">
-                  <div class="row" id="tabeldata">
-
-                  </div>
-                </form>
+                  <form class="form-control" style="border:0px;" action="" method="post">
+                    <div class="row" id="tabeldata">
+                    </div>
+                    <div class="row" id="rowbtnsubmit" align="right" style="margin-top:20px; padding-left:35px;">
+                      <button type="submit" class="btn btn-success btn-rounded btn-fw">Save</button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -92,11 +94,12 @@
           </div>
         </footer>
           <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
-            <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
+          <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
         <script type="text/javascript">
           document.getElementById("rowmi").style.display="none";
           document.getElementById("rowmts").style.display="none";
           document.getElementById("rowjumkelas").style.display="none";
+          document.getElementById("rowbtnsubmit").style.display="none";
           $("#selecthariku").select2({
             placeholder: "Pilih Hari",
             allowClear : true,
@@ -115,6 +118,8 @@
               var jenjang
               jenjang = document.getElementById("selectjenjangku").value;
               if(jenjang == 0){
+                $("#rowmi").hide();
+                $("#rowmts").hide();
                 $("#rowjumkelas").show();
               } else if(jenjang == 1){
                 $("#rowmi").show();
@@ -151,32 +156,49 @@
           ];
 
           function outputTabel(){
-            var hari, jenjang, jumlahkelas
-            hari = document.getElementById("selecthariku").value;
-            jenjang = document.getElementById("selectjenjangku").value;
-            switch (jenjang) {
-              case 0:
-                  jenjang2 = "Taman Kanak-Kanak";
-                break;
-                case 1:
-                    jenjang2 = "Madrasah Ibtidaiyah";
-                  break;
-                  case 2:
-                      jenjang2 = ">Madrasah Tsanawiyah";
-                    break;
-              default:
+            var hari, jenjang, jenjang2, tingkat, jumlahkelas, alphabet
+            hari        = document.getElementById("selecthariku").value;
+            jenjang     = document.getElementById("selectjenjangku").value;
+            jumlahkelas = document.getElementById("jumlahkelas").value;
+
+            if(jenjang == 0){
+              jenjang2 = "Taman Kanak-Kanak";
+            } else if (jenjang==1) {
+              jenjang2 = "Madrasah Ibtidaiyah";
+              tingkat = document.getElementById("selecttingkatmi").value;
+            } else {
+              jenjang2 = "Madrasah Tsanawiyah";
+              tingkat = document.getElementById("selecttingkatmts").value;
             }
 
-            jumlahkelas = document.getElementById("jumlahkelas").value;
+            alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+
             for (var i = 0; i < jumlahkelas; i++) {
-                $("#tabeldata").append("<div class='col-lg-12 stretch-card'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal Kelas Hari </h4> <table class='table table-bordered'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%>Kode Guru</th> <th width='10%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody> <tr> <td> </td> <td> <select id='selectmapelku"+ i +"' class='col-sm-12'> <option></option> </select> </td> <td> <select name='selectguru' class='col-sm-12'> <option></option> </select> </td> <td> <select id='selectshift' class='col-sm-12'> <option></option> </select> </td> <td></td> <td></td> <td></td> </tr> </tbody> </table> </div> </div> </div>");
+                if(jenjang == 0){
+                    $("#tabeldata").append("<div class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +" </h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='12%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody> <tr> <td> </td> <td> <select id='selectmapelku"+ i +"' class='col-sm-12'> <option></option> </select> </td> <td> <select id='selectguru"+ i +"' class='col-sm-12' name='selectguru'><option></option></select> </td> <td> <select id='selectshift"+i+"'name='selectshift' class='col-sm-12'> <option></option> </select> </td> <td></td> <td></td> <td></td> <td>tes</td> </tr> </tbody> </table> </div> </div> </div>");
+                } else {
+                    $("#tabeldata").append("<div class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +",  Kelas "+ tingkat + "-" + alphabet[i] +" </h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody> <tr> <td> </td> <td> <select id='selectmapelku"+ i +"' class='col-sm-12'> <option></option> </select> </td> <td><select id='selectguru"+ i +"' class='col-sm-12' name='selectguru'><option></option></select></td> <td> <select name='selectshift' id='selectshift"+ i +"' class='col-sm-12'> <option></option> </select> </td> <td></td> <td></td> <td></td> <td>tes</td></tr> </tbody> </table> </div> </div> </div>");
+                }
+
+                $("#rowbtnsubmit").show();
 
                 $("#selectmapelku"+i).select2({
                   placeholder: "Pilih Matapelajaran",
                   allowClear : true,
                   data : data
                 });
+                $("#selectshift"+i).select2({
+                  placeholder: "Pilih Shift",
+                  allowClear : true,
+                  data : data
+                });
+                $("#selectguru"+i).select2({
+                  placeholder: "Pilih Kode Guru",
+                  allowClear : true,
+                  data : data
+                });
               }
+
             }
 
             $("#selectmapelku").select2({
@@ -191,11 +213,6 @@
 
             $("#selecttingkatmts").select2({
               placeholder: "Pilih Tingkat",
-              allowClear : true,
-            });
-
-            document.getElementByName('selectguru').select2({
-              placeholder: "Pilih Guru",
               allowClear : true,
             });
 
