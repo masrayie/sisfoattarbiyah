@@ -68,7 +68,7 @@
                             </div>
                             <div class="col-sm-2" id="rowjumbaris" style="max-width:12.5%;">
                                 <div class="form-group">
-                                      <input type="number" min="1" class="form-control form-control-sm" name="jumlahbaris" id="jumlahkelas" placeholder="Baris Jadwal" style="padding:6px 5px; border: 1px solid #aaa;" />
+                                      <input type="number" min="1" class="form-control form-control-sm" name="jumlahbaris" id="jumlahbaris" placeholder="Baris Jadwal" style="padding:6px 5px; border: 1px solid #aaa;" />
                                 </div>
                             </div>
                             <div class="col-sm-2">
@@ -212,10 +212,11 @@
 
           //function output tabel dinamis
           function outputTabel(){
-            var hari, jenjang, jenjang2, tingkat, jumlahkelas, alphabet, kelasstorage
+            var hari, jenjang, jenjang2, tingkat, jumlahkelas, alphabet, kelasstorage, jumlahbaris
             hari        = document.getElementById("selecthariku").value;
             jenjang     = document.getElementById("selectjenjangku").value;
             jumlahkelas = document.getElementById("jumlahkelas").value;
+            jumlahbaris = document.getElementById("jumlahbaris").value;
             $("#btnreset").show();
 
             if(!localStorage.getItem("jumlahkelas")){
@@ -248,28 +249,32 @@
             // alert(counter);
             for (var i = 0; i < jumlahkelas; i++) {
                 if(jenjang == 0){
-                    $("#tabeldata").append("<div class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +" Kelas "+ alphabet[(counter+i)] +" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='12%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody> <tr> <td> </td> <td> <select id='selectmapelku"+ (counter+i) +"' class='col-sm-12'> <option></option> </select> </td> <td> <select id='selectguru"+ (counter+i) +"' class='col-sm-12' name='selectguru'><option></option></select> </td> <td> <select id='selectshift"+(counter+i)+"'name='selectshift' class='col-sm-12'> <option></option> </select> </td> <td></td> <td></td> <td></td> <td>tes</td> </tr> </tbody> </table> </div> </div> </div>");
+                    $("#tabeldata").append("<div class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +" Kelas "+ alphabet[(counter+i)] +" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='12%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
                 } else {
-                    $("#tabeldata").append("<div class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +",  Kelas "+ tingkat + "-" + alphabet[(counter+i)] +" </h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody> <tr> <td> </td> <td> <select id='selectmapelku"+ (counter+i) +"' class='col-sm-12'> <option></option> </select> </td> <td><select id='selectguru"+ (counter+i) +"' class='col-sm-12' name='selectguru'><option></option></select></td> <td> <select name='selectshift' id='selectshift"+ (counter+i) +"' class='col-sm-12'> <option></option> </select> </td> <td></td> <td></td> <td></td> <td>tes</td></tr> </tbody> </table> </div> </div> </div>");
+                    $("#tabeldata").append("<div class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +",  Kelas "+ tingkat + "-" + alphabet[(counter+i)] +" </h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                }
+
+                for(var j = 0; j < jumlahbaris; j++){
+                    var rowjadwal = "<tr> <td> </td> <td> <select id='selectmapelku" + i + (counter+j) + "' class='col-sm-12'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='col-sm-12' name='selectguru'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift' class='col-sm-12'> <option></option> </select> </td> <td></td> <td></td> <td></td> <td>tes</td> </tr>";
+                    $("#bodyjadwal"+(counter+i)).append(rowjadwal);
+                    $("#selectmapelku"+i+(counter+j)).select2({
+                      placeholder: "Pilih Matapelajaran",
+                      allowClear : true,
+                      data : data
+                    });
+                    $("#selectshift"+i+(counter+j)).select2({
+                      placeholder: "Pilih Shift",
+                      allowClear : true,
+                      data : data
+                    });
+                    $("#selectguru"+i+(counter+j)).select2({
+                      placeholder: "Pilih Kode Guru",
+                      allowClear : true,
+                      data : data
+                    });
                 }
 
                 $("#rowbtnsubmit").show();
-
-                $("#selectmapelku"+(counter+i)).select2({
-                  placeholder: "Pilih Matapelajaran",
-                  allowClear : true,
-                  data : data
-                });
-                $("#selectshift"+(counter+i)).select2({
-                  placeholder: "Pilih Shift",
-                  allowClear : true,
-                  data : data
-                });
-                $("#selectguru"+(counter+i)).select2({
-                  placeholder: "Pilih Kode Guru",
-                  allowClear : true,
-                  data : data
-                });
               }
 
             }
