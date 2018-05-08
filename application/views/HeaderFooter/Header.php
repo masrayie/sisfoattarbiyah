@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="<?php echo base_url("assets/node_modules/mdi/css/materialdesignicons.min.css");?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/node_modules/simple-line-icons/css/simple-line-icons.css");?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/vendor/Select2/dist/css/select2.min.css");?>"/>
+  <link rel="stylesheet" href="<?php echo base_url("assets/vendor/JTimePicker/dist/jquery-clockpicker.css");?>"/>
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->

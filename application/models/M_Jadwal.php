@@ -6,14 +6,14 @@
 class M_Jadwal
 {
   private $idJadwal;
-  private $mapel = new MataPelajaran;
-  private $guru = new Guru;
+  // private $mapel = new MataPelajaran();
+  // private $guru = new Guru();
   private $hari;
   private $jam;
   private $kelas;
   private $jadwalSiswa = [];
 
-  function __construct($idJadwal, $mapel, $guru, $hari, $jam, $kelas, $jadwalSiswa)
+  function __construct($idJadwal=null, $mapel=null, $guru=null, $hari=null, $jam=null, $kelas=null, $jadwalSiswa=null)
   {
     $this->idJadwal = $idJadwal;
     $this->mapel = $mapel;

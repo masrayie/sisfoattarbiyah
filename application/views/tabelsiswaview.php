@@ -41,13 +41,6 @@
                                     <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger mr-2">HAPUS</a>
                                   </td>
                                   <td>
-                                      <!-- <?php
-                                        if($as->status==0){
-                                            echo "<label class='label label-danger' style='font-size: 10px;'>BELUM KEMBALI </label>";
-                                        } elseif ($as->status==1) {
-                                            echo "<label class='label label-success'style='font-size: 10px;' >SUDAH KEMBALI </label>";
-                                        }
-                                      ?>   -->
                                   </td>
                           </tr>
                         <?php } ?>

@@ -18,7 +18,6 @@
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="<?php echo base_url("assets/js/dashboard.js");?>"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5NXz9eVnyJOA81wimI8WYE08kW_JMe8g&callback=initMap" async defer></script>
   <script src="<?php echo base_url("assets/js/maps.js");?>"></script>
   <script type="text/javascript">
 
@@ -44,7 +43,7 @@
       $("#selectmapel").on("change", function(e){
         $("#selectkelas").removeAttr("disabled");
       });
-    
+
   </script>
   <!-- End custom js for this page-->
 </body>

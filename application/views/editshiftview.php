@@ -2,8 +2,6 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-
-
           <div class="row">
             <div class="col-md-10  stretch-card">
               <div class="card">
@@ -13,7 +11,7 @@
 
                         <h3 class="card-title">Set up Shift Pembelajaran</h3>
                       </div>
-                      <div class="col-sm-2 stretch-card" style="text-align: right;">
+                      <div class="col-sm-2 stretch-card" style="text-align: right;" hidden>
                           <button class="btn btn-primary btn-sm mr-6" onclick="openRow()" id="btnopen"><i class="mdi mdi-plus-box-outline"></i> New</button>
                           <button class="btn btn-danger btn-sm" onclick="closeRow()" id="btnclose"> Close X </button>
                       </div>
@@ -23,30 +21,31 @@
                       <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/JadwalSeluruh/saveShift' ?>">
                         <div class="form-group">
                           <label for="exampleInputName1">ID Shift</label>
-                          <input type="text" class="form-control" name="id_shift" placeholder="ID Jadwal">
+                          <input type="text" class="form-control" name="id_shift" placeholder="ID Jadwal" value="<?php echo $objShift->getIdShift(); ?>" readonly>
                         </div>
                         <div class="form-group">
                           <label for="exampleInputPassword4">Jam Mulai & Jam Selesai</label>
                           <div class="row">
                             <div class="col-md-6">
                                 <div class="input-group clockpicker">
-                                  <input type="text" class="form-control" name="jam_mulai" placeholder="Jam Mulai">
+                                  <input type="text" class="form-control" name="jam_mulai" placeholder="Jam Mulai" value="<?php echo $objShift->getJamMulai(); ?>">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <!-- <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai" id="timepicker2"> -->
                                 <div class="input-group clockpicker">
-                                  <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai">
+                                  <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai" value="<?php echo $objShift->getJamSelesai();?>">
                                 </div>
                             </div>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="exampleInputPassword4">Keterangan</label>
-                          <input type="text" class="form-control" name="keterangan" placeholder="Keterangan">
+                          <input type="text" class="form-control" name="keterangan" placeholder="Keterangan" value="<?php echo $objShift->getKeterangan(); ?>">
                         </div>
                         <div class="form-group">
                           <button type="submit" class="btn btn-success mr-2">Save</button>
+                          <a href="<?php echo base_url('index.php/JadwalSeluruh/viewSettingShift');?>" class="btn btn-danger mr-2">Cancel</a>
                         </div>
                       </form>
                     </div>
@@ -117,7 +116,6 @@
 
         <script type="text/javascript">
           $('.clockpicker').clockpicker();
-          document.getElementById("rowinput").style.display = "none";
           document.getElementById("btnclose").style.display = "none";
           function openRow(){
             $("#rowinput").show();
