@@ -3,14 +3,14 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-
-			<div class="col-lg-12 stretch-card">
+ 			     <div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
                       <div class="row">
                           <div class="col-md-10 stretch-card">
                             <h3 class="card-title"> Input Jadwal Pelajaran</h3>
                           </div>
+                          <a href="<?php echo base_url().'index.php/JadwalSeluruh/generateIdJadwal/1';?>">tes</a>
                           <div class="col-md-2 stretch-card">
                               <h7 class="card-title"><a  href="<?php echo base_url('index.php/JadwalSeluruh/viewSettingShift'); ?>" class="btn btn-danger "> <i class="mdi mdi-settings"></i>Set Shift</a></h7>
                           </div>
@@ -108,9 +108,25 @@
           <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
           <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
         <script type="text/javascript">
+
+          $.ajax({
+              type: 'post',
+              url : "<?php echo base_url().'index.php/JadwalSeluruh/generateIdJadwal/1';?>",
+              data : '',
+              dataType : 'JSON',
+              success : function(data){
+                  alert(data.id_jadwal);
+                  console.log(data);
+              },
+              error : function(data){
+                console.log('error di controller');
+              }
+          });
+
           $(window).bind('beforeunload', function(){
             localStorage.removeItem("jumlahkelas");
           });
+
           $(document).ready(function(){
             // if(!localStorage.getItem("jumlahkelas")){
             //   alert("gaadacuk");
@@ -127,31 +143,10 @@
           document.getElementById("rowjumbaris").style.display="none";
           document.getElementById("rowbtnsubmit").style.display="none";
 
-          //select2 declaration
-          // $("#selecthariku").select2({
-          //   placeholder: "Pilih Hari",
-          //   allowClear : true,
-          // });
-
-          // $("#selectjenjangku").select2({
-          //   placeholder: "Pilih Hari",
-          //   allowClear : true,
-          // });
-
           $("#selectmapelku").select2({
             placeholder: "Pilih Matapelajaran",
             allowClear : true,
           });
-
-          // $("#selecttingkatmi").select2({
-          //   placeholder: "Pilih Tingkat",
-          //   allowClear : true,
-          // });
-
-          // $("#selecttingkatmts").select2({
-          //   placeholder: "Pilih Tingkat",
-          //   allowClear : true,
-          // });
 
           $("#selectshift").select2({
             placeholder: "Pilih Shift",
@@ -184,29 +179,6 @@
               }
           });
 
-          var data = [
-              {
-                  id: 0,
-                  text: 'enhancement'
-              },
-              {
-                  id: 1,
-                  text: 'bug'
-              },
-              {
-                  id: 2,
-                  text: 'duplicate'
-              },
-              {
-                  id: 3,
-                  text: 'invalid'
-              },
-              {
-                  id: 4,
-                  text: 'wontfix'
-              }
-          ];
-
           function cekLocalStorage(){
             if(!localStorage.getItem("jumlahkelas")){
               alert("belum ada");
@@ -222,7 +194,7 @@
             jenjang     = document.getElementById("selectjenjangku").value;
             jumlahkelas = document.getElementById("jumlahkelas").value;
             jumlahbaris = document.getElementById("jumlahbaris").value;
-            alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+            alphabet    = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
             if(!localStorage.getItem("jumlahkelas")){
                 kelasstorage = jumlahkelas;
@@ -261,6 +233,23 @@
                 counterrow = barisstorage - jumlahbaris;
             }
 
+            var datamapel = $.map(<?php echo $jsonMapel; ?>, function (obj) {
+                              obj.id = obj.id || obj.kode_mapel;
+                              obj.text = obj.text || obj.nama_mapel;
+                              return obj;
+                            });
+            var dataguru = $.map(<?php echo $jsonGuru; ?>, function (obj) {
+                              obj.id = obj.id || obj.kode_guru;
+                              var label = obj.kode_guru + " - " + obj.nama_guru;
+                              obj.text = obj.text || label;
+                              return obj;
+                            });
+            var datashift = $.map(<?php echo $jsonShift; ?>, function (obj) {
+                                obj.id = obj.id || obj.id_shift;
+                                obj.text = obj.text || obj.id_shift;
+                              return obj;
+                            });
+
             for (var i = 0; i < jumlahkelas; i++) {
                 if(jenjang == 0){
                     $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +" Kelas "+ alphabet[(counter+i)] +" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='12%'>Shift</th> <th width='5%'>Jam Mulai</th> <th width='5%'>Jam Selesai</th> <th width='15%'>Keterangan</th> <th width='15%'>Operation</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
@@ -273,25 +262,20 @@
                     $("#bodyjadwal"+(counter+i)).append(rowjadwal);
                     $("#selectmapelku"+i+(counter+j)).select2({
                       placeholder: "Pilih Matapelajaran",
-                      allowClear : true,
-                      data : data
+                      data : datamapel
                     });
                     $("#selectshift"+i+(counter+j)).select2({
                       placeholder: "Pilih Shift",
-                      allowClear : true,
-                      data : data
+                      data : datashift
                     });
                     $("#selectguru"+i+(counter+j)).select2({
                       placeholder: "Pilih Kode Guru",
-                      allowClear : true,
-                      data : data
+                      data : dataguru
                     });
+                  }
+                    $("#rowbtnsubmit").show();
+                    $("#rowoperation").hide();
                 }
-
-                $("#rowbtnsubmit").show();
-                $("#rowoperation").hide();
-              }
-
             }
 
             function btnreset(){

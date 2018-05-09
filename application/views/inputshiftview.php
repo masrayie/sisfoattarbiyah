@@ -14,7 +14,7 @@
                         <h3 class="card-title">Set up Shift Pembelajaran</h3>
                       </div>
                       <div class="col-sm-2 stretch-card" style="text-align: right;">
-                          <button class="btn btn-primary btn-sm mr-6" onclick="openRow()" id="btnopen"><i class="mdi mdi-plus-box-outline"></i> New</button>
+                            <button class="btn btn-primary btn-sm mr-6" onclick="openRow()" id="btnopen"><i class="mdi mdi-plus-box-outline"></i> New</button>
                           <button class="btn btn-danger btn-sm" onclick="closeRow()" id="btnclose"> Close X </button>
                       </div>
                   </div>
@@ -34,7 +34,6 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <!-- <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai" id="timepicker2"> -->
                                 <div class="input-group clockpicker">
                                   <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai">
                                 </div>

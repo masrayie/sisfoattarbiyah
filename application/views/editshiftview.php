@@ -18,7 +18,7 @@
                   </div>
                   <div id="rowinput" style="padding-left:30px; margin-top:15px;">
                     <div class="col-md-10 stretch-card">
-                      <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/JadwalSeluruh/saveShift' ?>">
+                      <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/JadwalSeluruh/updateShift/'.$objShift->getIdShift(); ?>">
                         <div class="form-group">
                           <label for="exampleInputName1">ID Shift</label>
                           <input type="text" class="form-control" name="id_shift" placeholder="ID Jadwal" value="<?php echo $objShift->getIdShift(); ?>" readonly>
@@ -32,7 +32,6 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <!-- <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai" id="timepicker2"> -->
                                 <div class="input-group clockpicker">
                                   <input type="text" class="form-control" name="jam_selesai" placeholder="Jam Selesai" value="<?php echo $objShift->getJamSelesai();?>">
                                 </div>

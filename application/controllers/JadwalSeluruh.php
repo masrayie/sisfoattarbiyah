@@ -23,6 +23,8 @@ class JadwalSeluruh extends CI_Controller {
      parent::__construct();
      $this->load->model('M_Jadwal', '', TRUE);
      $this->load->model('M_Shift', '', TRUE);
+     $this->load->model('M_MataPelajaran', '', TRUE);
+     $this->load->model('M_Guru', '', TRUE);
      $this->load->model('ModelDB', '', TRUE);
    }
 
@@ -52,15 +54,115 @@ class JadwalSeluruh extends CI_Controller {
        }
   }
 
+  public function generateIdJadwal($i){
+      $model  = new ModelDB();
+      $query = $model->readDataWhere('idc',1,'t_counter');
+      foreach ($query as $row ) {
+        $result = $row->countjadwal;
+      }
+      $result  = $result + $i ;
+      $id_jadwal = "";
+        if($result/10 > 999){
+             $id_jadwal = "JDW".$result;
+           } elseif ($result/10 > 99) {
+               $id_jadwal = "JDW"."0".$result;
+           } elseif ($result/10 > 9) {
+               $id_jadwal = "JDW"."00".$result;
+           } elseif ($result/10 >= 1) {
+               $id_jadwal = "JDW"."000".$result;
+           } else{
+               $id_jadwal = "JDW"."0000".$result;
+           }
+      // $dataID = array($id_jadwal, $result);
+      $data = array('no'=>1, 'id_jadwal'=>$id_jadwal);
+      echo json_encode($data);
+  }
+
+  public function readDataGuruAll(){
+      $model = new ModelDB();
+      $result = $model->readDataAll('t_guru');
+      foreach ($result as $row) {
+        # code...
+          $guruArr[] = new M_Guru($row->nip, $row->nama_guru, $row->alamat, $row->kode_guru, $row->email, $row->password);
+      }
+      return $guruArr;
+  }
+
+  public function readDataShiftAll(){
+      $model = new ModelDB();
+      $result = $model->readDataAll('t_shift');
+      foreach ($result as $row) {
+        # code...
+          $shiftArr[] = new M_Shift($row->id_shift, $row->jam_mulai, $row->jam_berakhir, $row->keterangan);
+      }
+      return $shiftArr;
+  }
+
+  public function readDataMapelAll(){
+      $model = new ModelDB();
+      $result = $model->readDataAll('t_mapel');
+      foreach ($result as $row) {
+        # code...
+          $mapelArr[] = new M_MataPelajaran($row->kode_mapel, $row->nama_mapel);
+      }
+      return $mapelArr;
+  }
+
+  public function jsonMapel(){
+      $objMapel  = $this->readDataMapelAll();
+      foreach ($objMapel as $as) {
+        $dataMapel[] = array(
+          'kode_mapel'   => $as->getKodeMapel(),
+          'nama_mapel'   => $as->getNamaMapel()
+        );
+      }
+      $jsonMapel = json_encode($dataMapel);
+      return $jsonMapel;
+  }
+
+  public function jsonGuru(){
+      $objGuru  = $this->readDataGuruAll();
+      foreach ($objGuru as $as) {
+        $dataGuru[] = array(
+          'nip'         => $as->getNip(),
+          'nama_guru'   => $as->getNamaGuru(),
+          'kode_guru'   => $as->getKodeGuru()
+        );
+      }
+      $jsonGuru = json_encode($dataGuru);
+      return $jsonGuru;
+  }
+
+  public function jsonShift(){
+      $objShift  = $this->readDataShiftAll();
+      foreach ($objShift as $as) {
+        $dataShift[] = array(
+          'id_shift'   => $as->getIdShift(),
+          'jam_mulai'   => $as->getJamMulai(),
+          'jam_selesai'  => $as->getJamSelesai(),
+          'keterangan'   => $as->getKeterangan()
+        );
+      }
+      $jsonShift = json_encode($dataShift);
+      return $jsonShift;
+  }
+
   public function viewTabelJadwalAll(){
     if($this->session->userdata('logged_in'))
        {
+         $model     = new ModelDB();
+         $jsonGuru   = $this->jsonGuru();
+         $jsonMapel  = $this->jsonMapel();
+         $jsonShift  = $this->jsonShift();
          $session_data = $this->session->userdata('logged_in');
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
+         $data['jsonGuru']   = $jsonGuru;
+         $data['jsonMapel']  = $jsonMapel;
+         $data['jsonShift']  = $jsonShift;
          $this->load->view('HeaderFooter/Header', $data);
-         $this->load->view('tabeljadwalview');
+         $this->load->view('tabeljadwalview', $data);
          $this->load->view('HeaderFooter/Footer');
        }
        else
@@ -68,22 +170,6 @@ class JadwalSeluruh extends CI_Controller {
          //If no session, redirect to login page
          redirect(base_url(), 'refresh');
        }
-  }
-
-  public function saveShift(){
-    $idshift     = "";
-    $jam_mulai    = $this->input->post('jam_mulai');
-    $jam_selesai  = $this->input->post('jam_selesai');
-    $keterangan   = $this->input->post('keterangan');
-    $data         = array(
-          'id_shift'        => $idshift,
-          'jam_mulai'       => $jam_mulai,
-          'jam_berakhir'    => $jam_selesai,
-          'keterangan'      => $keterangan
-    );
-    $model = new ModelDB();
-    $model->insertData($data, 't_shift');
-    redirect(base_url('index.php/JadwalSeluruh/viewSettingShift'), 'refresh');
   }
 
   public function viewEditShift(){
@@ -124,5 +210,37 @@ class JadwalSeluruh extends CI_Controller {
        }
   }
 
+    public function saveShift(){
+      $idshift     = "";
+      $jam_mulai    = $this->input->post('jam_mulai');
+      $jam_selesai  = $this->input->post('jam_selesai');
+      $keterangan   = $this->input->post('keterangan');
+      $data         = array(
+            'id_shift'        => $idshift,
+            'jam_mulai'       => $jam_mulai,
+            'jam_berakhir'    => $jam_selesai,
+            'keterangan'      => $keterangan
+      );
+      $model = new ModelDB();
+      $model->insertData($data, 't_shift');
+      redirect(base_url('index.php/JadwalSeluruh/viewSettingShift'), 'refresh');
+    }
+
+    public function updateShift(){
+        $id_shift     = $this->uri->segment(3);
+        $jam_mulai    = $this->input->post('jam_mulai');
+        $jam_selesai  = $this->input->post('jam_selesai');
+        $keterangan   = $this->input->post('keterangan');
+        $data         = array(
+              'id_shift'      => $id_shift,
+              'jam_mulai'     => $jam_mulai,
+              'jam_berakhir'   => $jam_selesai,
+              'Keterangan'    => $keterangan
+        );
+        $model = new ModelDB();
+        $model->editData('id_shift', $id_shift, 't_shift', $data);
+        redirect(base_url('index.php/JadwalSeluruh/viewSettingShift'), 'refresh');
+
+    }
 
 }
