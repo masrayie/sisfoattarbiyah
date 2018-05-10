@@ -112,39 +112,50 @@ class JadwalSeluruh extends CI_Controller {
       $objMapel  = $this->readDataMapelAll();
       foreach ($objMapel as $as) {
         $dataMapel[] = array(
-          'kode_mapel'   => $as->getKodeMapel(),
-          'nama_mapel'   => $as->getNamaMapel()
+          'id'   => $as->getKodeMapel(),
+          'text'   => $as->getNamaMapel()
         );
       }
       $jsonMapel = json_encode($dataMapel);
-      return $jsonMapel;
+      echo $jsonMapel;
+      // return $jsonMapel;
   }
 
   public function jsonGuru(){
       $objGuru  = $this->readDataGuruAll();
       foreach ($objGuru as $as) {
         $dataGuru[] = array(
-          'nip'         => $as->getNip(),
-          'nama_guru'   => $as->getNamaGuru(),
-          'kode_guru'   => $as->getKodeGuru()
+          'id'     => $as->getKodeGuru(),
+          'text'   => $as->getKodeGuru().' - '.$as->getNamaGuru()
         );
       }
       $jsonGuru = json_encode($dataGuru);
-      return $jsonGuru;
+      echo $jsonGuru;
   }
 
   public function jsonShift(){
       $objShift  = $this->readDataShiftAll();
       foreach ($objShift as $as) {
         $dataShift[] = array(
-          'id_shift'   => $as->getIdShift(),
-          'jam_mulai'   => $as->getJamMulai(),
-          'jam_selesai'  => $as->getJamSelesai(),
-          'keterangan'   => $as->getKeterangan()
+          'id'   => $as->getIdShift(),
+          'text'   => 'Shift '.$as->getIdShift()
         );
       }
       $jsonShift = json_encode($dataShift);
-      return $jsonShift;
+      echo $jsonShift;
+  }
+
+  public function getJam($id){
+      $model = new ModelDB();
+      $query = $model->readDataWhere('id_shift',$id,'t_shift');
+      foreach ($query as $row ) {
+        $jam_mulai = $row->jam_mulai;
+        $jam_selesai = $row->jam_berakhir;
+        $keterangan = $row->keterangan;
+      }
+      $dataJam = array('jam_mulai'=> $jam_mulai, 'jam_selesai'=> $jam_selesai, 'keterangan'=> $keterangan);
+      $jsonJam = json_encode($dataJam);
+      echo $jsonJam;
   }
 
   public function viewTabelJadwalAll(){
