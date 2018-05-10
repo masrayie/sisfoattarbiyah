@@ -10,7 +10,6 @@
                           <div class="col-md-10 stretch-card">
                             <h3 class="card-title"> Input Jadwal Pelajaran</h3>
                           </div>
-                          <a href = "<?php echo base_url('index.php/JadwalSeluruh/getJam/12'); ?>">tes</a>
                           <div class="col-md-2 stretch-card">
                               <h7 class="card-title"><a  href="<?php echo base_url('index.php/JadwalSeluruh/viewSettingShift'); ?>" class="btn btn-danger "> <i class="mdi mdi-settings"></i>Set Shift</a></h7>
                           </div>
@@ -118,7 +117,7 @@
                     var id_jadwal;
                     id_jadwal = data.id_jadwal;
                     $(idtype).val(id_jadwal);
-                    console.log(data);
+                    // console.log(data);
                 },
                 error : function(data){
                   console.log('error di controller');
@@ -180,8 +179,7 @@
               success : function(data){
                 $(idtype1).val(data.jam_mulai);
                 $(idtype2).val(data.jam_selesai);
-                document.getElementById(idtype3).innerHTML += data.keterangan;
-                console.log(data);
+                $(idtype3).val(data.keterangan);
               },
               error : function(data){
                 console.log('error getting');
@@ -305,14 +303,13 @@
                     dataShift('#selectshift'+i+(counter+j));
                     dataGuru('#selectguru'+i+(counter+j));
                     generateID(x,'#idjadwal'+i+(counter+j));
-                    var rowjadwal = "<tr> <td> <input type='text' class='col-sm-12' id='idjadwal"+i+(counter+j)+"' name='id_jadwal' value='' readonly style='border:none;'/> </td> <td> <select name='selectmapelku[]' id='selectmapelku" + i + (counter+j) + "' class='form form-control-sm' style='width:130px;'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='col-sm-12' name='selectguru[]' style='width:120px;'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift[]' class='col-sm-12' style='width:90px;'> <option></option> </select> </td> <td><input type='text' class='col-sm-12' id='jam_mulai"+i+(counter+j)+"' name='jam_mulai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' id='jam_selesai"+i+(counter+j)+"' name='jam_selesai' value='' readonly style='border:none;'/></td> <td><p id='keterangan"+i+(counter+j)+"'></p></td> </tr>";
+                    var rowjadwal = "<tr> <td> <input type='text' class='col-sm-12' id='idjadwal"+i+(counter+j)+"' name='id_jadwal' value='' readonly style='border:none;'/> </td> <td> <select name='selectmapelku[]' id='selectmapelku" + i + (counter+j) + "' class='form form-control-sm' style='width:130px;'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='col-sm-12' name='selectguru[]' style='width:120px;'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift[]' class='col-sm-12' style='width:90px;'> <option></option> </select> </td> <td><input type='text' class='col-sm-12' id='jam_mulai"+i+(counter+j)+"' name='jam_mulai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' id='jam_selesai"+i+(counter+j)+"' name='jam_selesai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' name='keterangan'id='keterangan"+i+(counter+j)+"' value='' readonly style='border:none;' /></td> </tr>";
                     $("#bodyjadwal"+(counter+i)).append(rowjadwal);
 
                     $("#selectshift"+i+(counter+j)).on('change', function(e){
                       var val = $(this).val();
-                      // alert('#jam_mulai'+i+(counter+j) + ' #jam_selesai'+i+(counter+j)+ ' keterangan'+i+(counter+j));
-                      alert(val);
-                        // outJam($(this).val(), '#jam_mulai'+i+(counter+j), '#jam_selesai'+i+(counter+j), 'keterangan'+i+(counter+j));
+                      var id = this.id.substring(11);
+                      outJam($(this).val(), '#jam_mulai'+id, '#jam_selesai'+id, '#keterangan'+id);
                     });
                   }
                     $("#rowbtnsubmit").show();

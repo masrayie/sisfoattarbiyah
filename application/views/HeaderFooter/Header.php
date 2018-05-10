@@ -16,7 +16,7 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="<?php echo base_url("assets/css/style2.css");?>">
   <!-- endinject -->
-  <link rel="shortcut icon" href="<?php echo base_url("assets/images/logo_kecil.png");?>" />
+  <link rel="shortcut icon" href="<?php echo base_url("assets/images/logo_kecil2.png");?>" />
   <style type="text/css">
       .select2-results__options{
         font-size:12px !important;
@@ -29,7 +29,7 @@
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.html"><img src="<?php echo base_url("assets/images/logoattarbiy.svg");?>" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url("assets/images/logo_kecil.png");?>" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url("assets/images/logo_kecil2.png");?>" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
@@ -71,11 +71,6 @@
               </a>
               <div class="dropdown-divider"></div>
             </div>
-          </li>
-          <li class="nav-item d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <img class="img-xs rounded-circle" src="images/faces/face4.jpg" alt="">
-            </a>
           </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">

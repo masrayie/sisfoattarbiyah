@@ -162,16 +162,10 @@ class JadwalSeluruh extends CI_Controller {
     if($this->session->userdata('logged_in'))
        {
          $model     = new ModelDB();
-         $jsonGuru   = $this->jsonGuru();
-         $jsonMapel  = $this->jsonMapel();
-         $jsonShift  = $this->jsonShift();
          $session_data = $this->session->userdata('logged_in');
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
-         $data['jsonGuru']   = $jsonGuru;
-         $data['jsonMapel']  = $jsonMapel;
-         $data['jsonShift']  = $jsonShift;
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('tabeljadwalview', $data);
          $this->load->view('HeaderFooter/Footer');
