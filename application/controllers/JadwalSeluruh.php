@@ -136,9 +136,11 @@ class JadwalSeluruh extends CI_Controller {
   public function jsonShift(){
       $objShift  = $this->readDataShiftAll();
       foreach ($objShift as $as) {
+        $date = strtotime($as->getJamMulai());
+        $time = date('H:i', $date);
         $dataShift[] = array(
           'id'   => $as->getIdShift(),
-          'text'   => 'Shift '.$as->getIdShift()
+          'text'   => 'Shift '.$as->getIdShift().' - '.$time
         );
       }
       $jsonShift = json_encode($dataShift);
