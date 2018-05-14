@@ -151,8 +151,8 @@ class JadwalSeluruh extends CI_Controller {
       $model = new ModelDB();
       $query = $model->readDataWhere('id_shift',$id,'t_shift');
       foreach ($query as $row ) {
-        $jam_mulai = $row->jam_mulai;
-        $jam_selesai = $row->jam_berakhir;
+        $jam_mulai = date('H:i', strtotime($row->jam_mulai));
+        $jam_selesai = date('H:i', strtotime($row->jam_berakhir));
         $keterangan = $row->keterangan;
       }
       $dataJam = array('jam_mulai'=> $jam_mulai, 'jam_selesai'=> $jam_selesai, 'keterangan'=> $keterangan);
@@ -170,35 +170,50 @@ class JadwalSeluruh extends CI_Controller {
       return $nip;
   }
 
-  public function getSubmitAll(){
+  public function insertJadwalAll(){
+      $model = new ModelDB();
       $dataAll = json_decode(file_get_contents('php://input'), true);
-      print_r($dataAll);
-    //   $model = new ModelDB();
-    //   foreach($dataAll as $row){
-    //     $data = array(
-    //            'id_jadwal'  => $row->id_jadwal,
-    //            'kode_mapel' => $row->mapel,
-    //            'nip'        => $this->getNip($row->kodeguru),
-    //            'jenjang'    => $row->jenjang,
-    //            'kelas'      => $row->kelas,
-    //            'hari'       => $row->hari,
-    //            'shift'      => $row->shift
-    //         );
-    //     $model->insertData('t_jadwal_semua', $data);
-    // }
-    // redirect(base_url('index.php/JadwalSeluruh/viewTabelJadwalAll/'), 'refresh');
+      for($i = 0; $i < sizeof($dataAll['id_jadwal']); $i++){
+        $dataJadwal = array(
+          'id_jadwal'   => $dataAll['id_jadwal'][$i],
+          'kode_mapel'  => $dataAll['mapel'][$i],
+          'nip'         => $this->getNip($dataAll['kodeguru'][$i]),
+          'jenjang'     => $dataAll['jenjang'][$i],
+          'kelas'       => $dataAll['kelas'][$i],
+          'hari'        => $dataAll['hari'][$i],
+          'id_shift'    => $dataAll['shift'][$i]
+        );
+        $model->insertData($dataJadwal,'t_jadwal_semua');
+      }
   }
 
   public function viewTabelJadwalAll(){
     if($this->session->userdata('logged_in'))
        {
-         $model     = new ModelDB();
          $session_data = $this->session->userdata('logged_in');
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header', $data);
-         $this->load->view('tabeljadwalview', $data);
+         $this->load->view('inputjadwalseluruhview', $data);
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
+  }
+
+  public function viewJadwalSeluruh(){
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('tabeljadwalseluruhview', $data);
          $this->load->view('HeaderFooter/Footer');
        }
        else

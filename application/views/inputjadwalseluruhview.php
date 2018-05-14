@@ -87,7 +87,7 @@
                     <div class="row" id="tabeldata">
                     </div>
                     <div class="row" id="rowbtnsubmit" align="right" style="margin-top:20px; padding-left:35px;">
-                      <button type="button" onclick="sendJSON()" class="btn btn-success btn-fw">Save</button>
+                      <button type="button" onclick="sendJSONJadwal()" class="btn btn-success btn-fw">Save</button>
                       <button type="button" class="btn btn-outline-danger btn-fw" style="margin-left:20px;" onclick="btnreset()"><i class="mdi mdi-restart"></i>Reset</button>
                     </div>
                   </form>
@@ -294,10 +294,10 @@
                 var kelas
                 if(jenjang == 0){
                     kelas = alphabet[(counter+i)];
-                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" / Kelas "+kelas+" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='20%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='15%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" / Kelas "+kelas+" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='20%'>ID Jadwal</th> <th width='15%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='10%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
                 } else {
                     kelas = tingkat + alphabet[(counter+i)];
-                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" /  Kelas "+kelas+"</h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='20%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='15%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" /  Kelas "+kelas+"</h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='20%'>ID Jadwal</th> <th width='15%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='10%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
                 }
 
                 for(var j = 0; j < jumlahbaris; j++){
@@ -306,7 +306,7 @@
                     dataShift('#selectshift'+i+(counter+j));
                     dataGuru('#selectguru'+i+(counter+j));
                     generateID(x,'#idjadwal'+i+(counter+j));
-                    var rowjadwal = "<tr> <td> <input type='hidden' name='kelas' value='"+kelas+"'/> <input type='hidden' name='jenjang' value='"+jenjang+"'/> <input type='hidden' name='hari' value='"+hari+"'/> <input type='text' class='col-sm-12' id='idjadwal"+i+(counter+j)+"' name='id_jadwal' value='' readonly style='border:none;'/> </td> <td> <select name='selectmapelku' id='selectmapelku" + i + (counter+j) + "' class='form form-control-sm'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='form form-control-sm' name='selectguru'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift' class='form form-control-sm'> <option></option> </select> </td> <td><input type='text' class='col-sm-12' id='jam_mulai"+i+(counter+j)+"' name='jam_mulai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' id='jam_selesai"+i+(counter+j)+"' name='jam_selesai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' name='keterangan'id='keterangan"+i+(counter+j)+"' value='' readonly style='border:none;' /></td> </tr>";
+                    var rowjadwal = "<tr> <td> <input type='hidden' name='kelas' value='"+kelas+"'/> <input type='hidden' name='jenjang' value='"+jenjang+"'/> <input type='hidden' name='hari' value='"+hari+"'/> <input type='text' class='col-sm-12' id='idjadwal"+i+(counter+j)+"' name='id_jadwal' value='' readonly style='border:none;font-size:11.5px;'/> </td> <td> <select name='selectmapelku' id='selectmapelku" + i + (counter+j) + "' class='form form-control-sm'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='form form-control-sm' name='selectguru'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift' class='form form-control-sm'> <option></option> </select> </td> <td><input type='text' class='col-sm-12' id='jam_mulai"+i+(counter+j)+"' name='jam_mulai' value='' readonly style='border:none;font-size:12px;'/></td> <td><input type='text' class='col-sm-12' id='jam_selesai"+i+(counter+j)+"' name='jam_selesai' value='' readonly style='border:none;font-size:12px;'/></td> <td><input type='text' class='col-sm-12' name='keterangan'id='keterangan"+i+(counter+j)+"' value='' readonly style='border:none;' /></td> </tr>";
                     $("#bodyjadwal"+(counter+i)).append(rowjadwal);
 
                     $("#selectshift"+i+(counter+j)).on('change', function(e){
@@ -321,24 +321,6 @@
             }
 
             function btnreset(){
-              // $("div[name='elementabel']").remove();
-              // $("#rowoperation").show();
-              // $("#rowbtnsubmit").hide();
-              // $("#selecthariku").val("-");
-              // $("#selectjenjangku").val("-");
-              // $("#selectjenjangku").prop("disabled","disabled");
-              // $("#selecttingkatmi").val("-");
-              // $("#selecttingkatmi").val("-");
-              // $("#jumlahkelas").val("");
-              // $("#jumlahbaris").val("");
-              // document.getElementById("rowmi").style.display="none";
-              // document.getElementById("rowmts").style.display="none";
-              // document.getElementById("rowjumkelas").style.display="none";
-              // document.getElementById("rowjumbaris").style.display="none";
-              // document.getElementById("rowbtnsubmit").style.display="none";
-              // localStorage.removeItem("jumlahkelas");
-              // localStorage.removeItem("jumlahbaris");
-              // alert("cek");
               location.reload();
             }
 
@@ -346,37 +328,37 @@
               var objAll = {};
               objAll.id_jadwal = $.map($("input[name='id_jadwal']"), function(val, _) {
                   var newObj = {};
-                  newObj.id_jadwal = val.value;
+                  newObj = val.value;
                   return newObj;
                 });
                 objAll.mapel = $.map($("select[name='selectmapelku']"), function(val, _) {
                     var newObj = {};
-                    newObj.mapel = val.value;
+                    newObj = val.value;
                     return newObj;
                   });
                   objAll.kodeguru = $.map($("select[name='selectguru']"), function(val, _) {
                       var newObj = {};
-                      newObj.kodeguru = val.value;
+                      newObj = val.value;
                       return newObj;
                     });
                     objAll.shift = $.map($("select[name='selectshift']"), function(val, _) {
                         var newObj = {};
-                        newObj.shift = val.value;
+                        newObj = val.value;
                         return newObj;
                       });
-                      objAll.jenjang = $.map($("select[name='jenjang']"), function(val, _) {
+                      objAll.jenjang = $.map($("input[name='jenjang']"), function(val, _) {
                           var newObj = {};
-                          newObj.jenjang = val.value;
+                          newObj = val.value;
                           return newObj;
                         });
                         objAll.kelas = $.map($("input[name='kelas']"), function(val, _) {
                             var newObj = {};
-                            newObj.kelas = val.value;
+                            newObj = val.value;
                             return newObj;
                           });
                           objAll.hari = $.map($("input[name='hari']"), function(val, _) {
                               var newObj = {};
-                              newObj.hari = val.value;
+                              newObj = val.value;
                               return newObj;
                             });
               console.log(JSON.stringify(objAll));
@@ -384,15 +366,15 @@
               // alert("cek");
             }
 
-            function sendJSON(){
+            function sendJSONJadwal(){
                 var val = getAllValue();
                 $.ajax({
                   method:'POST',
                   contentType :'application/json',
-                  url : "<?php echo base_url().'index.php/JadwalSeluruh/getSubmitAll';?>",
+                  url : "<?php echo base_url().'index.php/JadwalSeluruh/insertJadwalAll';?>",
                   data : val,
                   success: function(resp){
-                    console.log(resp);
+                    window.location="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll';?>";
                   },
                   error: function(resp){
                     console.log('gagal parsing');

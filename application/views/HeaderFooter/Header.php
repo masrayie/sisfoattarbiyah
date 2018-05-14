@@ -125,7 +125,9 @@
             <a class="nav-link" data-toggle="collapse" href="#menu_jadwal" aria-expanded="false" aria-controls="general-pages"> <img class="menu-icon" src="<?php echo base_url("assets/images/menu_icons/05.png")?>" alt="menu icon"> <span class="menu-title">Penjadwalan</span><i class="menu-arrow"></i></a>
             <div class="collapse" id="menu_jadwal">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll' ?>">Jadwal Seluruh</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll' ?>">Set Jadwal</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll' ?>">Jadwal Siswa</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewJadwalSeluruh' ?>">Tabel Jadwal</a></li>
               </ul>
             </div>
           </li>
