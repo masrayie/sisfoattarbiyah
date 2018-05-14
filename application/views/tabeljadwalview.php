@@ -292,9 +292,11 @@
             var x = 0;
             for (var i = 0; i < jumlahkelas; i++) {
                 if(jenjang == 0){
-                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +" Kelas "+ alphabet[(counter+i)] +" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='20%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='15%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                    var kelas = alphabet[(counter+i)];
+                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" / Kelas <input type='text' name='kelas' style='border:none;' value='"+kelas+"' readonly/> </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='20%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='15%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
                 } else {
-                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i>,  Hari "+ hari +",  Kelas "+ tingkat + "-" + alphabet[(counter+i)] +" </h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='20%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='15%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                    var kelas = tingkat + alphabet[(counter+i)];
+                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" /  Kelas <input type='text' name='kelas' style='border:none;' value='"+kelas+"' readonly/> </h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='10%'>ID Jadwal</th> <th width='20%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='20%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='15%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
                 }
 
                 for(var j = 0; j < jumlahbaris; j++){
@@ -303,13 +305,13 @@
                     dataShift('#selectshift'+i+(counter+j));
                     dataGuru('#selectguru'+i+(counter+j));
                     generateID(x,'#idjadwal'+i+(counter+j));
-                    var rowjadwal = "<tr> <td> <input type='text' class='col-sm-12' id='idjadwal"+i+(counter+j)+"' name='id_jadwal' value='' readonly style='border:none;'/> </td> <td> <select name='selectmapelku[]' id='selectmapelku" + i + (counter+j) + "' class='form form-control-sm'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='form form-control-sm' name='selectguru[]'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift[]' class='form form-control-sm'> <option></option> </select> </td> <td><input type='text' class='col-sm-12' id='jam_mulai"+i+(counter+j)+"' name='jam_mulai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' id='jam_selesai"+i+(counter+j)+"' name='jam_selesai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' name='keterangan'id='keterangan"+i+(counter+j)+"' value='' readonly style='border:none;' /></td> </tr>";
+                    var rowjadwal = "<tr> <td> <input type='text' class='col-sm-12' id='idjadwal"+i+(counter+j)+"' name='id_jadwal' value='' readonly style='border:none;'/> </td> <td> <select name='selectmapelku' id='selectmapelku" + i + (counter+j) + "' class='form form-control-sm'> <option></option> </select> </td> <td> <select id='selectguru" + i + (counter+j) + "' class='form form-control-sm' name='selectguru'><option></option></select> </td> <td> <select id='selectshift" + i + (counter+j) + "'name='selectshift' class='form form-control-sm'> <option></option> </select> </td> <td><input type='text' class='col-sm-12' id='jam_mulai"+i+(counter+j)+"' name='jam_mulai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' id='jam_selesai"+i+(counter+j)+"' name='jam_selesai' value='' readonly style='border:none;'/></td> <td><input type='text' class='col-sm-12' name='keterangan'id='keterangan"+i+(counter+j)+"' value='' readonly style='border:none;' /></td> </tr>";
                     $("#bodyjadwal"+(counter+i)).append(rowjadwal);
 
                     $("#selectshift"+i+(counter+j)).on('change', function(e){
                       var val = $(this).val();
                       var id = this.id.substring(11);
-                      outJam($(this).val(), '#jam_mulai'+id, '#jam_selesai'+id, '#keterangan'+id);
+                      outJam(val, '#jam_mulai'+id, '#jam_selesai'+id, '#keterangan'+id);
                     });
                   }
                     $("#rowbtnsubmit").show();
@@ -318,39 +320,70 @@
             }
 
             function btnreset(){
-              $("div[name='elementabel']").remove();
-              $("#rowoperation").show();
-              $("#rowbtnsubmit").hide();
-              $("#selecthariku").val("-");
-              $("#selectjenjangku").val("-");
-              $("#selectjenjangku").prop("disabled","disabled");
-              $("#selecttingkatmi").val("-");
-              $("#selecttingkatmi").val("-");
-              $("#jumlahkelas").val("");
-              $("#jumlahbaris").val("");
-              document.getElementById("rowmi").style.display="none";
-              document.getElementById("rowmts").style.display="none";
-              document.getElementById("rowjumkelas").style.display="none";
-              document.getElementById("rowjumbaris").style.display="none";
-              document.getElementById("rowbtnsubmit").style.display="none";
-              localStorage.removeItem("jumlahkelas");
-              localStorage.removeItem("jumlahbaris");
+              // $("div[name='elementabel']").remove();
+              // $("#rowoperation").show();
+              // $("#rowbtnsubmit").hide();
+              // $("#selecthariku").val("-");
+              // $("#selectjenjangku").val("-");
+              // $("#selectjenjangku").prop("disabled","disabled");
+              // $("#selecttingkatmi").val("-");
+              // $("#selecttingkatmi").val("-");
+              // $("#jumlahkelas").val("");
+              // $("#jumlahbaris").val("");
+              // document.getElementById("rowmi").style.display="none";
+              // document.getElementById("rowmts").style.display="none";
+              // document.getElementById("rowjumkelas").style.display="none";
+              // document.getElementById("rowjumbaris").style.display="none";
+              // document.getElementById("rowbtnsubmit").style.display="none";
+              // localStorage.removeItem("jumlahkelas");
+              // localStorage.removeItem("jumlahbaris");
               // alert("cek");
+              location.reload();
             }
 
-            // function btnSubmit(){
-            //   var valIdJadwal valMapel, valKode, valShift, valKet
-            //   valMapel = $('select[name="selectmapelku[]"]').map(function() {
-            //       return this.value;
-            //     }).get();
-            //   valKode = $('select[name="selectguru[]"]').map(function() {
-            //       return this.value;
-            //     }).get();
-            //   valShift = $('select[name="selectshift[]"]').map(function() {
-            //       return this.value;
-            //   }).get();
-            //   // alert("cek");
-            // }
+            function btnSubmit(){
+              var valIdJadwal, valMapel, valKode, valShift, valJenjang, valKelas, valHari
+              valIdJadwal = $.map($("input[name='id_jadwal']"), function(val, _) {
+                  var newObj = {};
+                  newObj.id_jadwal = val.value;
+                  return newObj;
+                });
+                valMapel = $.map($("select[name='selectmapelku']"), function(val, _) {
+                    var newObj = {};
+                    newObj.mapel = val.value;
+                    return newObj;
+                  });
+                  valKode = $.map($("select[name='selectguru']"), function(val, _) {
+                      var newObj = {};
+                      newObj.kodeguru = val.value;
+                      return newObj;
+                    });
+                    valShift = $.map($("select[name='selectshift']"), function(val, _) {
+                        var newObj = {};
+                        newObj.shift = val.value;
+                        return newObj;
+                      });
+                      valJenjang = $.map($("select[name='jenjang']"), function(val, _) {
+                          var newObj = {};
+                          newObj.jenjang = val.value;
+                          return newObj;
+                        });
+                        valKelas = $.map($("input[name='kelas']"), function(val, _) {
+                            var newObj = {};
+                            newObj.kelas = val.value;
+                            return newObj;
+                          });
+                      var jsonAll = {};
+                      jsonAll.id_jadwal = valIdJadwal;
+                      jsonAll.mapel = valMapel;
+                      jsonAll.kodeguru = valKode;
+                      jsonAll.shift = valShift;
+                      jsonAll.kelas = valKelas;
+                      jsonAll.jenjang = document.getElementById("selectjenjangku").value;
+                      jsonAll.hari = document.getElementById("selecthariku").value;
+              console.log();
+              // alert("cek");
+            }
 
         </script>
         <!-- partial -->
