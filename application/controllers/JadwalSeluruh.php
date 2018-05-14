@@ -160,6 +160,35 @@ class JadwalSeluruh extends CI_Controller {
       echo $jsonJam;
   }
 
+  public function getNip($kode_guru){
+      $model = new ModelDB();
+      $result = $model->readDataWhere('kode_guru', $kode_guru, 't_guru');
+      foreach ($result as $row) {
+        # code...
+        $nip = $row->nip;
+      }
+      return $nip;
+  }
+
+  public function getSubmitAll(){
+      $dataAll = json_decode(file_get_contents('php://input'), true);
+      print_r($dataAll);
+    //   $model = new ModelDB();
+    //   foreach($dataAll as $row){
+    //     $data = array(
+    //            'id_jadwal'  => $row->id_jadwal,
+    //            'kode_mapel' => $row->mapel,
+    //            'nip'        => $this->getNip($row->kodeguru),
+    //            'jenjang'    => $row->jenjang,
+    //            'kelas'      => $row->kelas,
+    //            'hari'       => $row->hari,
+    //            'shift'      => $row->shift
+    //         );
+    //     $model->insertData('t_jadwal_semua', $data);
+    // }
+    // redirect(base_url('index.php/JadwalSeluruh/viewTabelJadwalAll/'), 'refresh');
+  }
+
   public function viewTabelJadwalAll(){
     if($this->session->userdata('logged_in'))
        {
