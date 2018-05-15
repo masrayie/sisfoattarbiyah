@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-sm-2" id="rowjumkelas" style="max-width:12.5%; line-height: 0.5;">
                                 <div class="form-group">
-                                  <label for="exampleInputName1" style="font-size:13px;">Jumlah Kelas Say</label>
+                                  <label for="exampleInputName1" style="font-size:13px;">Jumlah Kelas</label>
                                       <input type="number" min="1" class="form-control form-control-sm" name="jumlahkelas" id="jumlahkelas" placeholder="Jumlah Kelas" style="padding:6px 5px; border: 1px solid #aaa;" />
                                 </div>
                             </div>

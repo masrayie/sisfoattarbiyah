@@ -14,7 +14,8 @@
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="<?php echo base_url("assets/css/style2.css");?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/css/style2.css");?>"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
   <!-- endinject -->
   <link rel="shortcut icon" href="<?php echo base_url("assets/images/logo_kecil2.png");?>" />
   <style type="text/css">
