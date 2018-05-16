@@ -48,7 +48,7 @@
                     </div>
                     <div class="form-group" style="display:none" id="idjenjang2">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
-                      <select class="form-control form-control-sm" name="tingkat">
+                      <select class="form-control form-control-sm" name="tingkat2">
                         <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group" style="display:none" id="idjenjang3">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
-                      <select class="form-control form-control-sm" name="tingkat">
+                      <select class="form-control form-control-sm" name="tingkat3">
                         <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
                         <option value="1">1</option>
                         <option value="2">2</option>

@@ -40,17 +40,17 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
-                      <select class="form-control form-control-sm" name="jenjang" id="jenjang">
+                      <select class="form-control form-control-sm" name="jenjang" id="jenjang" onchange="return dochange()">
                         <option value="0" selected="selected">Pilih Jenjang Pendidikan</option>
                         <option value="1">Taman Kanak-Kanak</option>
                         <option value="2">Madrasah Ibtida'iyah</option>
                         <option value="3">Madrasah Tsanawiyah</option>
                       </select>
                     </div>
-                    <div class="form-group" id="idjenjang2">
+                    <div class="form-group" style="display:none" id="idjenjang2">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
-                      <select class="form-control form-control-sm" name="tingkat">
-                        <option value="0" selected="selected" >Pilih Tingkat Pendidikan</option>
+                      <select class="form-control form-control-sm" name="tingkat2">
+                        <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group" style="display:none" id="idjenjang3">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
-                      <select class="form-control form-control-sm" name="tingkat">
+                      <select class="form-control form-control-sm" name="tingkat3">
                         <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
