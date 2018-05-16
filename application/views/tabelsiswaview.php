@@ -38,7 +38,7 @@
                                   <td align="center"><?php echo $as->getJenjang(); ?></td>
                                   <td>
                                     <a href="<?php echo base_url('index.php/siswa/viewEditSiswa/'.$as->getNis()); ?>" class="btn btn-warning mr-2">UBAH</a>
-                                    <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger mr-2">HAPUS</a>
+                                    <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
                                   </td>
                                   <td>
                                   </td>
@@ -62,3 +62,14 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
+
+      <script>
+      function doconfirm()
+      {
+          job=confirm("Are you sure to delete permanently?");
+          if(job!=true)
+          {
+              return false;
+          }
+      }
+      </script>

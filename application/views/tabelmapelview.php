@@ -36,7 +36,7 @@
                             <td><?php echo $as->getNamaMapel(); ?></td>
                             <td>
                               <a href="<?php echo base_url('index.php/MataPelajaran/viewEditMapel/'.$as->getKodeMapel()); ?>" class="btn btn-warning mr-2">UBAH</a>
-                              <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger mr-2">HAPUS</a>
+                              <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
                             </td>
                             <td>
                         <!-- <?php
@@ -68,3 +68,14 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
+
+      <script>
+      function doconfirm()
+      {
+          job=confirm("Are you sure to delete permanently?");
+          if(job!=true)
+          {
+              return false;
+          }
+      }
+      </script>

@@ -19,7 +19,7 @@
                   <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/siswa/inputdatasiswa' ?>" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Siswa</label>
-                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nis" placeholder="Nomor Induk Siswa [10 Karakter]">
+                      <input type="text" pattern="[a-zA-Z0-9]{10}" maxlength="10" class="form-control" name="nis" placeholder="Nomor Induk Siswa [10 Karakter]">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Siswa</label>
@@ -58,7 +58,7 @@
                         </div>
                       <?php endif ?>
                       <div class="input-group col-xs-12">
-                        <input class="btn" type="file" name="filefoto" size="20" accept=".jpg" required/>
+                        <input class="btn" type="file" name="filefoto" size="20" accept=".jpg"/>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-success mr-2">Submit</button>

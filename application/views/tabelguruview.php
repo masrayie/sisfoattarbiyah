@@ -52,7 +52,7 @@
                               <td><?php echo $as->getEmail(); ?></td>
                               <td>
                                 <a href="<?php echo base_url('index.php/guru/viewEditGuru/'.$as->getNip()); ?>" class="btn btn-warning mr-2">UBAH</a>
-                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2">HAPUS</a>
+                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
                               </td>
                               <td>
                               </td>
@@ -82,3 +82,14 @@
           tes = <?php echo json_encode($dataku); ?>;
       </script>
       <!-- main-panel ends -->
+
+      <script>
+      function doconfirm()
+      {
+          job=confirm("Are you sure to delete permanently?");
+          if(job!=true)
+          {
+              return false;
+          }
+      }
+      </script>

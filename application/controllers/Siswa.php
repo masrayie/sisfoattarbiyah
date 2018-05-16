@@ -91,6 +91,7 @@ class Siswa extends CI_Controller {
                     'nama_orangtua' => $nama_orangtua,
                     'jenjang'       => $jenjang
                   );
+
       $this->load->library('upload', $config);
 
       if (!$this->upload->do_upload('filefoto')) {
@@ -158,7 +159,7 @@ class Siswa extends CI_Controller {
     $config = array('file_name'     => $nis,
                     'upload_path'   => './photosiswa/',
                     'allowed_types' => 'jpeg|jpg|png',
-                    'max_size'      => '20',
+                    'max_size'      => '2000',
                     'max_width'     => '2000',
                     'max_height'    => '2000'
                   );
@@ -181,7 +182,7 @@ class Siswa extends CI_Controller {
         $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
         $data['objSiswa'] = $objSiswa;
         $this->session->set_flashdata('upload_failed', 'coba foto lain');
-        
+
         redirect(base_url('index.php/siswa/viewEditSiswa/'.$nis), 'refresh', $data);
       } else {
         $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
