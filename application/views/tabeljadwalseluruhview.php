@@ -45,7 +45,7 @@
                             <label for="exampleInputName1" style="font-size:13px;">Optional Edit</label>
                             <div class="form-group">
                               <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectopsi" name="opsi">
-                                  <option value="-">-----Pilih Opsi-----</option>
+                                  <option value="-">-----Pilih Opsi Edit-----</option>
                                   <option value="0">HARI</option>
                                   <option value="1">KELAS</option>
                               </select>
