@@ -26,6 +26,11 @@
                     </thead>
                     <tbody>
                       <?php
+                      if ($mapelArr == null) {
+                        echo '<script language="javascript">';
+                        echo 'alert("Tidak Ada Data Mata Pelajaran")';
+                        echo '</script>';
+                      }else {
                         $no=0;
                         foreach ($mapelArr as $as) {
                         $no = $no + 1;
@@ -35,8 +40,8 @@
                             <td><?php echo $as->getKodeMapel(); ?></td>
                             <td><?php echo $as->getNamaMapel(); ?></td>
                             <td>
-                              <a href="<?php echo base_url('index.php/MataPelajaran/viewEditMapel/'.$as->getKodeMapel()); ?>" class="btn btn-warning mr-2">UBAH</a>
-                              <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
+                              <a href="<?php echo base_url('index.php/MataPelajaran/viewEditMapel/'.$as->getKodeMapel()); ?>" class="btn btn-primary btn-xs">ubah</a>
+                              <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger btn-xs" onclick="return doconfirm();">hapus</a>
                             </td>
                             <td>
                         <!-- <?php
@@ -48,7 +53,9 @@
                               ?>   -->
                             </td>
                           </tr>
-                        <?php } ?>
+                        <?php }
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>
