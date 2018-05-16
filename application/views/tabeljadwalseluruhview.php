@@ -14,11 +14,11 @@
                 <div class="row" >
                   <div class="col-lg-12 ">
                     <div class="card">
-                      <div class="card-body">
+                      <div class="card-body" style="font-size:13px;">
                         <p class="card-description">
                           Jadwal Pembelajaran Keseluruhan
                         </p>
-                        <table class="table table-striped" id="example">
+                        <table class="table table-striped" id="example" >
                           <thead>
                             <tr>
                               <th>ID Jadwal</th>
@@ -42,7 +42,7 @@
                 <div class="row" style="margin-top:10px; padding-left:10px;" id="rowoperation">
                     <div class="col-md-2">
                         <div class="form-group" style="font-size:12px;">
-                            <label for="exampleInputName1" style="font-size:13px;">Edit Per</label>
+                            <label for="exampleInputName1" style="font-size:13px;">Optional Edit</label>
                             <div class="form-group">
                               <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectopsi" name="opsi">
                                   <option value="-">-----Pilih Opsi-----</option>
@@ -156,7 +156,7 @@
             error : function(data){
                 $("#selectdftkelas").select2({placeholder:'Daftar Kelas'}, 'val', '');
                 $("#selectdftkelas").html('<option></option>');
-                
+
             }
           });
         }
