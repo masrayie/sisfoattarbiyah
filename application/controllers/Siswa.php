@@ -20,13 +20,20 @@ class Siswa extends CI_Controller {
    */
 
   function __construct(){
-    parent::__construct();
-    $this->load->model('M_Siswa', '', TRUE);
-    $this->load->model('ModelDB', '' , TRUE);
-  }
+     parent::__construct();
+     $this->load->model('M_Jadwal', '', TRUE);
+     $this->load->model('M_Shift', '', TRUE);
+     $this->load->model('M_MataPelajaran', '', TRUE);
+     $this->load->model('M_Guru', '', TRUE);
+     $this->load->model('M_Siswa', '', TRUE);
+     $this->load->model('ModelDB', '', TRUE);
+   }
+
+
 
   public function index()
   {
+
 
   }
 

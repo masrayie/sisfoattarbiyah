@@ -19,7 +19,7 @@
                   <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Pegawai</label>
-                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
+                      <input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Guru</label>
@@ -41,21 +41,7 @@
                       <label for="exampleInputPassword4">Password</label>
                       <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                      <label>Foto Diri</label>
-                      <?php if ($error = $this->session->flashdata('upload_failed')):?>
-                        <div class="row" >
-                          <div class="col-lg-4">
-                            <div class="alert alert-dismissible alert-danger" align="center">
-                              <?= $error ?>
-                            </div>
-                          </div>
-                        </div>
-                      <?php endif ?>
-                      <div class="input-group col-xs-12">
-                        <input class="btn" type="file" name="filefoto" size="20" accept=".jpg" required/>
-                      </div>
-                    </div>
+                  
                     <div class="panel-footer">
                       <button type="submit" class="btn btn-success mr-2">Submit</button>
                     </div>

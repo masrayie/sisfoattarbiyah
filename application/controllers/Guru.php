@@ -102,13 +102,13 @@ class Guru extends CI_Controller {
     //                 'max_height'    => '2000'
     //               );
     //
-    // $data = array('nip' 			=> $nip,
-    //         			'nama_guru' => $nama_guru,
-    //         			'kode_guru'	=> $alamat,
-    //         			'alamat' 		=> $kode_guru,
-    //         			'email'			=> $email,
-    //         			'password' 	=> $password
-    //         		);
+    $data = array('nip' 			=> $nip,
+            			'nama_guru' => $nama_guru,
+            			'kode_guru'	=> $kode_guru,
+            			'alamat' 		=> $alamat,
+            			'email'			=> $email,
+            			'password' 	=> $password
+            		);
     //
     // $this->load->library('upload', $config);
 

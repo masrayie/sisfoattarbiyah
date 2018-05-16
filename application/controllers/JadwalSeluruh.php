@@ -263,6 +263,9 @@ class JadwalSeluruh extends CI_Controller {
   public function insertJadwalAll(){
       $model = new ModelDB();
       $dataAll = json_decode(file_get_contents('php://input'), true);
+      $query = $model->readDataWhere('idc',1,'t_counter');
+      $counter  = $query[0]->countjadwal + $dataAll['x'] ;
+      $data = array("countjadwal"=>$counter);
       for($i = 0; $i < sizeof($dataAll['id_jadwal']); $i++){
         $dataJadwal = array(
           'id_jadwal'   => $dataAll['id_jadwal'][$i],
@@ -275,6 +278,7 @@ class JadwalSeluruh extends CI_Controller {
         );
         $model->insertData($dataJadwal,'t_jadwal_semua');
       }
+      $model->editData('idc', $query[0]->idc, 't_counter', $data);
   }
 
   public function viewTabelJadwalAll(){

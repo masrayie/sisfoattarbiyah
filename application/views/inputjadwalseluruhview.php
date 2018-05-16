@@ -262,7 +262,7 @@
               alert(localStorage.getItem("jumlahkelas"));
             }
           }
-
+          var x = 0;
           //function output tabel dinamis
           function outputTabel(){
             var hari, jenjang, jenjang2, tingkat, jumlahkelas, alphabet, kelasstorage, jumlahbaris
@@ -310,7 +310,7 @@
                 counterrow = barisstorage - jumlahbaris;
             }
 
-            var x = 0;
+
             for (var i = 0; i < jumlahkelas; i++) {
                 var kelas
                 kelas = tingkat + alphabet[(counter+i)];
@@ -340,6 +340,7 @@
                     $("#rowbtnsubmit").show();
                     $("#rowoperation").hide();
                 }
+                ct = x;
             }
 
             function btnreset(){
@@ -383,6 +384,7 @@
                               newObj = val.value;
                               return newObj;
                             });
+                            objAll.x = x;
               console.log(JSON.stringify(objAll));
               return JSON.stringify(objAll);
               // alert("cek");
@@ -397,6 +399,7 @@
                   data : val,
                   success: function(resp){
                     window.location="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll';?>";
+                    // console.log(resp);
                   },
                   error: function(resp){
                     console.log('gagal parsing');

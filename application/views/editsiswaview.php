@@ -47,7 +47,7 @@
                         <option value="3">Madrasah Tsanawiyah</option>
                       </select>
                     </div>
-                    <div class="form-group" style="display:none" id="idjenjang2">
+                    <div class="form-group" id="idjenjang2">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
                       <select class="form-control form-control-sm" name="tingkat2">
                         <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
@@ -59,7 +59,7 @@
                         <option value="6">6</option>
                       </select>
                     </div>
-                    <div class="form-group" style="display:none" id="idjenjang3">
+                    <div class="form-group" id="idjenjang3">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
                       <select class="form-control form-control-sm" name="tingkat3">
                         <option value="-">Pilih Tingkat Pendidikan</option>

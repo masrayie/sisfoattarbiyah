@@ -2,95 +2,47 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
-          <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <i class="mdi mdi-cube text-danger icon-lg"></i>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-right">Total Revenue</p>
-                      <div class="fluid-container">
-                        <h3 class="card-title font-weight-bold text-right mb-0">$65,650</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-muted mt-3">
-                    <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> 65% lower growth
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <i class="mdi mdi-receipt text-warning icon-lg"></i>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-right">Orders</p>
-                      <div class="fluid-container">
-                        <h3 class="card-title font-weight-bold text-right mb-0">3455</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-muted mt-3">
-                    <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Product-wise sales
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <i class="mdi mdi-poll-box text-teal icon-lg"></i>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-right">Sales</p>
-                      <div class="fluid-container">
-                        <h3 class="card-title font-weight-bold text-right mb-0">5693</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-muted mt-3">
-                    <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Weekly Sales
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-              <div class="card card-statistics">
-                <div class="card-body">
-                  <div class="clearfix">
-                    <div class="float-left">
-                      <i class="mdi mdi-account-location text-info icon-lg"></i>
-                    </div>
-                    <div class="float-right">
-                      <p class="card-text text-right">Employees</p>
-                      <div class="fluid-container">
-                        <h3 class="card-title font-weight-bold text-right mb-0">246</h3>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-muted mt-3">
-                    <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Product-wise sales
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-12 grid-margin">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title mb-4">Targets</h5>
-                  <canvas id="dashoard-area-chart" height="100px"></canvas>
+                  <h5 class="card-title mb-4">Jadwal Pelajaran Hari Ini</h5>
+                  <table class="table table-striped" id="example" >
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>ID Jadwal</th>
+                        <th>MataPelajaran</th>
+                        <th>Kode Guru</th>
+                        <th>Jenjang</th>
+                        <th>Kelas</th>
+                        <th>Hari</th>
+                        <th>Jam Pelajaran</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php
+                        if(!$jadwal){
+                            echo "<td colspan='9' align='center' >No Data Found</td>";
+                        } else {
+                          $no=0;
+                          for ($i=0 ; $i < sizeof($jadwal) ;$i++) {
+                            $no = $no + 1;
+                        ?>
+                          <tr>
+                                  <td><?php echo $no; ?></td>
+                                  <td><?php echo $jadwal[$i]['id_jadwal']; ?></td>
+                                  <td><?php echo $jadwal[$i]['mapel']; ?></td>
+                                  <td><?php echo $jadwal[$i]['kode_guru']; ?></td>
+                                  <td><?php echo $jadwal[$i]['jenjang']; ?></td>
+                                  <td><?php echo $jadwal[$i]['kelas']; ?></td>
+                                  <td><?php echo $jadwal[$i]['hari']; ?></td>
+                                  <td><?php echo $jadwal[$i]['jam_pel']; ?></td>
+                          </tr>
+                        <?php }
+                      } ?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -104,7 +56,15 @@
             <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
           </div>
         </footer>
+        <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
+        <script src="<?php echo base_url("assets/vendor/Mdtpicker/mdtimepicker.js")?>"></script>
+        <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+        <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url("assets/vendor/JTimePicker/dist/bootstrap-clockpickerr.min.js")?>"></script>
+        <script type="text/javascript">
+
+        </script>
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    
