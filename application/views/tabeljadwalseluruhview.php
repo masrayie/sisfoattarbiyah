@@ -156,7 +156,7 @@
             error : function(data){
                 $("#selectdftkelas").select2({placeholder:'Daftar Kelas'}, 'val', '');
                 $("#selectdftkelas").html('<option></option>');
-
+                
             }
           });
         }
