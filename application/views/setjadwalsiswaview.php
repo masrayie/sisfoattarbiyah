@@ -8,8 +8,38 @@
                 <div class="card-body">
                   <div class="row">
                       <div class="col-md-10  stretch-card">
-                        <h3 class="card-title">Tabel Jadwal Keseluruhan</h3>
+                        <h3 class="card-title">Set Jadwal Siswa</h3>
                       </div>
+                  </div>
+                  <div class="row" style="margin-top:10px; padding-left:10px;" id="rowoperation">
+                      <div class="col-md-2" id="rowjenjang">
+                          <div class="form-group" style="font-size:12px;">
+                            <label for="exampleInputName1" style="font-size:13px;">Jenjang Pendidikan</label>
+                              <div class="form-group">
+                                <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjangku" name="jenjang">
+                                  <option value="-">--Pilih Jenjang--</option>
+                                  <option value="0">Taman Kanak-Kanak</option>
+                                  <option value="1">Madrasah Ibtidaiyah</option>
+                                  <option value="2">Madrasah Tsanawiyah</option>
+                                </select>
+                              </div>
+
+                          </div>
+                      </div>
+                      <div class="col-md-2" id="rowdftkelas" style="flex:0 0 10.5%;">
+                          <div class="form-group" style="font-size:12px;">
+                            <label for="exampleInputName1" style="font-size:13px;">Daftar Kelas</label>
+                                <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectdftkelas" name="kelas" >
+                                  <option></option>
+                                </select>
+                          </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <div class="form-group" style="padding-top:21px;">
+                            <button type="button" id="btngo" class="btn btn-primary btn-xs" onclick="editOpsional()" disabled>Random !</button>
+                          </div>
+                      </div>
+                    </form>
                   </div>
                 <div class="row" >
                   <div class="col-lg-12 ">
@@ -32,67 +62,11 @@
                             </tr>
                           </thead>
                           <tbody>
-
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row" style="margin-top:10px; padding-left:10px;" id="rowoperation" hidden>
-                    <div class="col-md-2">
-                        <div class="form-group" style="font-size:12px;">
-                            <label for="exampleInputName1" style="font-size:13px;">Optional Edit</label>
-                            <div class="form-group">
-                              <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectopsi" name="opsi">
-                                  <option value="-">-----Pilih Opsi Edit-----</option>
-                                  <option value="0">HARI</option>
-                                  <option value="1">KELAS</option>
-                              </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-2" id="rowhari">
-                        <div class="form-group" style="font-size:12px;">
-                            <label for="exampleInputName1" style="font-size:13px;">Hari</label>
-                              <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selecthari" name="hari">
-                                  <option value="-">-----Pilih Hari-----</option>
-                                  <option value="Senin">SENIN</option>
-                                  <option value="Selasa">SELASA</option>
-                                  <option value="Rabu">RABU</option>
-                                  <option value="Kamis">KAMIS</option>
-                                  <option value="Jumat">JUMAT</option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2" id="rowjenjang">
-                        <div class="form-group" style="font-size:12px;">
-                          <label for="exampleInputName1" style="font-size:13px;">Jenjang Pendidikan</label>
-                            <div class="form-group">
-                              <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjangku" name="jenjang" disabled>
-                                <option value="-">--Pilih Jenjang--</option>
-                                <option value="0">Taman Kanak-Kanak</option>
-                                <option value="1">Madrasah Ibtidaiyah</option>
-                                <option value="2">Madrasah Tsanawiyah</option>
-                              </select>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="col-md-2" id="rowdftkelas" style="flex:0 0 10.5%;">
-                        <div class="form-group" style="font-size:12px;">
-                          <label for="exampleInputName1" style="font-size:13px;">Daftar Kelas</label>
-                              <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectdftkelas" name="kelas" >
-                                <option></option>
-                              </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="form-group" style="padding-top:21px;">
-                          <button type="button" id="btngo" class="btn btn-primary btn-xs" onclick="editOpsional()" disabled>Go !</button>
-                        </div>
-                    </div>
-                  </form>
                 </div>
               </div>
               </div>
@@ -115,11 +89,7 @@
         <script type="text/javascript" src="<?php echo base_url("assets/vendor/JTimePicker/dist/bootstrap-clockpickerr.min.js")?>"></script>
 
         <script type="text/javascript">
-
-        document.getElementById("rowhari").style.display="none";
-        document.getElementById("rowjenjang").style.display="none";
         document.getElementById("rowdftkelas").style.display="none";
-
         $("#selectopsi").on("change", function(){
             var opsi = $(this).val();
             if(opsi == 0){
@@ -130,9 +100,6 @@
               $("#selectjenjangku").removeAttr("disabled");
               $("#rowhari").hide();
             } else {
-              document.getElementById("rowmi").style.display="none";
-              document.getElementById("rowmts").style.display="none";
-              document.getElementById("rowhari").style.display="none";
               document.getElementById("rowjenjang").style.display="none";
               document.getElementById("rowdftkelas").style.display="none";
               document.getElementById("rowbtnsubmit").style.display="none";

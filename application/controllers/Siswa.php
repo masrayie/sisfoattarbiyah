@@ -67,6 +67,31 @@ class Siswa extends CI_Controller {
        }
   }
 
+  public function jsonDataSiswa(){
+    $objSiswa = $this->readDataSiswaAll();
+    foreach ($objSiswa as $as) {
+      if($as->getJenjang()=='0'){
+          $jenjang = "Taman Kanak-Kanak";
+      } else if ($as->getJenjang()=='1'){
+          $jenjang = "Madrasah Ibtidaiyah";
+      } else {
+          $jenjang = "Madrasah Tsanawiyah";
+      }
+      $dataSiswa[] = array(
+        'nis'         => $as->getNis(),
+        'nama_siswa'  => $as->getNamaSiswa(),
+        'nama_wali'   => $as->getNamaOrangTua(),
+        'tgl_lahir'   => $as->getTglLahir(),
+        'alamat'      => $as->getAlamat(),
+        'jenjang'     => $jenjang,
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getNis().'\')">Edit</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getNis().'\')" class="btn btn-danger btn-xs">Delete</button>'
+      );
+    }
+    $dataS = array("data"=>$dataSiswa);
+    $jsonSiswa = json_encode($dataS);
+    echo $jsonSiswa;
+  }
+
   public function inputDataSiswa(){
 
       $nis            = $this->input->post('nis');
@@ -114,8 +139,8 @@ class Siswa extends CI_Controller {
       return $siswaArr;
   }
 
-  public function viewEditSiswa(){
-    $nip = $this->uri->segment(3);
+  public function viewEditSiswa($nis){
+    // $nip = $this->uri->segment(3);
         if($this->session->userdata('logged_in'))
          {
            $session_data = $this->session->userdata('logged_in');
@@ -123,7 +148,7 @@ class Siswa extends CI_Controller {
            $data['nama_guru'] = $session_data['nama_guru'];
            $data['kode_guru'] = $session_data['kode_guru'];
            $model = new ModelDB();
-           $result = $model->readDataWhere('nis', $nip, 't_siswa');
+           $result = $model->readDataWhere('nis', $nis, 't_siswa');
             if($result){
               foreach ($result as $row) {
                   $nis = $row->nis;
@@ -139,17 +164,16 @@ class Siswa extends CI_Controller {
               $this->load->view('HeaderFooter/Header', $data);
               $this->load->view('editsiswaview', $data);
               $this->load->view('HeaderFooter/Footer');
-         }
+            }
+          }
          else
          {
            //If no session, redirect to login page
            redirect(base_url(), 'refresh');
          }
-       }
   }
 
-  public function editDataSiswa(){
-    $nis            = $this->uri->segment(3);
+  public function editDataSiswa($nis){
     $nama_siswa     = $this->input->post('nama_siswa');
     $tgl_lahir      = $this->input->post('tgl_lahir');
     $alamat         = $this->input->post('alamat');
@@ -191,10 +215,8 @@ class Siswa extends CI_Controller {
     }
   }
 
-  public function deleteDataSiswa()
+  public function deleteDataSiswa($nis)
    {
-     $nis = $this->uri->segment(3);
-     unlink('photosiswa/'.$nis.".jpg");
      $this->ModelDB->deleteData('nis', $nis, 't_siswa');
      redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
    }

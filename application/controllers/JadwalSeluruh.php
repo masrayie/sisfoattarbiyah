@@ -238,7 +238,7 @@ class JadwalSeluruh extends CI_Controller {
         'kelas'       => $as->getKelas(),
         'hari'        => $as->getHari(),
         'jam_pel'     => $jam_mulai." s.d. ".$jam_selesai,
-        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getIdJadwal().'\')">Edit</button> &nbsp; <button type="button" onclick="deletetData(\''.$as->getIdJadwal().'\')" class="btn btn-danger btn-xs">Delete</button>'
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getIdJadwal().'\')">Edit</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getIdJadwal().'\')" class="btn btn-danger btn-xs">Delete</button>'
       );
     }
     $dataJ = array("data"=>$dataJadwal);
@@ -272,6 +272,42 @@ class JadwalSeluruh extends CI_Controller {
          $data['kode_guru'] = $session_data['kode_guru'];
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('inputjadwalseluruhview', $data);
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
+  }
+
+  public function getDataJadwal(){
+    $model = new ModelDB();
+    $dataAll = json_decode(file_get_contents('php://input'), true);
+    $hari = $dataAll['hari'];
+    $jenjang = $dataAll['jenjang'];
+    $kelas = $dataAll['kelas'];
+    if($hari=='-'){
+      $query = "Select * from t_jadwal_semua where jenjang='$jenjang' and kelas = '$kelas'";
+      $rows = $model->freeQuery($query);
+    } else {
+      $query = "Select * from t_jadwal_semua where hari = '$hari' and jenjang='$jenjang' and kelas = '$kelas'";
+      $rows = $model->freeQuery($query);
+    }
+    return json_encode($rows);
+  }
+
+  public function viewEditOpsional(){
+    if($this->session->userdata('logged_in'))
+       {
+
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $data['jsonJadwal'] = $this->getDataJadwal();
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('editopsionaljadwalview', $data);
          $this->load->view('HeaderFooter/Footer');
        }
        else

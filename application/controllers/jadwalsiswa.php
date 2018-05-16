@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Jadwal_Siswa_data extends CI_Controller {
+class jadwalsiswa extends CI_Controller {
 
   /**
    * Index Page for this controller.
@@ -20,8 +20,28 @@ class Jadwal_Siswa_data extends CI_Controller {
    */
   public function index()
   {
-    $this->load->view('HeaderFooter/Header');
-    $this->load->view('jadwal_siswa_data');
-    $this->load->view('HeaderFooter/Footer');
+    parent::__construct();
+    $this->load->model('M_Jadwal', '', TRUE);
+    $this->load->model('M_Shift', '', TRUE);
+    $this->load->model('M_MataPelajaran', '', TRUE);
+    $this->load->model('M_Guru', '', TRUE);
+    $this->load->model('ModelDB', '', TRUE);
+  }
+  public function viewSetSiswa(){
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('setjadwalsiswaview', $data);
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
   }
 }
