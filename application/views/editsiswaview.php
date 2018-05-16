@@ -40,7 +40,7 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
-                      <select class="form-control form-control-sm" name="jenjang" id="jenjang" onchange="return dochange()">
+                      <select class="form-control form-control-sm" name="jenjang" id="jenjang" onchange="return dochange(<?php echo $objSiswa->getJenjang(); ?>)">
                         <option value="0" selected="selected">Pilih Jenjang Pendidikan</option>
                         <option value="1">Taman Kanak-Kanak</option>
                         <option value="2">Madrasah Ibtida'iyah</option>
@@ -62,13 +62,13 @@
                     <div class="form-group" style="display:none" id="idjenjang3">
                       <label for="exampleInputPassword4">Tingkat Pendidikan</label>
                       <select class="form-control form-control-sm" name="tingkat3">
-                        <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
+                        <option value="-">Pilih Tingkat Pendidikan</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                       </select>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Foto Siswa</label>
                       <?php if ($error = $this->session->flashdata('upload_failed')):?>
                         <div class="row" >
@@ -82,7 +82,7 @@
                       <div class="input-group col-xs-12">
                         <input class="btn" type="file" name="filefoto" size="20" accept=".jpg"/>
                       </div>
-                    </div>
+                    </div> -->
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
                     <!-- <button class="btn btn-light">Cancel</button> -->
                   </form>
@@ -104,12 +104,12 @@
       <!-- main-panel ends -->
 
       <script>
-      function dochange()
+      function dochange(id)
       {
         $('#idjenjang2').hide();
         $('#idjenjang3').hide();
 
-        var jenjang = $( "#jenjang option:selected" ).val();
+        var jenjang = $( "#jenjang option:selected" ).val(id);
         $('#idjenjang'+jenjang).show();
       }
       </script>

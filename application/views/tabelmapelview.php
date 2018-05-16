@@ -4,7 +4,7 @@
         <div class="content-wrapper">
           <div class="row">
 
-			<div class="col-lg-12 stretch-card">
+			<div class="col-lg-8 stretch-card">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Data Mata Pelajaran</h4>
@@ -14,8 +14,8 @@
                   <table class="table table-striped" id="example">
                     <thead>
                       <tr>
-                        <th>
-                          Kode Mata Pelajaran
+                        <th width="10%">
+                          Kode Mapel
                         </th>
                         <th>
                           Nama Mata Pelajaran

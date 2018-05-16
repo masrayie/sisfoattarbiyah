@@ -46,14 +46,6 @@
                             </div>
                           </form>
                         </div>
-                  <form class="form-control" style="border:0px;" action="" method="post">
-                    <div class="row" id="tabeldata">
-                    </div>
-                    <div class="row" id="rowbtnsubmit" align="right" style="margin-top:20px; padding-left:35px;">
-                      <button type="button" onclick="sendJSONJadwal()" class="btn btn-success btn-fw">Save</button>
-                      <button type="button" class="btn btn-outline-danger btn-fw" style="margin-left:20px;" onclick="btnreset()"><i class="mdi mdi-restart"></i>Reset</button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
@@ -137,7 +129,6 @@
           //Hidden rowmi, rowmts, rowjumkelas, rowbtnsubmit
           document.getElementById("rowdfmapel").style.display="none";
           document.getElementById("rowdftkelas").style.display="none";
-          document.getElementById("rowbtnsubmit").style.display="none";
 
 
           $("#selectjenjangku").on("change", function(){

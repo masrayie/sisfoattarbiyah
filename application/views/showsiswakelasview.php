@@ -11,7 +11,7 @@
                   <div class="row">
                       <div class="col-md-10  stretch-card">
 
-                        <h3 class="card-title">Input Penilaian</h3>
+                        <h3 class="card-title">Data Siswa Kelas <?php echo !$siswa ? '' : $siswa[0]->kelas;?> </h3>
                       </div>
                   </div>
 
@@ -20,7 +20,7 @@
                   <div class="col-lg-10 ">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title"> <?php echo !$nilai ? '' : 'Siswa Kelas '.$nilai[0]->kelas;?> <?php echo !$nilai ? '' : '/ Matapelajaran '.$nilai[0]->mapel;?></h4>
+                        <h4 class="card-title"> <?php echo !$siswa ? '' : 'Siswa Kelas '.$siswa[0]->kelas;?></h4>
                         <p class="card-description">
 
                         </p>
@@ -30,22 +30,19 @@
                               <th>No.</th>
                               <th>NIS</th>
                               <th>Nama Siswa</th>
-                              <th>Kode Guru</th>
+                              <th>Jenjang</th>
                               <th>Kelas</th>
-                              <th>MataPelajaran</th>
-                              <th>Tugas</th>
-                              <th>UTS</th>
-                              <th>UAS</th>
+                              <th>Alamat</th>
                             </tr>
                           </thead>
                           <tbody >
                             <?php
 
-                              if(!$nilai){
+                              if(!$siswa){
                                   echo "<td colspan='9' align='center' >No Data Found</td>";
                               } else {
                                 $no=0;
-                                foreach ($nilai as $as) {
+                                foreach ($siswa as $as) {
                                   $no = $no + 1;
 
                               ?>
@@ -54,11 +51,8 @@
                                         <td><input type="text" name="id[]" value="<?php echo $as->id; ?>" hidden/><?php echo $as->nis; ?></td>
                                         <td><?php echo $as->nama; ?></td>
                                         <td><?php echo $as->kode; ?></td>
-                                        <td><?php echo $as->kelas; ?></td>
-                                        <td><?php echo $as->mapel; ?></td>
-                                        <td><input maxlength="3" size="3" type="text" name="n_tugas[]" value="<?php echo $as->tugas; ?>"/></td>
-                                        <td><input maxlength="3" size="3" type="text" name="n_uts[]" value="<?php echo $as->uts; ?>"/></td>
-                                        <td><input maxlength="3" size="3" type="text" name="n_uas[]" value="<?php echo $as->uas; ?>"/></td>
+                                        <td><?php echo $as->jenjang; ?></td>
+                                        <td><?php echo $as->alamat; ?></td>
                                 </tr>
                               <?php }
                             } ?>
@@ -68,7 +62,6 @@
                       <div class="row">
                         <div class="col-lg-12" align="right">
                           <div class="form-group">
-                            <button type="submit" class="btn btn-success mr-2" <?php echo !$nilai ? 'hidden' : '';?>>SIMPAN</button>
                           </div>
                         </div>
                       </div>
@@ -76,7 +69,7 @@
                   </div>
                 </div>
               </form>
-                <h4><a href="<?php echo base_url('index.php/nilai/viewTabelNilai'); ?>" style="margin-right:10px; "><i class="mdi mdi-arrow-left-bold-circle-outline">Kembali</i></a></h4>
+                <h4><a href="<?php echo base_url('index.php/JadwalSeluruh/searchsiswakelas'); ?>" style="margin-right:10px; "><i class="mdi mdi-arrow-left-bold-circle-outline">Kembali</i></a></h4>
               </div>
               </div>
             </div>

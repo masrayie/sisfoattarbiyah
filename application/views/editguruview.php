@@ -43,7 +43,7 @@
                       <label for="exampleInputPassword4">Password</label>
                       <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label>Foto Diri</label>
                       <?php if ($error = $this->session->flashdata('upload_failed')):?>
                         <div class="row" >
@@ -57,7 +57,7 @@
                       <div class="input-group col-xs-12">
                         <input class="btn" type="file" name="filefoto" size="20" accept=".jpg"/>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="panel-footer">
                       <button type="submit" class="btn btn-success mr-2">Submit</button>
                     </div>

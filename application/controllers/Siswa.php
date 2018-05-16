@@ -196,13 +196,13 @@ class Siswa extends CI_Controller {
       $tingkat        = 0;
     }
 
-    $config = array('file_name'     => $nis,
-                    'upload_path'   => './photosiswa/',
-                    'allowed_types' => 'jpeg|jpg|png',
-                    'max_size'      => '2000',
-                    'max_width'     => '2000',
-                    'max_height'    => '2000'
-                  );
+    // $config = array('file_name'     => $nis,
+    //                 'upload_path'   => './photosiswa/',
+    //                 'allowed_types' => 'jpeg|jpg|png',
+    //                 'max_size'      => '2000',
+    //                 'max_width'     => '2000',
+    //                 'max_height'    => '2000'
+    //               );
 
     $data = array('nama_siswa'    => $nama_siswa,
                   'tgl_lahir'     => $tgl_lahir,
@@ -211,25 +211,26 @@ class Siswa extends CI_Controller {
                   'jenjang'       => $jenjang,
                   'tingkat'       => $tingkat
                 );
-
-    if ($_FILES['filefoto']['size'] == 0) {
-      $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
-      redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
-    }else {
-      $this->load->library('upload', $config);
-      $this->upload->overwrite = true;
-
-      if (!$this->upload->do_upload('filefoto')) {
-        $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
-        $data['objSiswa'] = $objSiswa;
-        $this->session->set_flashdata('upload_failed', 'coba foto lain');
-
-        redirect(base_url('index.php/siswa/viewEditSiswa/'.$nis), 'refresh', $data);
-      } else {
-        $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
-        redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
-      }
-    }
+                $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+                redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+    // if ($_FILES['filefoto']['size'] == 0) {
+    //   $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+    //   redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+    // }else {
+    //   $this->load->library('upload', $config);
+    //   $this->upload->overwrite = true;
+    //
+    //   if (!$this->upload->do_upload('filefoto')) {
+    //     $objSiswa = new M_Siswa($nis, $nama_siswa, $tgl_lahir, $alamat, $nama_orangtua, $jenjang);
+    //     $data['objSiswa'] = $objSiswa;
+    //     $this->session->set_flashdata('upload_failed', 'coba foto lain');
+    //
+    //     redirect(base_url('index.php/siswa/viewEditSiswa/'.$nis), 'refresh', $data);
+    //   } else {
+    //     $this->ModelDB->editData('nis', $nis, 't_siswa', $data);
+    //     redirect(base_url('index.php/siswa/viewTabelSiswa/'), 'refresh');
+    //   }
+    // }
   }
 
   public function deleteDataSiswa($nis)

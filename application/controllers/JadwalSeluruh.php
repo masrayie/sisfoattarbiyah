@@ -314,7 +314,6 @@ class JadwalSeluruh extends CI_Controller {
   public function viewEditOpsional(){
     if($this->session->userdata('logged_in'))
        {
-
          $session_data = $this->session->userdata('logged_in');
          $data['nip'] = $session_data['nip'];
          $data['nama_guru'] = $session_data['nama_guru'];
@@ -459,6 +458,54 @@ class JadwalSeluruh extends CI_Controller {
              //If no session, redirect to login page
              redirect(base_url(), 'refresh');
            }
+         }
+         else
+         {
+           //If no session, redirect to login page
+           redirect(base_url(), 'refresh');
+         }
+    }
+
+    public function searchsiswakelas(){
+      if($this->session->userdata('logged_in'))
+         {
+           $session_data = $this->session->userdata('logged_in');
+           $data['nip'] = $session_data['nip'];
+           $data['nama_guru'] = $session_data['nama_guru'];
+           $data['kode_guru'] = $session_data['kode_guru'];
+           $this->load->view('HeaderFooter/Header', $data);
+           $this->load->view('searchsiswakelasview', $data);
+           $this->load->view('HeaderFooter/Footer');
+         }
+         else
+         {
+           //If no session, redirect to login page
+           redirect(base_url(), 'refresh');
+         }
+    }
+
+    public function viewSiswaKelas(){
+      $jenjang = $this->input->get('jenjang', TRUE);
+      $kelas = $this->input->get('kelas', TRUE);
+      $model = new ModelDB();
+      $query = "select t2.id_jadwal_siswa as id, s.nis as nis, s.nama_siswa as nama, t1.jenjang as jenjang, g.kode_guru as kode, t1.kelas as kelas, s.alamat as alamat from t_jadwal_siswa t2
+              inner join t_siswa s on s.nis = t2.nis
+              inner join t_jadwal_semua t1 on t1.id_jadwal = t2.id_jadwal
+              inner join t_mapel m on m.kode_mapel = t1.kode_mapel
+              inner join t_guru g on g.nip = t1.nip
+              where t1.jenjang = $jenjang and t1.kelas = '$kelas'
+              GROUP by s.nis";
+      $result=$model->freeQuery($query);
+      if($this->session->userdata('logged_in'))
+         {
+           $session_data = $this->session->userdata('logged_in');
+           $data['nip'] = $session_data['nip'];
+           $data['nama_guru'] = $session_data['nama_guru'];
+           $data['kode_guru'] = $session_data['kode_guru'];
+           $data['siswa'] = $result;
+           $this->load->view('HeaderFooter/Header', $data);
+           $this->load->view('showsiswakelasview', $data);
+           $this->load->view('HeaderFooter/Footer');
          }
          else
          {

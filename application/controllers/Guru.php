@@ -94,29 +94,29 @@ class Guru extends CI_Controller {
     $email      = $this->input->post('email');
     $password   = md5($this->input->post('password'));
 
-    $config = array('file_name'     => $nip,
-                    'upload_path'   => './photoguru/',
-                    'allowed_types' => 'jpg',
-                    'max_size'      => '2000',
-                    'max_width'     => '2000',
-                    'max_height'    => '2000'
-                  );
+    // $config = array('file_name'     => $nip,
+    //                 'upload_path'   => './photoguru/',
+    //                 'allowed_types' => 'jpg',
+    //                 'max_size'      => '2000',
+    //                 'max_width'     => '2000',
+    //                 'max_height'    => '2000'
+    //               );
+    //
+    // $data = array('nip' 			=> $nip,
+    //         			'nama_guru' => $nama_guru,
+    //         			'kode_guru'	=> $alamat,
+    //         			'alamat' 		=> $kode_guru,
+    //         			'email'			=> $email,
+    //         			'password' 	=> $password
+    //         		);
+    //
+    // $this->load->library('upload', $config);
 
-    $data = array('nip' 			=> $nip,
-            			'nama_guru' => $nama_guru,
-            			'kode_guru'	=> $alamat,
-            			'alamat' 		=> $kode_guru,
-            			'email'			=> $email,
-            			'password' 	=> $password
-            		);
-
-    $this->load->library('upload', $config);
-
-    if (!$this->upload->do_upload('filefoto')) {
-      $this->session->set_flashdata('upload_failed', 'coba foto lain');
-    } else {
+    // if (!$this->upload->do_upload('filefoto')) {
+    //   $this->session->set_flashdata('upload_failed', 'coba foto lain');
+    // } else {
       $this->ModelDB->insertData($data, 't_guru');
-    }
+    // }
 
     redirect(base_url('index.php/guru/viewInputGuru/'), 'refresh');
   }
@@ -175,13 +175,13 @@ class Guru extends CI_Controller {
     $email      = $this->input->post('email');
     $password   = $this->input->post('password');
 
-    $config = array('file_name'     => $nip,
-                    'upload_path'   => './photoguru/',
-                    'allowed_types' => 'jpg',
-                    'max_size'      => '200',
-                    'max_width'     => '2000',
-                    'max_height'    => '2000'
-                  );
+    // $config = array('file_name'     => $nip,
+    //                 'upload_path'   => './photoguru/',
+    //                 'allowed_types' => 'jpg',
+    //                 'max_size'      => '200',
+    //                 'max_width'     => '2000',
+    //                 'max_height'    => '2000'
+    //               );
 
     if ($password == '') {
       $data = array('nama_guru' => $nama_guru,
@@ -196,25 +196,17 @@ class Guru extends CI_Controller {
                   );
     }
 
-    if ($_FILES['filefoto']['size'] == 0) {
-      $this->ModelDB->editData('nip', $nip, 't_guru', $data);
-      redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
-    }else {
-      $this->load->library('upload', $config);
-      $this->upload->overwrite = true;
+    $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+    redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
 
-      if (!$this->upload->do_upload('filefoto')){
-        $objGuru = new M_Guru($nip, $nama_guru, $alamat, $kode_guru, $email, $password);
-        $data['objGuru'] = $objGuru;
+    // if ($_FILES['filefoto']['size'] == 0) {
+    //   $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+    //   redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+    // } else {
+    //     $this->ModelDB->editData('nip', $nip, 't_guru', $data);
+    //     redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
+    //   }
 
-        $this->session->set_flashdata('upload_failed', 'coba foto lain');
-
-        redirect(base_url('index.php/guru/viewEditGuru/'.$nip), 'refresh', $data);
-      } else {
-        $this->ModelDB->editData('nip', $nip, 't_guru', $data);
-        redirect(base_url('index.php/guru/viewTabelGuru/'), 'refresh');
-      }
-    }
   }
 
   public function deleteDataGuru(){

@@ -10,6 +10,9 @@
                       <div class="col-md-10  stretch-card">
                         <h3 class="card-title">Set Jadwal Siswa</h3>
                       </div>
+                      <div class="col-md-2 grid-margin stretch-card" style="text-align: right;">
+                          <a href="<?php echo base_url('index.php/JadwalSeluruh/searchsiswakelas'); ?>" style="color:#ffa632;"> <h4 class="card-title">Siswa Per Kelas <i class="mdi mdi-arrow-right-bold"></i></h4></a>
+                      </div>
                   </div>
                 <div class="row" id="tabeldata">
                   <div class="col-lg-12 ">
@@ -67,7 +70,7 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="form-group" style="padding-top:21px;">
-                          <button type="button" id="btngo" class="btn btn-primary btn-xs" onclick="setSiswa()" disabled>Set</button>
+                          <button type="button" id="btngo" class="btn btn-success btn-sm" onclick="setSiswa()" disabled>Set</button>
                         </div>
                     </div>
                   </form>
