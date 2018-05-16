@@ -3,27 +3,27 @@
 /**
  *
  */
-class M_JadwalSiswa 
+class M_JadwalSiswa
 {
   private $idJadwalSiswa;
-  private $siswa = new Siswa;
-  private $jadwalSeluruh = new Jadwal;
-  private $tahunAjaran = new TahunAjaran;
+  private $nis;
+  private $idJadwal;
+  private $idTahunAjaran;
+  private $nip;
   private $nilaiTugas;
   private $nilaiUTS;
   private $nilaiUAS;
-  private $guru = new Guru;
 
-  function __construct($idJadwalSiswa, $siswa, $jadwalSeluruh, $tahunAjaran, $nilaiTugas, $nilaiUTS, $nilaiUAS)
+  function __construct($idJadwalSiswa=null, $nis=null, $idJadwal=null, $idTahunAjaran=null, $nip=null, $nilaiTugas=null, $nilaiUTS=null, $nilaiUAS=null)
   {
     $this->idJadwalSiswa = $idJadwalSiswa;
-    $this->siswa = $siswa;
-    $this->jadwalSeluruh = $jadwalSeluruh;
-    $this->tahunAjaran = $tahunAjaran;
+    $this->nis = $nis;
+    $this->idJadwal = $idJadwal;
+    $this->idTahunAjaran = $idTahunAjaran;
+    $this->nip = $nip;
     $this->nilaiTugas = $nilaiTugas;
     $this->nilaiUTS = $nilaiUTS;
     $this->nilaiUAS = $nilaiUAS;
-    $this->guru = $guru;
   }
 
   public function getIdJadwalSiswa()
@@ -36,34 +36,34 @@ class M_JadwalSiswa
     $this->idJadwalSiswa = $idJadwalSiswa;
     return $this;
   }
-  public function getSiswa()
+  public function getNis()
   {
-    return $this->siswa;
+    return $this->nis;
   }
 
-  public function setSiswa($siswa)
+  public function setNis($nis)
   {
-    $this->siswa = $siswa;
+    $this->nis = $nis;
     return $this;
   }
-  public function getJadwalSeluruh()
+  public function getIdJadwal()
   {
-    return $this->jadwalSeluruh;
+    return $this->idJadwal;
   }
 
-  public function setJadwalSeluruh($jadwalSeluruh)
+  public function setIdJadwal($idJadwal)
   {
-    $this->jadwalSeluruh = $jadwalSeluruh;
+    $this->idJadwal = $idJadwal;
     return $this;
   }
-  public function getTahunAjaran()
+  public function getIdTahunAjaran()
   {
-    return $this->tahunAjaran;
+    return $this->idTahunAjaran;
   }
 
-  public function setTahunAjaran($tahunAjaran)
+  public function setIdTahunAjaran($idTahunAjaran)
   {
-    $this->tahunAjaran = $tahunAjaran;
+    $this->idTahunAjaran = $idTahunAjaran;
     return $this;
   }
   public function getNilaiTugas()
@@ -96,14 +96,14 @@ class M_JadwalSiswa
     $this->nilaiUAS = $nilaiUAS;
     return $this;
   }
-  public function getGuru()
+  public function getNip()
   {
-    return $this->guru;
+    return $this->nip;
   }
 
-  public function setGuru($guru)
+  public function setNip($nip)
   {
-    $this->guru = $guru;
+    $this->nip = $nip;
     return $this;
   }
 }

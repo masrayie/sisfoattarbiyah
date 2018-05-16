@@ -69,6 +69,11 @@
                             <button type="submit" class="btn btn-success mr-2">SIMPAN</button>
                           </div>
                         </div>
+                        <div class="col-lg-12 " align="left">
+                            <form class="form-control" action="<?php echo base_url().'index.php/Nilai/exportExcel';?>" method="post">
+                              <button type="submit" class="btn btn-primary xs">Export Excel</button>
+                            </form>
+                        </div>
                       </div>
                     </div>
                   </div>
