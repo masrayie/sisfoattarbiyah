@@ -71,8 +71,9 @@
                             <button type="submit" class="btn btn-success mr-2" <?php echo !$nilai ? 'hidden' : '';?>>SIMPAN</button>
                           </div>
                         </div>
+                      </form>
                         <div class="col-lg-12 " align="left">
-                            <form class="form-control" action="<?php echo base_url().'index.php/Nilai/exportExcel';?>" method="post">
+                            <form class="form-control" action="<?php echo base_url().'index.php/Nilai/exportExcel?jenjang='.$jenjang.'&kelas='.$nilai[0]->kelas.'&mapel='.$kodemapel;?>" method="post">
                               <button type="submit" class="btn btn-primary xs">Export Excel</button>
                             </form>
                         </div>
@@ -80,7 +81,6 @@
                     </div>
                   </div>
                 </div>
-              </form>
                 <h4><a href="<?php echo base_url('index.php/nilai/viewTabelNilai'); ?>" style="margin-right:10px; "><i class="mdi mdi-arrow-left-bold-circle-outline">Kembali</i></a></h4>
               </div>
               </div>

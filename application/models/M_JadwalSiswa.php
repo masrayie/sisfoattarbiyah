@@ -10,17 +10,19 @@ class M_JadwalSiswa
   private $idJadwal;
   private $idTahunAjaran;
   private $nip;
+  private $mapel;
   private $nilaiTugas;
   private $nilaiUTS;
   private $nilaiUAS;
 
-  function __construct($idJadwalSiswa=null, $nis=null, $idJadwal=null, $idTahunAjaran=null, $nip=null, $nilaiTugas=null, $nilaiUTS=null, $nilaiUAS=null)
+  function __construct($idJadwalSiswa=null, $nis=null, $idJadwal=null, $idTahunAjaran=null, $nip=null, $mapel=null, $nilaiTugas=null, $nilaiUTS=null, $nilaiUAS=null)
   {
     $this->idJadwalSiswa = $idJadwalSiswa;
     $this->nis = $nis;
     $this->idJadwal = $idJadwal;
     $this->idTahunAjaran = $idTahunAjaran;
     $this->nip = $nip;
+    $this->mapel = $mapel;
     $this->nilaiTugas = $nilaiTugas;
     $this->nilaiUTS = $nilaiUTS;
     $this->nilaiUAS = $nilaiUAS;
@@ -36,6 +38,7 @@ class M_JadwalSiswa
     $this->idJadwalSiswa = $idJadwalSiswa;
     return $this;
   }
+
   public function getNis()
   {
     return $this->nis;
@@ -46,6 +49,18 @@ class M_JadwalSiswa
     $this->nis = $nis;
     return $this;
   }
+
+  public function getMapel()
+  {
+    return $this->mapel;
+  }
+
+  public function setMapel($mapel)
+  {
+    $this->mapel = $mapel;
+    return $this;
+  }
+
   public function getIdJadwal()
   {
     return $this->idJadwal;

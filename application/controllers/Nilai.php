@@ -23,6 +23,7 @@ class Nilai extends CI_Controller {
      $this->load->model('M_Jadwal', '', TRUE);
      $this->load->model('M_Shift', '', TRUE);
      $this->load->model('M_MataPelajaran', '', TRUE);
+     $this->load->model('M_JadwalSiswa', '', TRUE);
      $this->load->model('M_Guru', '', TRUE);
      $this->load->model('M_Siswa', '', TRUE);
      $this->load->model('ModelDB', '', TRUE);
@@ -58,7 +59,7 @@ class Nilai extends CI_Controller {
     $result = $model->freeQuery($query);
     foreach ($result as $row) {
       # code...
-        $nilaiArr[] = new M_JadwalSiswa($row->idJadwalSiswa, $row->nis, $row->idJadwal, $row->idTahunAjaran, $row->nip, $row->nilaiTugas, $row->nilaiUTS, $row->nilaiUAS);
+        $nilaiArr[] = new M_JadwalSiswa($row->id, $row->nis, $row->nama, $row->kode, $row->kelas, $row->mapel, $row->tugas, $row->uts, $row->uas);
     }
     $filename = "nilai.xls";
                 header("Content-Type: application/vnd.ms-excel");
@@ -85,6 +86,8 @@ class Nilai extends CI_Controller {
          $data['nama_guru'] = $session_data['nama_guru'];
          $data['kode_guru'] = $session_data['kode_guru'];
          $data['nilai'] = $result;
+         $data['jenjang'] = $jenjang;
+         $data['kodemapel'] = $mapel;
          $this->load->view('HeaderFooter/Header', $data);
          $this->load->view('shownilaiview', $data);
          $this->load->view('HeaderFooter/Footer');
