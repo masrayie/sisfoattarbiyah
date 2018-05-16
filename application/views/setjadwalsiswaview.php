@@ -16,7 +16,7 @@
                     <div class="card">
                       <div class="card-body" style="font-size:13px;">
                         <p class="card-description">
-                          Jadwal Pembelajaran Keseluruhan
+                          Daftar Siswa
                         </p>
                         <table class="table table-striped" id="example" >
                           <thead>

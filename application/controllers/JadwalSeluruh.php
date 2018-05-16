@@ -131,6 +131,20 @@ class JadwalSeluruh extends CI_Controller {
       echo json_encode($kelas);
   }
 
+  public function readDataMapel($kelas){
+    $model = new ModelDB();
+    $que="select distinct t.kode_mapel as kode, m.nama_mapel as nama from t_jadwal_semua t inner join t_mapel m on t.kode_mapel=m.kode_mapel where kelas='$kelas'";
+    $query = $model->freeQuery($que);
+      foreach ($query as $row) {
+        # code...
+          $mapel[] = array(
+            'id' => $row->kode,
+            'text' => $row->nama
+          );
+      }
+      echo json_encode($mapel);
+  }
+
   public function jsonMapel(){
       $objMapel  = $this->readDataMapelAll();
       foreach ($objMapel as $as) {
