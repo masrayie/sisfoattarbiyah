@@ -30,6 +30,35 @@ class MataPelajaran extends CI_Controller {
 
   }
 
+  public function exportExcelData($records){
+    $heading = false;
+    if (!empty($records))
+    foreach ($records as $row) {
+      if (!$heading) {
+        echo implode("\t", array_keys($row)) . "\n";
+        $heading = true;
+      }
+      echo implode("\t", ($row)) . "\n";
+    }
+  }
+
+  public function exportExcel()
+  {
+    $objMapel = $this->readDataMapelAll();
+    foreach ($objMapel as $as) {
+
+      $dataMapel[] = array(
+        'kode_mapel'  => $as->getKodeMapel(),
+        'nama_mapel'  => $as->getNamaMapel(),
+      );
+    }
+    
+    $filename = "MataPelajaran.xls";
+                header("Content-Type: application/vnd.ms-excel");
+                header("Content-Disposition: attachment; filename=\"$filename\"");
+    $this->exportExcelData($dataMapel);
+  }
+
   public function viewInputMapel(){
     if($this->session->userdata('logged_in'))
        {
@@ -65,6 +94,21 @@ class MataPelajaran extends CI_Controller {
          //If no session, redirect to login page
          redirect(base_url(), 'refresh');
        }
+  }
+
+  public function jsonDataMapel(){
+    $objMapel = $this->readDataMapelAll();
+    foreach ($objMapel as $as) {
+
+      $dataMapel[] = array(
+        'kode_mapel'  => $as->getKodeMapel(),
+        'nama_mapel'  => $as->getNamaMapel(),
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getKodeMapel().'\')">ubah</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getKodeMapel().'\')" class="btn btn-danger btn-xs">hapus</button>'
+      );
+    }
+    $dataM = array("data"=>$dataMapel);
+    $jsonMapel = json_encode($dataM);
+    echo $jsonMapel;
   }
 
   public function inputDataMapel(){

@@ -30,6 +30,37 @@ class Guru extends CI_Controller {
 
   }
 
+  public function exportExcelData($records){
+    $heading = false;
+    if (!empty($records))
+    foreach ($records as $row) {
+      if (!$heading) {
+        echo implode("\t", array_keys($row)) . "\n";
+        $heading = true;
+      }
+      echo implode("\t", ($row)) . "\n";
+    }
+  }
+
+  public function exportExcel()
+  {
+    $objGuru= $this->readDataGuruAll();
+    foreach ($objGuru as $as) {
+
+      $dataGuru[] = array(
+        'nip'         => $as->getNip(),
+        'nama_guru'  => $as->getNamaGuru(),
+        'kode_guru'   => $as->getKodeGuru(),
+        'alamat'   => $as->getAlamat(),
+        'email'      => $as->getEmail(),
+      );
+    }
+    $filename = "guru.xls";
+                header("Content-Type: application/vnd.ms-excel");
+                header("Content-Disposition: attachment; filename=\"$filename\"");
+    $this->exportExcelData($dataGuru);
+  }
+
   public function viewInputGuru(){
     if($this->session->userdata('logged_in'))
        {
@@ -65,6 +96,24 @@ class Guru extends CI_Controller {
          //If no session, redirect to login page
          redirect(base_url(), 'refresh');
        }
+  }
+
+  public function jsonDataGuru(){
+    $objGuru= $this->readDataGuruAll();
+    foreach ($objGuru as $as) {
+
+      $dataGuru[] = array(
+        'nip'         => $as->getNip(),
+        'nama_guru'  => $as->getNamaGuru(),
+        'kode_guru'   => $as->getKodeGuru(),
+        'alamat'   => $as->getAlamat(),
+        'email'      => $as->getEmail(),
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getNip().'\')">ubah</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getNip().'\')" class="btn btn-danger btn-xs">hapus</button>'
+      );
+    }
+    $dataG = array("data"=>$dataGuru);
+    $jsonGuru = json_encode($dataG);
+    echo $jsonGuru;
   }
 
   public function inputDataGuru(){

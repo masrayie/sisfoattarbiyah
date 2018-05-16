@@ -1,6 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+//load Spout Library
+require_once APPPATH.'/third_party/spout/src/Spout/Autoloader/autoload.php';
+
+//lets Use the Spout Namespaces
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Type;
+
 class Siswa extends CI_Controller {
 
   /**
@@ -28,6 +35,45 @@ class Siswa extends CI_Controller {
   public function index()
   {
 
+  }
+
+  public function exportExcelData($records){
+    $heading = false;
+    if (!empty($records))
+    foreach ($records as $row) {
+      if (!$heading) {
+        echo implode("\t", array_keys($row)) . "\n";
+        $heading = true;
+      }
+      echo implode("\t", ($row)) . "\n";
+    }
+  }
+  
+  public function exportExcel()
+  {
+    $objSiswa = $this->readDataSiswaAll();
+    foreach ($objSiswa as $as) {
+      if($as->getJenjang()=='0'){
+          $jenjang = "Taman Kanak-Kanak";
+      } else if ($as->getJenjang()=='1'){
+          $jenjang = "Madrasah Ibtidaiyah";
+      } else {
+          $jenjang = "Madrasah Tsanawiyah";
+      }
+      $dataSiswa[] = array(
+        'nis'         => $as->getNis(),
+        'nama_siswa'  => $as->getNamaSiswa(),
+        'nama_wali'   => $as->getNamaOrangTua(),
+        'tgl_lahir'   => $as->getTglLahir(),
+        'alamat'      => $as->getAlamat(),
+        'jenjang'     => $jenjang,
+        'tingkat'     => $as->getTingkat()
+      );
+    }
+    $filename = "siswa.xls";
+                header("Content-Type: application/vnd.ms-excel");
+                header("Content-Disposition: attachment; filename=\"$filename\"");
+    $this->exportExcelData($dataSiswa);
   }
 
   public function viewInputSiswa(){
@@ -101,6 +147,13 @@ class Siswa extends CI_Controller {
       $alamat         = $this->input->post('alamat');
       $nama_orangtua  = $this->input->post('nama_orangtua');
       $jenjang        = $this->input->post('jenjang');
+      if (!$this->input->post('tingkat2') == 0) {
+        $tingkat        = $this->input->post('tingkat2');
+      }elseif (!$this->input->post('tingkat3') == 0) {
+        $tingkat        = $this->input->post('tingkat3');
+      }else {
+        $tingkat        = 0;
+      }
 
       $config = array('file_name'     => $nis,
                       'upload_path'   => './photosiswa/',
@@ -115,7 +168,8 @@ class Siswa extends CI_Controller {
                     'tgl_lahir'     => $tgl_lahir,
                     'alamat'        => $alamat,
                     'nama_orangtua' => $nama_orangtua,
-                    'jenjang'       => $jenjang
+                    'jenjang'       => $jenjang,
+                    'tingkat'       => $tingkat
                   );
 
       $this->load->library('upload', $config);
@@ -180,6 +234,13 @@ class Siswa extends CI_Controller {
     $alamat         = $this->input->post('alamat');
     $nama_orangtua  = $this->input->post('nama_orangtua');
     $jenjang        = $this->input->post('jenjang');
+    if (!$this->input->post('tingkat2') == 0) {
+      $tingkat        = $this->input->post('tingkat2');
+    }elseif (!$this->input->post('tingkat3') == 0) {
+      $tingkat        = $this->input->post('tingkat3');
+    }else {
+      $tingkat        = 0;
+    }
 
     $config = array('file_name'     => $nis,
                     'upload_path'   => './photosiswa/',
@@ -193,7 +254,8 @@ class Siswa extends CI_Controller {
                   'tgl_lahir'     => $tgl_lahir,
                   'alamat'        => $alamat,
                   'nama_orangtua' => $nama_orangtua,
-                  'jenjang'       => $jenjang
+                  'jenjang'       => $jenjang,
+                  'tingkat'       => $tingkat
                 );
 
     if ($_FILES['filefoto']['size'] == 0) {
