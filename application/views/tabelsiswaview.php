@@ -20,6 +20,7 @@
                         <th>Nama Wali</th>
                         <th>Alamat</th>
                         <th>Jenjang</th>
+                        <th>Tingkat</th>
                         <th>Operation</th>
                       </tr>
                     </thead>
@@ -67,6 +68,7 @@
           {"data":"tgl_lahir", "className" : "dt-center"},
           {"data":"alamat", "className" : "dt-center"},
           {"data":"jenjang", "className" : "dt-center"},
+          {"data":"tingkat", "className" : "dt-center"},
           {"data":"buton", "className" : "dt-center"}
         ]
       });

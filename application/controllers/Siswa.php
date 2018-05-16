@@ -84,6 +84,7 @@ class Siswa extends CI_Controller {
         'tgl_lahir'   => $as->getTglLahir(),
         'alamat'      => $as->getAlamat(),
         'jenjang'     => $jenjang,
+        'tingkat'     => $as->getTingkat(),
         'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getNis().'\')">Edit</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getNis().'\')" class="btn btn-danger btn-xs">Delete</button>'
       );
     }
@@ -134,7 +135,7 @@ class Siswa extends CI_Controller {
 
       foreach ($result as $row) {
         # code...
-          $siswaArr[] = new M_Siswa($row->nis, $row->nama_siswa, $row->tgl_lahir, $row->alamat, $row->nama_orangtua, $row->jenjang);
+          $siswaArr[] = new M_Siswa($row->nis, $row->nama_siswa, $row->tgl_lahir, $row->alamat, $row->nama_orangtua, $row->jenjang, $row->tingkat);
       }
       return $siswaArr;
   }
