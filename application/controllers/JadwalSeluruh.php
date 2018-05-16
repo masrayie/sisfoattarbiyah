@@ -117,6 +117,20 @@ class JadwalSeluruh extends CI_Controller {
       return $jadwalArr;
   }
 
+  public function readDataKelas($jenjang){
+    $model = new ModelDB();
+    $que="select distinct kelas from t_jadwal_semua where jenjang='$jenjang'";
+    $query = $model->freeQuery($que);
+      foreach ($query as $row) {
+        # code...
+          $kelas[] = array(
+            'id' => $row->kelas,
+            'text' => "Kelas ".$row->kelas
+          );
+      }
+      echo json_encode($kelas);
+  }
+
   public function jsonMapel(){
       $objMapel  = $this->readDataMapelAll();
       foreach ($objMapel as $as) {
@@ -354,6 +368,53 @@ class JadwalSeluruh extends CI_Controller {
         $model->editData('id_shift', $id_shift, 't_shift', $data);
         redirect(base_url('index.php/JadwalSeluruh/viewSettingShift'), 'refresh');
 
+    }
+
+    public function updateJadwalSingle($id){
+      $model = new ModelDB();
+      $dataJson = json_decode(file_get_contents('php://input'), true);
+      $dataJadwal = array(
+        'id_jadwal'   => $dataJson['id_jadwal'][0],
+        'kode_mapel'  => $dataJson['mapel'][0],
+        'nip'         => $this->getNip($dataJson['kodeguru'][0]),
+        'jenjang'     => $dataJson['jenjang'][0],
+        'kelas'       => $dataJson['kelas'][0],
+        'hari'        => $dataJson['hari'][0],
+        'id_shift'    => $dataJson['shift'][0]
+      );
+      $model->editData('id_jadwal', $id, 't_jadwal_semua', $dataJadwal);
+      // print_r($dataJadwal);
+    }
+
+    public function viewEditJadwalSingle($id_jadwal){
+          if($this->session->userdata('logged_in'))
+           {
+             $session_data = $this->session->userdata('logged_in');
+             $data['nip'] = $session_data['nip'];
+             $data['nama_guru'] = $session_data['nama_guru'];
+             $data['kode_guru'] = $session_data['kode_guru'];
+             $model = new ModelDB();
+             $result = $model->readDataWhere('id_jadwal', $id_jadwal, 't_jadwal_semua');
+              if($result){
+                foreach ($result as $row) {
+                    $jadwalArr = new M_Jadwal($row->id_jadwal, $row->kode_mapel, $this->getKodeGuru($row->nip), $row->jenjang, $row->kelas, $row->hari, $row->id_shift);
+                }
+                $data['objJadwal'] = $jadwalArr;
+                $this->load->view('HeaderFooter/Header', $data);
+                $this->load->view('editsinglejadwalview', $data);
+                $this->load->view('HeaderFooter/Footer');
+           }
+           else
+           {
+             //If no session, redirect to login page
+             redirect(base_url(), 'refresh');
+           }
+         }
+         else
+         {
+           //If no session, redirect to login page
+           redirect(base_url(), 'refresh');
+         }
     }
 
 }

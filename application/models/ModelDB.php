@@ -27,13 +27,13 @@ class ModelDB extends CI_Model{
 		$this-> db -> where($column, $value);
 		$query = $this -> db -> get();
 
-	    if($query -> num_rows() == 1)
+	    if($query -> num_rows() > -1)
 	    {
 	      return $query->result();
 	    }
 	    else
 	    {
-	      return false;
+	      return $this->db->_error_message();
 	    }
 	}
 
@@ -48,9 +48,9 @@ class ModelDB extends CI_Model{
 	}
 
 	function freeQuery($query){
-		$sql = $query;
-      	$this-> db -> query($sql);
+    return $this->db->query($query)->result();
 	}
+
 }
 
 ?>
