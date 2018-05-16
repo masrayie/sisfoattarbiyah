@@ -101,6 +101,13 @@ class Siswa extends CI_Controller {
       $alamat         = $this->input->post('alamat');
       $nama_orangtua  = $this->input->post('nama_orangtua');
       $jenjang        = $this->input->post('jenjang');
+      if (!$this->input->post('tingkat2') == 0) {
+        $tingkat        = $this->input->post('tingkat2');
+      }elseif (!$this->input->post('tingkat3') == 0) {
+        $tingkat        = $this->input->post('tingkat3');
+      }else {
+        $tingkat        = 0;
+      }
 
       $config = array('file_name'     => $nis,
                       'upload_path'   => './photosiswa/',
@@ -115,7 +122,8 @@ class Siswa extends CI_Controller {
                     'tgl_lahir'     => $tgl_lahir,
                     'alamat'        => $alamat,
                     'nama_orangtua' => $nama_orangtua,
-                    'jenjang'       => $jenjang
+                    'jenjang'       => $jenjang,
+                    'tingkat'       => $tingkat
                   );
 
       $this->load->library('upload', $config);
@@ -180,6 +188,13 @@ class Siswa extends CI_Controller {
     $alamat         = $this->input->post('alamat');
     $nama_orangtua  = $this->input->post('nama_orangtua');
     $jenjang        = $this->input->post('jenjang');
+    if (!$this->input->post('tingkat2') == 0) {
+      $tingkat        = $this->input->post('tingkat2');
+    }elseif (!$this->input->post('tingkat3') == 0) {
+      $tingkat        = $this->input->post('tingkat3');
+    }else {
+      $tingkat        = 0;
+    }
 
     $config = array('file_name'     => $nis,
                     'upload_path'   => './photosiswa/',
@@ -193,7 +208,8 @@ class Siswa extends CI_Controller {
                   'tgl_lahir'     => $tgl_lahir,
                   'alamat'        => $alamat,
                   'nama_orangtua' => $nama_orangtua,
-                  'jenjang'       => $jenjang
+                  'jenjang'       => $jenjang,
+                  'tingkat'       => $tingkat
                 );
 
     if ($_FILES['filefoto']['size'] == 0) {
