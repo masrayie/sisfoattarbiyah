@@ -11,9 +11,10 @@ class M_Siswa
   private $alamat;
   private $namaOrangTua;
   private $jenjang;
+  private $tingkat;
   private $dataKehadiran = [];
 
-  function __construct($nis=null, $namaSiswa=null, $tglLahir=null, $alamat=null, $namaOrangTua=null, $jenjang=null)
+  function __construct($nis=null, $namaSiswa=null, $tglLahir=null, $alamat=null, $namaOrangTua=null, $jenjang=null, $tingkat=null)
   {
     $this->nis = $nis;
     $this->namaSiswa = $namaSiswa;
@@ -21,6 +22,7 @@ class M_Siswa
     $this->alamat = $alamat;
     $this->namaOrangTua = $namaOrangTua;
     $this->jenjang = $jenjang;
+    $this->tingkat = $tingkat;
   }
 
   public function getNis()
@@ -33,6 +35,18 @@ class M_Siswa
     $this->nis = $nis;
     return $this;
   }
+
+  public function getTingkat()
+  {
+    return $this->tingkat;
+  }
+
+  public function setTingkat($tingkat)
+  {
+    $this->tingkat = $tingkat;
+    return $this;
+  }
+
   public function getNamaSiswa()
   {
     return $this->namaSiswa;

@@ -6,51 +6,26 @@
 
 			<div class="col-lg-12 stretch-card">
               <div class="card">
-                <div class="card-body">
+                <div class="card-body" style="font-size:13px;">
                   <h4 class="card-title">Data Siswa</h4>
                   <p class="card-description">
                     Data Siswa Al-Islamiyah Attarbiyah
                   </p>
-                  <table class="table table-hover">
-                    <thead align="justify">
+                  <table class="table table-striped" id="example" >
+                    <thead>
                       <tr>
-                        <th> NO </th>
-                        <th> NIS </th>
-                        <th> Nama Siswa </th>
-                        <th> Nama Orangtua / Wali
-                        <th> Alamat </th>
-            						<th> Jenjang </th>
-                        <th> Operation </th>
+                        <th>NIS</th>
+                        <th>Nama Siswa</th>
+                        <th>Tgl Lahir</th>
+                        <th>Nama Wali</th>
+                        <th>Alamat</th>
+                        <th>Jenjang</th>
+                        <th>Tingkat</th>
+                        <th>Operation</th>
                       </tr>
                     </thead>
-                   <tbody>
-                      <?php
-                      if ($siswaArr == null) {
-                        echo '<script language="javascript">';
-                        echo 'alert("Tidak Ada Data Siswa")';
-                        echo '</script>';
-                      }else {
-                        $no=0;
-                        foreach ($siswaArr as $as) {
-                        $no = $no + 1;
-                        ?>
-                          <tr>
-                                  <td><?php echo $no; ?></td>
-                                  <td><?php echo $as->getNis(); ?></td>
-                                  <td><?php echo $as->getNamaSiswa(); ?></td>
-                                  <td><?php echo $as->getNamaOrangTua(); ?></td>
-                                  <td><?php echo $as->getAlamat(); ?></td>
-                                  <td align="center"><?php echo $as->getJenjang(); ?></td>
-                                  <td>
-                                    <a href="<?php echo base_url('index.php/siswa/viewEditSiswa/'.$as->getNis()); ?>" class="btn btn-primary btn-xs">ubah</a>
-                                    <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger btn-xs" onclick="return deleteData()">hapus</a>
-                                  </td>
-                                  <td>
-                                  </td>
-                          </tr>
-                        <?php }
-                      }
-                      ?>
+                    <tbody>
+
                     </tbody>
                   </table>
                 </div>
@@ -69,7 +44,12 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-
+      <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
+      <script src="<?php echo base_url("assets/vendor/Mdtpicker/mdtimepicker.js")?>"></script>
+      <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+      <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+      <script type="text/javascript" src="<?php echo base_url("assets/vendor/JTimePicker/dist/bootstrap-clockpickerr.min.js")?>"></script>
       <script>
       function doconfirm()
       {
@@ -78,5 +58,30 @@
           {
               return false;
           }
+      }
+      $("#example").DataTable({
+        "ajax"    : "<?php echo base_url().'index.php/Siswa/jsonDataSiswa';?>",
+        "columns" : [
+          {"data":"nis", "className" : "dt-center"},
+          {"data":"nama_siswa", "className" : "dt-center"},
+          {"data":"nama_wali", "className" : "dt-center"},
+          {"data":"tgl_lahir", "className" : "dt-center"},
+          {"data":"alamat", "className" : "dt-center"},
+          {"data":"jenjang", "className" : "dt-center"},
+          {"data":"tingkat", "className" : "dt-center"},
+          {"data":"buton", "className" : "dt-center"}
+        ]
+      });
+      function editData(val){
+        window.location="<?php echo base_url().'index.php/Siswa/viewEditSiswa/';?>"+val;
+      }
+      function deleteData(val){
+        job=confirm("Are you sure to delete permanently?");
+        if(job!=true)
+        {
+            return false;
+        } else {
+            window.location="<?php echo base_url().'index.php/Siswa/deleteDataSiswa/';?>"+val;
+        }
       }
       </script>
