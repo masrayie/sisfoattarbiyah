@@ -11,12 +11,9 @@
                   <p class="card-description">
                     Data Guru Al-Islamiyah Attarbiyah
                   </p>
-                  <table class="table table-bordered">
+                  <table class="table table-striped" id="example">
                     <thead>
                       <tr>
-                        <th>
-                          NO
-                        </th>
                         <th>
                           NIP
                         </th>
@@ -27,45 +24,14 @@
             						  Kode Guru
             						</th>
                         <th>
+            						  Alamat
+            						</th>
+                        <th>
                           Email
                         </th>
                         <th> Operation </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php
-                      if ($guruArr == null) {
-                        echo '<script language="javascript">';
-                        echo 'alert("Tidak Ada Data Guru")';
-                        echo '</script>';
-                      }else {
-                        $no=0;
-                        foreach ($guruArr as $as) {
-                          $dataku[] = array(
-                            'nip'         => $as->getNip(),
-                            'nama_guru'   => $as->getNamaGuru(),
-                            'kode_guru'   => $as->getKodeGuru(),
-                            'email'       => $as->getEmail()
-                          );
-                          $no = $no + 1;
-                        ?>
-                          <tr>
-                              <td><?php echo $no; ?></td>
-                              <td><?php echo $as->getNip(); ?></td>
-                              <td><?php echo $as->getNamaGuru(); ?></td>
-                              <td><?php echo $as->getKodeGuru(); ?></td>
-                              <td><?php echo $as->getEmail(); ?></td>
-                              <td>
-                                <a href="<?php echo base_url('index.php/guru/viewEditGuru/'.$as->getNip()); ?>" class="btn btn-primary btn-xs">ubah</a>
-                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger btn-xs" onclick="return doconfirm();">hapus</a>
-                              </td>
-                              <td>
-                              </td>
-                          </tr>
-                        <?php }
-                      }
-                      ?>
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -82,19 +48,36 @@
         </footer>
         <!-- partial -->
       </div>
-      <script type="text/javascript">
-          var tes
-          tes = <?php echo json_encode($dataku); ?>;
-      </script>
       <!-- main-panel ends -->
+      <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
+      <script src="<?php echo base_url("assets/vendor/Mdtpicker/mdtimepicker.js")?>"></script>
+      <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+      <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+      <script type="text/javascript" src="<?php echo base_url("assets/vendor/JTimePicker/dist/bootstrap-clockpickerr.min.js")?>"></script>
 
       <script>
-      function doconfirm()
-      {
-          job=confirm("Are you sure to delete permanently?");
-          if(job!=true)
-          {
-              return false;
-          }
+      $("#example").DataTable({
+        "ajax"    : "<?php echo base_url().'index.php/Guru/jsonDataGuru';?>",
+        "columns" : [
+          {"data":"nip", "className" : "dt-center"},
+          {"data":"nama_guru", "className" : "dt-center"},
+          {"data":"kode_guru", "className" : "dt-center"},
+          {"data":"alamat", "className" : "dt-center"},
+          {"data":"email", "className" : "dt-center"},
+          {"data":"buton", "className" : "dt-center"}
+        ]
+      });
+      function editData(val){
+        window.location="<?php echo base_url().'index.php/Guru/viewEditGuru/';?>"+val;
+      }
+      function deleteData(val){
+        job=confirm("Are you sure to delete permanently?");
+        if(job!=true)
+        {
+            return false;
+        } else {
+            window.location="<?php echo base_url().'index.php/Guru/deleteDataGuru/';?>"+val;
+        }
       }
       </script>
