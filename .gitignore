@@ -1,8 +1,5 @@
 .DS_Store
 
-application/config/*
-!application/config/autoload.php
-
 application/cache/*
 !application/cache/index.html
 

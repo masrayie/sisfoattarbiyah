@@ -3,14 +3,41 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-			
+
 			<div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
-                  <h3 class="card-title">Data Nilai Siswa</h3>
-                  <p class="card-description">
-                    Data Nilai Siswa Al-Islamiyah Attarbiyah
-                  </p>
+                  <div class="row">
+                      <div class="col-md-6 grid-margin stretch-card">
+                        <h3 class="card-title">Data Nilai Siswa</h3>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group" style="font-size:12px;">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjang" name="jenjang">
+              														<option></option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group" style="font-size:12px;">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectmapel" name="mapel" disabled>
+                                          <option></option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group" style="font-size:12px;">
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectkelas" name="kelas" disabled>
+                                          <option></option>
+                                      </select>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                  <form method="POST" action="google.com">
                   <table class="table table-bordered">
                     <thead>
                       <tr>
@@ -21,10 +48,10 @@
                           NIS
                         </th>
                         <th>
-                          Nama 
+                          Nama
                         </th>
                         <th>
-                          Kelas 
+                          Kelas
                         </th>
             						<th>
             						  Mata Pelajaran
@@ -57,23 +84,24 @@
                         <td>
                           May 15, 2015
                         </td>
-						<td>
-						  <input type="text" class="form-control" name="nilai_tugas" placeholder="Tugas" size="3">
+						<td align="center">
+						  <input type="text" class="form-control col-md-7" name="nilai_tugas" placeholder="Tugas" size="3">
 						</td>
-						<td>
-						  <input type="text" class="form-control" name="nilai_uts" placeholder="UTS" size="3">
+						<td align="center">
+						  <input type="text" class="form-control col-md-7" name="nilai_uts" placeholder="UTS" size="3">
 						</td>
-						<td>
-						  <input type="text" class="form-control" name="nilai_uas" placeholder="UAS" size="3">
+						<td align="center">
+						  <input type="text" class="form-control col-md-7" name="nilai_uas" placeholder="UAS" size="3">
+              <input type="submit" hidden>
 						</td>
-						
                       </tr>
                     </tbody>
                   </table>
+                  </form>
                 </div>
               </div>
             </div>
-			
+
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -87,4 +115,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    

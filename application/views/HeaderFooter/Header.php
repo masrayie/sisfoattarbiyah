@@ -8,13 +8,21 @@
   <!-- plugins:css -->
   <link rel="stylesheet" href="<?php echo base_url("assets/node_modules/mdi/css/materialdesignicons.min.css");?>">
   <link rel="stylesheet" href="<?php echo base_url("assets/node_modules/simple-line-icons/css/simple-line-icons.css");?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/vendor/Select2/dist/css/select2.min.css");?>"/>
+  <link rel="stylesheet" href="<?php echo base_url("assets/vendor/JTimePicker/dist/jquery-clockpicker.css");?>"/>
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
   <!-- inject:css -->
-  <link rel="stylesheet" href="<?php echo base_url("assets/css/style2.css");?>">
+  <link rel="stylesheet" href="<?php echo base_url("assets/css/style2.css");?>"/>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.css"/>
   <!-- endinject -->
-  <link rel="shortcut icon" href="<?php echo base_url("assets/images/logo_kecil.png");?>" />
+  <link rel="shortcut icon" href="<?php echo base_url("assets/images/logo_kecil2.png");?>" />
+  <style type="text/css">
+      .select2-results__options{
+        font-size:12px !important;
+    }
+  </style>
 </head>
 <body>
   <div class="container-scroller">
@@ -22,7 +30,7 @@
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
         <a class="navbar-brand brand-logo" href="index.html"><img src="<?php echo base_url("assets/images/logoattarbiy.svg");?>" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url("assets/images/logo_kecil.png");?>" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="<?php echo base_url("assets/images/logo_kecil2.png");?>" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
@@ -65,11 +73,6 @@
               <div class="dropdown-divider"></div>
             </div>
           </li>
-          <li class="nav-item d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <img class="img-xs rounded-circle" src="images/faces/face4.jpg" alt="">
-            </a>
-          </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="icon-menu"></span>
@@ -83,9 +86,9 @@
         <ul class="nav">
           <li class="nav-item nav-profile">
             <div class="nav-link">
-              <div class="profile-image"> <img src="<?php echo base_url("assets/images/faces/face28.jpg");?>" alt="image"/> <span class="online-status online"></span> </div>
+              <div class="profile-image"> <img src="<?php echo base_url('photoguru/'.$nip.'.jpg');?>" alt="image"/> <span class="online-status online"></span> </div>
               <div class="profile-name">
-                <p class="name">Asep Saefullah</p>
+                <p class="name"><?php echo $nama_guru; ?></p>
                 <p class="designation">Wakepsek</p>
                 <div class="badge badge-teal mx-auto mt-3">Online</div>
               </div>
@@ -123,8 +126,9 @@
             <a class="nav-link" data-toggle="collapse" href="#menu_jadwal" aria-expanded="false" aria-controls="general-pages"> <img class="menu-icon" src="<?php echo base_url("assets/images/menu_icons/05.png")?>" alt="menu icon"> <span class="menu-title">Penjadwalan</span><i class="menu-arrow"></i></a>
             <div class="collapse" id="menu_jadwal">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewInputJadwalAll' ?>">Input Jadwal</a></li>
-                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll' ?>">Jadwal Seluruh</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll' ?>">Set Jadwal</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewTabelJadwalAll' ?>">Jadwal Siswa</a></li>
+                <li class="nav-item"> <a class="nav-link" href="<?php echo base_url().'index.php/JadwalSeluruh/viewJadwalSeluruh' ?>">Tabel Jadwal</a></li>
               </ul>
             </div>
           </li>

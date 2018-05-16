@@ -6,14 +6,15 @@
 class M_Jadwal
 {
   private $idJadwal;
-  private $mapel = new MataPelajaran;
-  private $guru = new Guru;
+  private $mapel;
+  private $guru;
   private $hari;
+  private $jenjang;
   private $jam;
   private $kelas;
   private $jadwalSiswa = [];
 
-  function __construct($idJadwal, $mapel, $guru, $hari, $jam, $kelas, $jadwalSiswa)
+  function __construct($idJadwal=null, $mapel=null, $guru=null, $jenjang= null, $kelas = null, $hari=null, $jam=null)
   {
     $this->idJadwal = $idJadwal;
     $this->mapel = $mapel;
@@ -21,7 +22,7 @@ class M_Jadwal
     $this->hari = $hari;
     $this->jam = $jam;
     $this->kelas = $kelas;
-    $this->jadwalSiswa = $jadwalSiswa;
+    $this->jenjang = $jenjang;
   }
 
   public function getIdJadwal()
@@ -82,6 +83,17 @@ class M_Jadwal
   public function setKelas($kelas)
   {
     $this->kelas = $kelas;
+    return $this;
+  }
+
+  public function getJenjang()
+  {
+    return $this->jenjang;
+  }
+
+  public function setJenjang($jenjang)
+  {
+    $this->jenjang = $jenjang;
     return $this;
   }
   public function getJadwalSiswa()

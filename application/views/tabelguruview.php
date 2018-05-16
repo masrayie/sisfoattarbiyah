@@ -3,7 +3,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-			
+
 			<div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -36,7 +36,13 @@
                       <?php
                         $no=0;
                         foreach ($guruArr as $as) {
-                        $no = $no + 1;
+                          $dataku[] = array(
+                            'nip'         => $as->getNip(),
+                            'nama_guru'   => $as->getNamaGuru(),
+                            'kode_guru'   => $as->getKodeGuru(),
+                            'email'       => $as->getEmail()
+                          );
+                          $no = $no + 1;
                         ?>
                           <tr>
                               <td><?php echo $no; ?></td>
@@ -45,23 +51,20 @@
                               <td><?php echo $as->getKodeGuru(); ?></td>
                               <td><?php echo $as->getEmail(); ?></td>
                               <td>
-                                      <!-- <?php
-                                        if($as->status==0){
-                                            echo "<label class='label label-danger' style='font-size: 10px;'>BELUM KEMBALI </label>";
-                                        } elseif ($as->status==1) {
-                                            echo "<label class='label label-success'style='font-size: 10px;' >SUDAH KEMBALI </label>";
-                                        }
-                                      ?>   -->
+                                <a href="<?php echo base_url('index.php/guru/viewEditGuru/'.$as->getNip()); ?>" class="btn btn-warning mr-2">UBAH</a>
+                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
+                              </td>
+                              <td>
                               </td>
                           </tr>
-                        <?php } ?>
+                        <?php
+                          }
+                        ?>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-			
-			
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -74,5 +77,19 @@
         </footer>
         <!-- partial -->
       </div>
+      <script type="text/javascript">
+          var tes
+          tes = <?php echo json_encode($dataku); ?>;
+      </script>
       <!-- main-panel ends -->
-    
+
+      <script>
+      function doconfirm()
+      {
+          job=confirm("Are you sure to delete permanently?");
+          if(job!=true)
+          {
+              return false;
+          }
+      }
+      </script>

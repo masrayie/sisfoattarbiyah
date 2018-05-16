@@ -2,8 +2,8 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
-          
+
+
           <div class="row">
             <div class="col-md-10 grid-margin stretch-card">
               <div class="card">
@@ -16,39 +16,48 @@
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/guru/inputdataguru' ?>" enctype="multipart/form-data">
                     <div class="form-group">
                       <label for="exampleInputName1">Nomor Induk Pegawai</label>
-                      <input type="text" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
+                      <input type="text" pattern="[a-zA-Z0-9]{10}" class="form-control" name="nip" placeholder="Nomor Induk Pegawai">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Lengkap Guru</label>
-                      <input type="text" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
+                      <input type="text" pattern="[a-zA-Z\s]{1,}" class="form-control" name="nama_guru" placeholder="Nama Lengkap Guru">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Kode Guru</label>
-                      <input type="text" class="form-control" name="kode_guru" placeholder="Kode Guru">
+                      <input type="text" pattern="[a-zA-Z]{3}"class="form-control" name="kode_guru" placeholder="Kode Guru">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Alamat</label>
-                      <input type="text" class="form-control" name="alamat" placeholder="Alamat">
+                      <input type="text" pattern="{1,}" class="form-control" name="alamat" placeholder="Alamat">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Email</label>
                       <input type="email" class="form-control" name="email" placeholder="Email">
                     </div>
                     <div class="form-group">
+                      <label for="exampleInputPassword4">Password</label>
+                      <input type="password" class="form-control" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
                       <label>Foto Diri</label>
-                      <input type="file" name="img[]" class="file-upload-default">
+                      <?php if ($error = $this->session->flashdata('upload_failed')):?>
+                        <div class="row" >
+                          <div class="col-lg-4">
+                            <div class="alert alert-dismissible alert-danger" align="center">
+                              <?= $error ?>
+                            </div>
+                          </div>
+                        </div>
+                      <?php endif ?>
                       <div class="input-group col-xs-12">
-                        <input type="text" class="form-control file-upload-info" disabled placeholder="Unggah Foto">
-                        <span class="input-group-append">
-                          <button class="file-upload-browse btn btn-info" type="browse">Upload</button>
-                        </span>
+                        <input class="btn" type="file" name="filefoto" size="20" accept=".jpg" required/>
                       </div>
                     </div>
                     <div class="panel-footer">
-                      <button type="submit" class="btn btn-success mr-2">Submit</button>                      
+                      <button type="submit" class="btn btn-success mr-2">Submit</button>
                     </div>
                     <!-- <button class="btn btn-light">Cancel</button> -->
                   </form>
@@ -68,4 +77,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    

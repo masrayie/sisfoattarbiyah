@@ -20,14 +20,27 @@ class Nilai extends CI_Controller {
    */
   public function index()
   {
-    $this->load->view('HeaderFooter/Header');
-    $this->load->view('inputnilaiview');
-    $this->load->view('HeaderFooter/Footer');
   }
 
   public function viewTabelNilai(){
-    $this->load->view('HeaderFooter/Header');
-    $this->load->view('tabelnilaiview');
-    $this->load->view('HeaderFooter/Footer');
+    if($this->session->userdata('logged_in'))
+       {
+         $session_data = $this->session->userdata('logged_in');
+         $data['nip'] = $session_data['nip'];
+         $data['nama_guru'] = $session_data['nama_guru'];
+         $data['kode_guru'] = $session_data['kode_guru'];
+         $this->load->view('HeaderFooter/Header', $data);
+         $this->load->view('tabelnilaiview');
+         $this->load->view('HeaderFooter/Footer');
+       }
+       else
+       {
+         //If no session, redirect to login page
+         redirect(base_url(), 'refresh');
+       }
+  }
+
+  public function readDataNilai(){
+    
   }
 }

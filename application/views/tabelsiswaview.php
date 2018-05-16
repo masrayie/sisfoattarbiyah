@@ -3,7 +3,7 @@
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
-			
+
 			<div class="col-lg-12 stretch-card">
               <div class="card">
                 <div class="card-body">
@@ -12,7 +12,7 @@
                     Data Siswa Al-Islamiyah Attarbiyah
                   </p>
                   <table class="table table-hover">
-                    <thead>
+                    <thead align="justify">
                       <tr>
                         <th> NO </th>
                         <th> NIS </th>
@@ -35,15 +35,12 @@
                                   <td><?php echo $as->getNamaSiswa(); ?></td>
                                   <td><?php echo $as->getNamaOrangTua(); ?></td>
                                   <td><?php echo $as->getAlamat(); ?></td>
-                                  <td><?php echo $as->getJenjang(); ?></td>
+                                  <td align="center"><?php echo $as->getJenjang(); ?></td>
                                   <td>
-                                      <!-- <?php
-                                        if($as->status==0){
-                                            echo "<label class='label label-danger' style='font-size: 10px;'>BELUM KEMBALI </label>";
-                                        } elseif ($as->status==1) {
-                                            echo "<label class='label label-success'style='font-size: 10px;' >SUDAH KEMBALI </label>";
-                                        }
-                                      ?>   -->
+                                    <a href="<?php echo base_url('index.php/siswa/viewEditSiswa/'.$as->getNis()); ?>" class="btn btn-warning mr-2">UBAH</a>
+                                    <a href="<?php echo base_url('index.php/siswa/deleteDataSiswa/'.$as->getNis()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
+                                  </td>
+                                  <td>
                                   </td>
                           </tr>
                         <?php } ?>
@@ -52,7 +49,6 @@
                 </div>
               </div>
             </div>
-			
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -66,4 +62,14 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    
+
+      <script>
+      function doconfirm()
+      {
+          job=confirm("Are you sure to delete permanently?");
+          if(job!=true)
+          {
+              return false;
+          }
+      }
+      </script>

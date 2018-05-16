@@ -2,8 +2,7 @@
       <!-- partial -->
       <div class="main-panel">
         <div class="content-wrapper">
-          
-          
+
           <div class="row">
             <div class="col-md-10 grid-margin stretch-card">
               <div class="card">
@@ -16,14 +15,14 @@
                           <a href="" style="color:#ffa632;"> <h7 class="card-title">Upload File</h7></a>
                       </div>
                   </div>
-                  <form class="forms-sample" method="POST">
+                  <form class="forms-sample" method="POST" action="<?php echo base_url().'index.php/MataPelajaran/inputdatamapel' ?>">
                     <div class="form-group">
                       <label for="exampleInputName1">Kode Mata Pelajaran</label>
-                      <input type="text" class="form-control" name="kode_mapel" placeholder="Kode Mata Pelajaran">
+                      <input type="text"  class="form-control" name="kode_mapel" placeholder="Kode Mata Pelajaran">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail3">Nama Mata Pelajaran</label>
-                      <input type="text" class="form-control" name="nama_mapel" placeholder="Nama Mata Pelajaran">
+                      <input type="text"  class="form-control" name="nama_mapel" placeholder="Nama Mata Pelajaran">
                     </div>
                     <button type="submit" class="btn btn-success mr-2">Submit</button>
                     <!-- <button class="btn btn-light">Cancel</button> -->
@@ -44,4 +43,3 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
-    
