@@ -50,6 +50,9 @@ class ModelDB extends CI_Model{
 	function freeQuery($query){
     return $this->db->query($query)->result();
 	}
+	function freeQueryInsert($query){
+		return $this->db->query($query);
+	}
 
 }
 
