@@ -30,7 +30,6 @@ class JadwalSeluruh extends CI_Controller {
 
   public function index()
   {
-
   }
 
   public function viewSettingShift(){
@@ -108,6 +107,16 @@ class JadwalSeluruh extends CI_Controller {
       return $mapelArr;
   }
 
+  public function readDataJadwal(){
+      $model= new ModelDB();
+      $result = $model->readDataAll('t_jadwal_semua');
+      foreach ($result as $row) {
+        # code...
+          $jadwalArr[] = new M_Jadwal($row->id_jadwal, $row->kode_mapel, $row->nip, $row->jenjang, $row->kelas, $row->hari, $row->id_shift);
+      }
+      return $jadwalArr;
+  }
+
   public function jsonMapel(){
       $objMapel  = $this->readDataMapelAll();
       foreach ($objMapel as $as) {
@@ -168,6 +177,59 @@ class JadwalSeluruh extends CI_Controller {
         $nip = $row->nip;
       }
       return $nip;
+  }
+
+  public function getKodeGuru($nip){
+      $model = new ModelDB();
+      $result = $model->readDataWhere('nip', $nip, 't_guru');
+      foreach ($result as $row) {
+        # code...
+        $kode = $row->kode_guru;
+      }
+      return $kode;
+  }
+
+  public function getNamaMapel($kodemapel){
+      $model = new ModelDB();
+      $result = $model->readDataWhere('kode_mapel', $kodemapel, 't_mapel');
+      foreach ($result as $row) {
+        # code...
+        $mapel = $row->nama_mapel;
+      }
+      return $mapel;
+  }
+
+  public function jsonDataJadwal(){
+    $objJadwal = $this->readDataJadwal();
+    foreach ($objJadwal as $as) {
+      if($as->getJenjang()=='0'){
+          $jenjang = "Taman Kanak-Kanak";
+      } else if ($as->getJenjang()=='1'){
+          $jenjang = "Madrasah Ibtidaiyah";
+      } else {
+          $jenjang = "Madrasah Tsanawiyah";
+      }
+      $model = new ModelDB();
+      $query = $model->readDataWhere('id_shift',$as->getJam(),'t_shift');
+      foreach ($query as $row ) {
+        $jam_mulai = date('H:i', strtotime($row->jam_mulai));
+        $jam_selesai = date('H:i', strtotime($row->jam_berakhir));
+        $keterangan = $row->keterangan;
+      }
+      $dataJadwal[] = array(
+        'id_jadwal'   => $as->getIdJadwal(),
+        'mapel'       => $this->getNamaMapel($as->getMapel()),
+        'kode_guru'   => $this->getKodeGuru($as->getGuru()),
+        'jenjang'     => $jenjang,
+        'kelas'       => $as->getKelas(),
+        'hari'        => $as->getHari(),
+        'jam_pel'     => $jam_mulai." s.d. ".$jam_selesai,
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getIdJadwal().'\')">Edit</button> &nbsp; <button type="button" onclick="deletetData(\''.$as->getIdJadwal().'\')" class="btn btn-danger btn-xs">Delete</button>'
+      );
+    }
+    $dataJ = array("data"=>$dataJadwal);
+    $jsonJadwal = json_encode($dataJ);
+    echo $jsonJadwal;
   }
 
   public function insertJadwalAll(){

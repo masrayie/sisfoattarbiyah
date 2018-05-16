@@ -4,10 +4,10 @@
   <!-- container-scroller -->
 
   <!-- plugins:js -->
-  <!-- <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script> -->
+  <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
   <script src="<?php echo base_url("assets/node_modules/popper.js/dist/umd/popper.min.js");?>"></script>
   <script src="<?php echo base_url("assets/node_modules/bootstrap/dist/js/bootstrap.min.js");?>"></script>
-  <!-- <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script> -->
+  <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
   <!-- endinject -->
   <!-- Plugin js for this page-->
   <script src="<?php echo base_url("assets/node_modules/chart.js/dist/Chart.min.js");?>"></script>
