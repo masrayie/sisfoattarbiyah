@@ -26,6 +26,11 @@
                     </thead>
                     <tbody>
                       <?php
+                      if ($mapelArr == null) {
+                        echo '<script language="javascript">';
+                        echo 'alert("Tidak Ada Data Mata Pelajaran")';
+                        echo '</script>';
+                      }else {
                         $no=0;
                         foreach ($mapelArr as $as) {
                         $no = $no + 1;
@@ -48,7 +53,9 @@
                               ?>   -->
                             </td>
                           </tr>
-                        <?php } ?>
+                        <?php }
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>

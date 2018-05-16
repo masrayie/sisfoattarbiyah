@@ -238,7 +238,7 @@ class JadwalSeluruh extends CI_Controller {
         'kelas'       => $as->getKelas(),
         'hari'        => $as->getHari(),
         'jam_pel'     => $jam_mulai." s.d. ".$jam_selesai,
-        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getIdJadwal().'\')">ubah</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getIdJadwal().'\')" class="btn btn-danger btn-xs">hapus</button>'
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getIdJadwal().'\')">ubah</button> &nbsp; <button type="button" onclick="return deleteData(\''.$as->getIdJadwal().'\')" class="btn btn-danger btn-xs">hapus</button>'
       );
     }
     $dataJ = array("data"=>$dataJadwal);

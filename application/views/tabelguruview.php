@@ -34,6 +34,11 @@
                     </thead>
                     <tbody>
                       <?php
+                      if ($guruArr == null) {
+                        echo '<script language="javascript">';
+                        echo 'alert("Tidak Ada Data Guru")';
+                        echo '</script>';
+                      }else {
                         $no=0;
                         foreach ($guruArr as $as) {
                           $dataku[] = array(
@@ -57,9 +62,9 @@
                               <td>
                               </td>
                           </tr>
-                        <?php
-                          }
-                        ?>
+                        <?php }
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>

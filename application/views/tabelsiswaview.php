@@ -25,6 +25,11 @@
                     </thead>
                    <tbody>
                       <?php
+                      if ($siswaArr == null) {
+                        echo '<script language="javascript">';
+                        echo 'alert("Tidak Ada Data Siswa")';
+                        echo '</script>';
+                      }else {
                         $no=0;
                         foreach ($siswaArr as $as) {
                         $no = $no + 1;
@@ -43,7 +48,9 @@
                                   <td>
                                   </td>
                           </tr>
-                        <?php } ?>
+                        <?php }
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div>

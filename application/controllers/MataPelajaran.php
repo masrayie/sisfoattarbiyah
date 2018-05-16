@@ -85,11 +85,13 @@ class MataPelajaran extends CI_Controller {
       $model = new ModelDB();
       $result = $model->readDataAll('t_mapel');
 
-      foreach ($result as $row) {
-        # code...
-          $mapelArr[] = new M_MataPelajaran($row->kode_mapel, $row->nama_mapel);
+      if (!$result == null) {
+        foreach ($result as $row) {
+          # code...
+            $mapelArr[] = new M_MataPelajaran($row->kode_mapel, $row->nama_mapel);
+        }
+        return $mapelArr;
       }
-      return $mapelArr;
   }
 
   public function viewEditMapel(){

@@ -106,11 +106,14 @@ class Guru extends CI_Controller {
   public function readDataGuruAll(){
       $model = new ModelDB();
       $result = $model->readDataAll('t_guru');
-      foreach ($result as $row) {
-        # code...
-          $guruArr[] = new M_Guru($row->nip, $row->nama_guru, $row->alamat, $row->kode_guru, $row->email, $row->password);
+
+      if (!$result == null) {
+        foreach ($result as $row) {
+          # code...
+            $guruArr[] = new M_Guru($row->nip, $row->nama_guru, $row->alamat, $row->kode_guru, $row->email, $row->password);
+        }
+        return $guruArr;
       }
-      return $guruArr;
   }
 
   public function viewEditGuru(){
