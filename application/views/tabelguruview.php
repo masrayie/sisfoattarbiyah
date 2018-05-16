@@ -51,8 +51,8 @@
                               <td><?php echo $as->getKodeGuru(); ?></td>
                               <td><?php echo $as->getEmail(); ?></td>
                               <td>
-                                <a href="<?php echo base_url('index.php/guru/viewEditGuru/'.$as->getNip()); ?>" class="btn btn-warning mr-2">UBAH</a>
-                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
+                                <a href="<?php echo base_url('index.php/guru/viewEditGuru/'.$as->getNip()); ?>" class="btn btn-primary btn-xs">ubah</a>
+                                <a href="<?php echo base_url('index.php/guru/deleteDataGuru/'.$as->getNip()); ?>" class="btn btn-danger btn-xs" onclick="return doconfirm();">hapus</a>
                               </td>
                               <td>
                               </td>

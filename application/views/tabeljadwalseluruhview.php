@@ -196,8 +196,12 @@
           function editData(val){
             window.location="<?php echo base_url().'index.php/JadwalSeluruh/viewEditJadwalSingle/';?>"+val;
           }
-          function deletetData(val){
-            alert("delete "+val);
+          function deleteData(val){
+            job=confirm("Are you sure to delete permanently "+val+" ?");
+            if(job!=true)
+            {
+                return false;
+            }
           }
         </script>
         <!-- partial -->
