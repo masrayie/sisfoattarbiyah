@@ -33,6 +33,9 @@
                       </tr>
                     </thead>
                   </table>
+                  <form class="form-control" action="<?php echo base_url().'index.php/Guru/exportExcel';?>" method="post">
+                    <button type="submit" class="btn btn-success xs">Export Excel</button>
+                  </form>
                 </div>
               </div>
             </div>
