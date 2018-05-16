@@ -24,9 +24,6 @@
                         <th>Operation</th>
                       </tr>
                     </thead>
-                    <tbody>
-
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -50,15 +47,9 @@
       <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
       <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
       <script type="text/javascript" src="<?php echo base_url("assets/vendor/JTimePicker/dist/bootstrap-clockpickerr.min.js")?>"></script>
+
       <script>
-      function doconfirm()
-      {
-          job=confirm("Are you sure to delete permanently?");
-          if(job!=true)
-          {
-              return false;
-          }
-      }
+
       $("#example").DataTable({
         "ajax"    : "<?php echo base_url().'index.php/Siswa/jsonDataSiswa';?>",
         "columns" : [

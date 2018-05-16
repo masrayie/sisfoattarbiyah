@@ -67,6 +67,21 @@ class MataPelajaran extends CI_Controller {
        }
   }
 
+  public function jsonDataMapel(){
+    $objGuru= $this->readDataMapelAll();
+    foreach ($objGuru as $as) {
+
+      $dataMapel[] = array(
+        'kode_mapel'  => $as->getKodeMapel(),
+        'nama_mapel'  => $as->getNamaMapel(),
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getKodeMapel().'\')">ubah</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getKodeMapel().'\')" class="btn btn-danger btn-xs">hapus</button>'
+      );
+    }
+    $dataM = array("data"=>$dataMapel);
+    $jsonMapel = json_encode($dataM);
+    echo $jsonMapel;
+  }
+
   public function inputDataMapel(){
       $kode_mapel     = $this->input->post('kode_mapel');
       $nama_mapel     = $this->input->post('nama_mapel');
@@ -85,11 +100,13 @@ class MataPelajaran extends CI_Controller {
       $model = new ModelDB();
       $result = $model->readDataAll('t_mapel');
 
-      foreach ($result as $row) {
-        # code...
-          $mapelArr[] = new M_MataPelajaran($row->kode_mapel, $row->nama_mapel);
+      if (!$result == null) {
+        foreach ($result as $row) {
+          # code...
+            $mapelArr[] = new M_MataPelajaran($row->kode_mapel, $row->nama_mapel);
+        }
+        return $mapelArr;
       }
-      return $mapelArr;
   }
 
   public function viewEditMapel(){

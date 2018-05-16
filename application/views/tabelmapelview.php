@@ -11,10 +11,9 @@
                   <p class="card-description">
                     Data Mata Pelajaran Al-Islamiyah Attarbiyah
                   </p>
-                  <table class="table table-bordered">
+                  <table class="table table-striped" id="example">
                     <thead>
                       <tr>
-                        <th>No.</th>
                         <th>
                           Kode Mata Pelajaran
                         </th>
@@ -24,37 +23,10 @@
                         <th>Operation</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <?php
-                        $no=0;
-                        foreach ($mapelArr as $as) {
-                        $no = $no + 1;
-                        ?>
-                          <tr>
-                            <td><?php echo $no; ?></td>
-                            <td><?php echo $as->getKodeMapel(); ?></td>
-                            <td><?php echo $as->getNamaMapel(); ?></td>
-                            <td>
-                              <a href="<?php echo base_url('index.php/MataPelajaran/viewEditMapel/'.$as->getKodeMapel()); ?>" class="btn btn-warning mr-2">UBAH</a>
-                              <a href="<?php echo base_url('index.php/MataPelajaran/deleteDataMapel/'.$as->getKodeMapel()); ?>" class="btn btn-danger mr-2" onclick="return doconfirm();">HAPUS</a>
-                            </td>
-                            <td>
-                        <!-- <?php
-                              if($as->status==0){
-                              echo "<label class='label label-danger' style='font-size: 10px;'>BELUM KEMBALI </label>";
-                              } elseif ($as->status==1) {
-                              echo "<label class='label label-success'style='font-size: 10px;' >SUDAH KEMBALI </label>";
-                              }
-                              ?>   -->
-                            </td>
-                          </tr>
-                        <?php } ?>
-                    </tbody>
                   </table>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <!-- content-wrapper ends -->
@@ -68,14 +40,32 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
+      <script src="<?php echo base_url("assets/node_modules/jquery/dist/jquery.min.js");?>"></script>
+      <script src="<?php echo base_url("assets/vendor/Mdtpicker/mdtimepicker.js")?>"></script>
+      <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script> -->
+      <script src="<?php echo base_url("assets/vendor/Select2/dist/js/select2.min.js")?>"></script>
+      <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
+      <script type="text/javascript" src="<?php echo base_url("assets/vendor/JTimePicker/dist/bootstrap-clockpickerr.min.js")?>"></script>
 
       <script>
-      function doconfirm()
-      {
-          job=confirm("Are you sure to delete permanently?");
-          if(job!=true)
-          {
-              return false;
-          }
+      $("#example").DataTable({
+        "ajax"    : "<?php echo base_url().'index.php/MataPelajaran/jsonDataMapel';?>",
+        "columns" : [
+          {"data":"kode_mapel", "className" : "dt-center"},
+          {"data":"nama_mapel", "className" : "dt-center"},
+          {"data":"buton", "className" : "dt-center"}
+        ]
+      });
+      function editData(val){
+        window.location="<?php echo base_url().'index.php/MataPelajaran/viewEditMapel/';?>"+val;
+      }
+      function deleteData(val){
+        job=confirm("Are you sure to delete permanently?");
+        if(job!=true)
+        {
+            return false;
+        } else {
+            window.location="<?php echo base_url().'index.php/MataPelajaran/deleteDataMapel/';?>"+val;
+        }
       }
       </script>

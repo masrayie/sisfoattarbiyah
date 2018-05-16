@@ -67,6 +67,24 @@ class Guru extends CI_Controller {
        }
   }
 
+  public function jsonDataGuru(){
+    $objGuru= $this->readDataGuruAll();
+    foreach ($objGuru as $as) {
+
+      $dataGuru[] = array(
+        'nip'         => $as->getNip(),
+        'nama_guru'  => $as->getNamaGuru(),
+        'kode_guru'   => $as->getKodeGuru(),
+        'alamat'   => $as->getAlamat(),
+        'email'      => $as->getEmail(),
+        'buton'       => '<button type="button" class="btn btn-primary btn-xs" onclick="editData(\''.$as->getNip().'\')">ubah</button> &nbsp; <button type="button" onclick="deleteData(\''.$as->getNip().'\')" class="btn btn-danger btn-xs">hapus</button>'
+      );
+    }
+    $dataG = array("data"=>$dataGuru);
+    $jsonGuru = json_encode($dataG);
+    echo $jsonGuru;
+  }
+
   public function inputDataGuru(){
 
     $nip        = $this->input->post('nip');
@@ -106,11 +124,14 @@ class Guru extends CI_Controller {
   public function readDataGuruAll(){
       $model = new ModelDB();
       $result = $model->readDataAll('t_guru');
-      foreach ($result as $row) {
-        # code...
-          $guruArr[] = new M_Guru($row->nip, $row->nama_guru, $row->alamat, $row->kode_guru, $row->email, $row->password);
+
+      if (!$result == null) {
+        foreach ($result as $row) {
+          # code...
+            $guruArr[] = new M_Guru($row->nip, $row->nama_guru, $row->alamat, $row->kode_guru, $row->email, $row->password);
+        }
+        return $guruArr;
       }
-      return $guruArr;
   }
 
   public function viewEditGuru(){

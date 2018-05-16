@@ -40,12 +40,33 @@
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword4">Jenjang Pendidikan</label>
-                      <select class="form-control form-control-sm" name="jenjang">
-                      <option value="0" disabled >Pilih Jenjang Pendidikan</option>
-                      <option value="1">Taman Kanak-Kanak</option>
-                      <option value="2">Madrasah Ibtida'iyah</option>
-                      <option value="3">Madrasah Tsanawiyah</option>
-                    </select>
+                      <select class="form-control form-control-sm" name="jenjang" id="jenjang" onchange="return dochange()">
+                        <option value="0" selected="selected">Pilih Jenjang Pendidikan</option>
+                        <option value="1">Taman Kanak-Kanak</option>
+                        <option value="2">Madrasah Ibtida'iyah</option>
+                        <option value="3">Madrasah Tsanawiyah</option>
+                      </select>
+                    </div>
+                    <div class="form-group" style="display:none" id="idjenjang2">
+                      <label for="exampleInputPassword4">Tingkat Pendidikan</label>
+                      <select class="form-control form-control-sm" name="tingkat2">
+                        <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                      </select>
+                    </div>
+                    <div class="form-group" style="display:none" id="idjenjang3">
+                      <label for="exampleInputPassword4">Tingkat Pendidikan</label>
+                      <select class="form-control form-control-sm" name="tingkat3">
+                        <option value="0" selected="selected">Pilih Tingkat Pendidikan</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label>Foto Siswa</label>
@@ -81,3 +102,14 @@
         <!-- partial -->
       </div>
       <!-- main-panel ends -->
+
+      <script>
+      function dochange()
+      {
+        $('#idjenjang2').hide();
+        $('#idjenjang3').hide();
+
+        var jenjang = $( "#jenjang option:selected" ).val();
+        $('#idjenjang'+jenjang).show();
+      }
+      </script>
