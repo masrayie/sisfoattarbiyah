@@ -39,6 +39,16 @@
                                       </select>
                                 </div>
                             </div>
+                            <div class="col-md-2" id="rowtk" style="flex:0 0 10.5%;">
+                                <div class="form-group" style="font-size:12px;">
+                                  <label for="exampleInputName1" style="font-size:13px;">Tingkat</label>
+                                      <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selecttingkattk" name="tingkattk" >
+                                        <option value="-">-Tingkat-</option>
+                                        <option value="1">1 (Nol Kecil)</option>
+                                        <option value="2">2 (Nol Besar)</option>
+                                      </select>
+                                </div>
+                            </div>
                             <div class="col-md-2" id="rowmi" style="flex:0 0 10.5%;">
                                 <div class="form-group" style="font-size:12px;">
                                   <label for="exampleInputName1" style="font-size:13px;">Tingkat</label>
@@ -194,6 +204,7 @@
 
           //Hidden rowmi, rowmts, rowjumkelas, rowbtnsubmit
           document.getElementById("rowmi").style.display="none";
+          document.getElementById("rowtk").style.display="none";
           document.getElementById("rowmts").style.display="none";
           document.getElementById("rowjumkelas").style.display="none";
           document.getElementById("rowjumbaris").style.display="none";
@@ -220,18 +231,27 @@
               if(jenjang == 0){
                 $("#rowmi").hide();
                 $("#rowmts").hide();
+                $("#rowtk").show();
                 $("#rowjumkelas").show();
                 $("#rowjumbaris").show();
               } else if(jenjang == 1){
                 $("#rowmi").show();
                 $("#rowmts").hide();
+                $("#rowtk").hide();
                 $("#rowjumbaris").show();
                 $("#rowjumkelas").show();
-              } else {
+              } else if(jenjang == 2){
                 $("#rowmts").show();
                 $("#rowmi").hide();
+                $("#rowtk").hide();
                 $("#rowjumbaris").show();
                 $("#rowjumkelas").show();
+              } else{
+                document.getElementById("rowmi").style.display="none";
+                document.getElementById("rowtk").style.display="none";
+                document.getElementById("rowmts").style.display="none";
+                document.getElementById("rowjumkelas").style.display="none";
+                document.getElementById("rowjumbaris").style.display="none";
               }
           });
 
@@ -269,6 +289,7 @@
 
             if(jenjang == 0){
               jenjang2 = "Taman Kanak-Kanak";
+              tingkat = document.getElementById("selecttingkattk").value;
             } else if (jenjang==1) {
               jenjang2 = "Madrasah Ibtidaiyah";
               tingkat = document.getElementById("selecttingkatmi").value;
@@ -292,13 +313,14 @@
             var x = 0;
             for (var i = 0; i < jumlahkelas; i++) {
                 var kelas
-                if(jenjang == 0){
-                    kelas = alphabet[(counter+i)];
-                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" / Kelas "+kelas+" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='20%'>ID Jadwal</th> <th width='15%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='10%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
-                } else {
-                    kelas = tingkat + alphabet[(counter+i)];
-                    $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" /  Kelas "+kelas+"</h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='20%'>ID Jadwal</th> <th width='15%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='10%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
-                }
+                kelas = tingkat + alphabet[(counter+i)];
+                $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" /  Kelas "+kelas+"</h4> <table class='table table-bordered' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='20%'>ID Jadwal</th> <th width='15%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='10%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                // if(jenjang == 0){
+                //     kelas = alphabet[(counter+i)];
+                //     $("#tabeldata").append("<div name='elementabel' class='col-lg-12 grid-margin stretch-card' style='margin-bottom:-20px;'> <div class='card'> <div class='card-body'> <h4 class='card-title'>Jadwal <i>"+ jenjang2 +"</i> /  Hari "+ hari +" / Kelas "+kelas+" </h4> <table class='table table-bordered' name='jadwaltabel' id='tabeljadwal'> <thead> <tr style='vertical-align:top;'> <th width='20%'>ID Jadwal</th> <th width='15%'>Matapelajaran</th> <th width='15%'>Kode Guru</th> <th width='10%'>Shift</th> <th width='10%'>Jam Mulai</th> <th width='10%'>Jam Selesai</th> <th width='10%'>Keterangan</th> </tr> </thead> <tbody id='bodyjadwal"+(counter+i)+"'> </tbody> </table> </div> </div> </div>");
+                // } else {
+                //
+                // }
 
                 for(var j = 0; j < jumlahbaris; j++){
                     x = x+1;;

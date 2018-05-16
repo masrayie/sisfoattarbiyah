@@ -11,37 +11,7 @@
                         <h3 class="card-title">Set Jadwal Siswa</h3>
                       </div>
                   </div>
-                  <div class="row" style="margin-top:10px; padding-left:10px;" id="rowoperation">
-                      <div class="col-md-2" id="rowjenjang">
-                          <div class="form-group" style="font-size:12px;">
-                            <label for="exampleInputName1" style="font-size:13px;">Jenjang Pendidikan</label>
-                              <div class="form-group">
-                                <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjangku" name="jenjang">
-                                  <option value="-">--Pilih Jenjang--</option>
-                                  <option value="0">Taman Kanak-Kanak</option>
-                                  <option value="1">Madrasah Ibtidaiyah</option>
-                                  <option value="2">Madrasah Tsanawiyah</option>
-                                </select>
-                              </div>
-
-                          </div>
-                      </div>
-                      <div class="col-md-2" id="rowdftkelas" style="flex:0 0 10.5%;">
-                          <div class="form-group" style="font-size:12px;">
-                            <label for="exampleInputName1" style="font-size:13px;">Daftar Kelas</label>
-                                <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectdftkelas" name="kelas" >
-                                  <option></option>
-                                </select>
-                          </div>
-                      </div>
-                      <div class="col-sm-2">
-                          <div class="form-group" style="padding-top:21px;">
-                            <button type="button" id="btngo" class="btn btn-primary btn-xs" onclick="editOpsional()" disabled>Random !</button>
-                          </div>
-                      </div>
-                    </form>
-                  </div>
-                <div class="row" >
+                <div class="row" id="tabeldata">
                   <div class="col-lg-12 ">
                     <div class="card">
                       <div class="card-body" style="font-size:13px;">
@@ -51,14 +21,10 @@
                         <table class="table table-striped" id="example" >
                           <thead>
                             <tr>
-                              <th>ID Jadwal</th>
-                              <th>MataPelajaran</th>
-                              <th>Kode Guru</th>
+                              <th>NIS</th>
+                              <th>Nama Siswa</th>
                               <th>Jenjang</th>
-                              <th>Kelas</th>
-                              <th>Hari</th>
-                              <th>Jam Pelajaran</th>
-                              <th>Operation</th>
+                              <th>Tingkat</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -67,6 +33,44 @@
                       </div>
                     </div>
                   </div>
+                </div>
+                <div class="row" style="margin-top:10px; padding-left:10px;" id="rowoperation2">
+                  <div class="col-md-2" id="rowjenjang">
+                      <div class="form-group" style="font-size:12px;">
+                        <label for="exampleInputName1" style="font-size:13px;">Jenjang Pendidikan</label>
+                          <div class="form-group">
+                            <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectjenjangku" name="jenjang">
+                              <option value="-">--Pilih Jenjang--</option>
+                              <option value="0">Taman Kanak-Kanak</option>
+                              <option value="1">Madrasah Ibtidaiyah</option>
+                              <option value="2">Madrasah Tsanawiyah</option>
+                            </select>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="col-md-2" id="rowdftkelas" style="flex:0 0 10.5%;">
+                        <div class="form-group" style="font-size:12px;">
+                          <label for="exampleInputName1" style="font-size:13px;">Daftar Kelas</label>
+                              <select class="js-example-placeholder-single form-control form-control-sm select2-results__options" id="selectdftkelas" name="kelas" >
+                                <option></option>
+                              </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2" id="rowjumlahanak">
+                        <div class="form-group" style="font-size:12px;">
+                          <label for="exampleInputName1" style="font-size:13px;">Jumlah Anak</label>
+                            <div class="form-group">
+                              <input type="number" min="1" class="form-control form-control-sm" name="jumlahanak" id="jumlahanak" placeholder="Jumlah Anak" style="padding:6px 5px; border: 1px solid #aaa;" />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group" style="padding-top:21px;">
+                          <button type="button" id="btngo" class="btn btn-primary btn-xs" onclick="setSiswa()" disabled>Set</button>
+                        </div>
+                    </div>
+                  </form>
                 </div>
               </div>
               </div>
@@ -90,6 +94,8 @@
 
         <script type="text/javascript">
         document.getElementById("rowdftkelas").style.display="none";
+        document.getElementById("rowjumlahanak").style.display="none";
+
         $("#selectopsi").on("change", function(){
             var opsi = $(this).val();
             if(opsi == 0){
@@ -108,6 +114,15 @@
 
         $("#selecthari").on("change", function(){
           $("#selectjenjangku").removeAttr("disabled");
+        });
+        $("#example").DataTable({
+          "ajax"    : "<?php echo base_url();?>"+"index.php/jadwalsiswa/jsonSiswaBy",
+          "columns" : [
+            {"data":"nis", "className" : "dt-center"},
+            {"data":"nama_siswa", "className" : "dt-center"},
+            {"data":"jenjang", "className" : "dt-center"},
+            {"data":"tingkat", "className" : "dt-center"}
+          ]
         });
 
         function dataKelas(idjenjang){
@@ -131,61 +146,46 @@
         $("#selectjenjangku").on("change", function(){
             if($(this).val()==0){
               $("#rowdftkelas").show();
+              $("#rowjumlahanak").show();
               dataKelas($(this).val());
               $("#btngo").removeAttr("disabled");
             }else if($(this).val()==1){
               $("#rowdftkelas").show();
+              $("#rowjumlahanak").show();
               dataKelas($(this).val());
               $("#btngo").removeAttr("disabled");
             }else if($(this).val()==2){
+              $("#rowjumlahanak").show();
               $("#rowdftkelas").show();
               dataKelas($(this).val());
               $("#btngo").removeAttr("disabled");
             }else{
               $("#rowdftkelas").hide();
+              $("#rowjumlahanak").hide();
               $("#btngo").prop("disabled",true);
             }
         });
 
-          $("#example").DataTable({
-            "ajax"    : "<?php echo base_url().'index.php/JadwalSeluruh/jsonDataJadwal';?>",
-            "columns" : [
-              {"data":"id_jadwal", "className" : "dt-center"},
-              {"data":"mapel", "className" : "dt-center"},
-              {"data":"kode_guru", "className" : "dt-center"},
-              {"data":"jenjang", "className" : "dt-center"},
-              {"data":"kelas", "className" : "dt-center"},
-              {"data":"hari", "className" : "dt-center"},
-              {"data":"jam_pel", "className" : "dt-center"},
-              {"data":"buton", "className" : "dt-center"}
-            ]
-          });
-          function editData(val){
-            window.location="<?php echo base_url().'index.php/JadwalSeluruh/viewEditJadwalSingle/';?>"+val;
-          }
-          function deleteData(val){
-            alert("delete "+val);
-          }
 
-          function editOpsional(){
-            var hari, jenjang, kelas, komponen
-            hari = document.getElementById("selecthari").value;
+          function setSiswa(){
+            var  jenjang, kelas, jumlah
             jenjang = document.getElementById("selectjenjangku").value;
             kelas = document.getElementById("selectdftkelas").value;
-            komponen = {"hari":hari,"jenjang":jenjang, "kelas":kelas};
-            $.ajax({
-              method:'POST',
-              contentType :'application/json',
-              url : "<?php echo base_url().'index.php/JadwalSeluruh/getDataJadwal';?>",
-              data : JSON.stringify(komponen),
-              success: function(resp){
-                window.location="<?php echo base_url().'index.php/JadwalSeluruh/viewEditOpsional';?>";
-                // console.log(resp);
-              },
-              error: function(resp){
-                console.log('gagal parsing');
-              }
-            });
+            jumlah = document.getElementById("jumlahanak").value;
+            window.location="<?php echo base_url()?>"+"index.php/jadwalsiswa/getRandomSiswa?jenjang="+jenjang+"&kelas="+kelas+"&jumlah="+jumlah;
+            // $.ajax({
+            //   method:'POST',
+            //   contentType :'application/json',
+            //   url : "<?php echo base_url().'index.php/JadwalSeluruh/getDataJadwal';?>",
+            //   data : JSON.stringify(komponen),
+            //   success: function(resp){
+            //     window.location="<?php echo base_url().'index.php/JadwalSeluruh/viewEditOpsional';?>";
+            //     // console.log(resp);
+            //   },
+            //   error: function(resp){
+            //     console.log('gagal parsing');
+            //   }
+            // });
           }
         </script>
         <!-- partial -->
