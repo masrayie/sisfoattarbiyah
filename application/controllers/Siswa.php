@@ -1,13 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//load Spout Library
-require_once APPPATH.'/third_party/spout/src/Spout/Autoloader/autoload.php';
-
-//lets Use the Spout Namespaces
-use Box\Spout\Writer\WriterFactory;
-use Box\Spout\Common\Type;
-
 class Siswa extends CI_Controller {
 
   /**
@@ -48,7 +41,7 @@ class Siswa extends CI_Controller {
       echo implode("\t", ($row)) . "\n";
     }
   }
-  
+
   public function exportExcel()
   {
     $objSiswa = $this->readDataSiswaAll();
