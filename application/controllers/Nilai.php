@@ -31,6 +31,41 @@ class Nilai extends CI_Controller {
   {
   }
 
+  public function exportExcelData($records){
+    $heading = false;
+    if (!empty($records))
+    foreach ($records as $row) {
+      if (!$heading) {
+        echo implode("\t", array_keys($row)) . "\n";
+        $heading = true;
+      }
+      echo implode("\t", ($row)) . "\n";
+    }
+  }
+
+  public function exportExcel()
+  {
+    $jenjang = $this->input->get('jenjang', TRUE);
+    $kelas = $this->input->get('kelas', TRUE);
+    $mapel = $this->input->get('mapel', TRUE);
+    $model = new ModelDB();
+    $query = "select t2.id_jadwal_siswa as id, s.nis as nis, s.nama_siswa as nama, g.kode_guru as kode, t1.kelas as kelas, m.nama_mapel as mapel, t2.nilai_tugas as tugas, t2.nilai_uts as uts, t2.nilai_uas as uas from t_jadwal_siswa t2
+              inner join t_siswa s on s.nis = t2.nis
+              inner join t_jadwal_semua t1 on t1.id_jadwal = t2.id_jadwal
+              inner join t_mapel m on m.kode_mapel = t1.kode_mapel
+              inner join t_guru g on g.nip = t1.nip
+              where t1.jenjang = $jenjang and t1.kelas = '$kelas' and t1.kode_mapel=$mapel";
+    $result = $model->freeQuery($query);
+    foreach ($result as $row) {
+      # code...
+        $nilaiArr[] = new M_JadwalSiswa($row->idJadwalSiswa, $row->nis, $row->idJadwal, $row->idTahunAjaran, $row->nip, $row->nilaiTugas, $row->nilaiUTS, $row->nilaiUAS);
+    }
+    $filename = "nilai.xls";
+                header("Content-Type: application/vnd.ms-excel");
+                header("Content-Disposition: attachment; filename=\"$filename\"");
+    $this->exportExcelData($nilaiArr);
+  }
+
   public function getDataNilai(){
     $jenjang = $this->input->get('jenjang', TRUE);
     $kelas = $this->input->get('kelas', TRUE);
